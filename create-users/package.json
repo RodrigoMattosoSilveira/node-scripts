@@ -1,0 +1,11 @@
+{
+  "name": "create-users",
+  "version": "1.0.0",
+  "description": "create users",
+  "main": "index.js",
+  "author": "Rodrigo Silveira",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
+}

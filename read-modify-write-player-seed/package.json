@@ -1,0 +1,9 @@
+{
+  "name": "read-modify-write-player-seed",
+  "version": "1.0.0",
+  "description": "read-modify-write-player-seed",
+  "main": "index.js",
+  "author": "Rodrigo Silveira",
+  "license": "MIT",
+  "private": false
+}
