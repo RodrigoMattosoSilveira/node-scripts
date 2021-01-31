@@ -1,0 +1,12 @@
+{
+    "name": "create-tournaments",
+    "version": "1.0.0",
+    "description": "create tournaments",
+    "main": "index.js",
+    "author": "Rodrigo Silveira",
+    "license": "MIT",
+    "dependencies": {
+        "axios": "^0.21.1",
+        "shortid": "^2.2.16"
+    }
+}
