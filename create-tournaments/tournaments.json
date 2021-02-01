@@ -2,19 +2,23 @@
     {
         "name": "DSB Congress - 1910",
         "city": "Hamburg",
-        "year": "1910",
-        "rounds": "12"
+        "rounds": 12,
+        "maxPlayers": 12,
+        "type": "round"
     },
     {
         "name": "San Sebastian - 1911",
         "city": "San Sebastian",
-        "year": "1911",
-        "rounds": "10"
+        "rounds": 10,
+        "maxPlayers": 12,
+        "type": "round"
     },
     {
         "name": "San Sebastian - 1912",
         "city": "San Sebastian",
         "year": "1912",
-        "rounds": "10"
+        "rounds": 6,
+        "maxPlayers": 50,
+        "type": "swiss"
     }
 ]
