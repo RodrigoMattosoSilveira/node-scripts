@@ -11,7 +11,9 @@ for (i=0; i < entities.length; i++) {
         name: entities[i].name,
         city: entities[i].city,
         year: entities[i].year,
-        rounds: entities[i].rounds
+        rounds: entities[i].rounds,
+        maxPlayers: entities[i].maxPlayers,
+        type: entities[i].type
     })
     .then(function (response) {
         console.log(response);
