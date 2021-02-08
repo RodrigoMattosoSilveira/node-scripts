@@ -4,14 +4,14 @@
         "city": "Hamburg",
         "rounds": 12,
         "maxPlayers": 12,
-        "type": "round"
+        "type": "round_robin"
     },
     {
         "name": "San Sebastian - 1911",
         "city": "San Sebastian",
         "rounds": 10,
         "maxPlayers": 12,
-        "type": "round"
+        "type": "round_robin"
     },
     {
         "name": "San Sebastian - 1912",
