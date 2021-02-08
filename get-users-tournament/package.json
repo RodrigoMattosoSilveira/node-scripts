@@ -1,0 +1,12 @@
+{
+    "name": "get-users-tournament",
+    "version": "1.0.0",
+    "description": "get a few users and one tournament",
+    "main": "index.js",
+    "author": "Rodrigo Silveira",
+    "license": "MIT",
+    "dependencies": {
+        "axios": "^0.21.1",
+        "shortid": "^2.2.16"
+    }
+}
