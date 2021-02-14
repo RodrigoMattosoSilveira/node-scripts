@@ -4,6 +4,7 @@
 const fs = require("fs");
 const axios = require('axios');
 const users = require("./users.json");
+const users_generated = "./users.generated.json";
 
 // console.log(users);
 for (i=0; i < users.length; i++) {
@@ -16,9 +17,25 @@ for (i=0; i < users.length; i++) {
         rating: users[i].rating,
     })
     .then(function (response) {
-        console.log(response);
+        // console.log(response);
+        console.log("Created user: " + response.id);
     })
     .catch(function (error) {
     console.log(error);
     });
 }
+axios.get('http://localhost:3000/user')
+    .then(function (response) {
+        console.log(response.data);
+        var jsonContent = JSON.stringify(response.data);
+        fs.writeFile(users_generated, jsonContent, 'utf8', (err) => {
+          if (err) {
+            console.error(err)
+            return
+          }
+          console.log("Created users_generated")
+        })
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
