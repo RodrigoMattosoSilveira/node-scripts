@@ -164,6 +164,15 @@ export const showPairings = (tournamentPlayers: number, schedule: number[][]): v
     }
     console.log("\n");
 };
+
+
+/**
+ * @param {players: number} - The number of players in this round robin
+ * @return {number[][]} Tournament Rounds Pairing
+ */
+export const calculateCircleMethod = (players: number): number[][] {
+  pairings: number[][] = [];
+}
 /*
 Chess Tournament - Simple Round Robin pairings
 6        |----------------------------------
