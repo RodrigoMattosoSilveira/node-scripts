@@ -6,7 +6,8 @@
     "author": "Rodrigo Silveira",
     "license": "MIT",
     "scripts": {
-        "start": "tsc && node dist/app.js --players=8",
+        "start10": "tsc && node dist/app.js --players=10",
+        "start11": "tsc && node dist/app.js --players=11",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "dependencies": {

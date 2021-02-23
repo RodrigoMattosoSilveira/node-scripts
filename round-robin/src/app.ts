@@ -27,6 +27,7 @@ console.log(`tournmentPlayers players: ${tournamentPlayers}`);
 // calculator.showResults(tournamentPlayers, schedule);
 
 // Calculate and show the schedule
-schedule = calculator.calculate(tournamentPlayers);
-calculator.showResults(tournamentPlayers, schedule);
-calculator.showPairings(tournamentPlayers, schedule);
+// schedule = calculator.calculate(tournamentPlayers);
+// calculator.showResults(tournamentPlayers, schedule);
+// calculator.showPairings(tournamentPlayers, schedule);
+calculator.calculateCircleMethod(tournamentPlayers);

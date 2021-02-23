@@ -1,3 +1,11 @@
+/**
+ * An algorithm to generate a schedule for a round robin chess tournament:
+ * (1) Every player must play every other player;
+ * (2) Each player can be involved in at most one game per round;
+ * (3) If during a round player i plays player j, then during that same round player j
+ *     plays player i.
+ */
+
 import printf from "printf";
 
 export const calculate = (tournamentPlayers: number): number[][] => {
@@ -167,11 +175,140 @@ export const showPairings = (tournamentPlayers: number, schedule: number[][]): v
 
 
 /**
- * @param {players: number} - The number of players in this round robin
- * @return {number[][]} Tournament Rounds Pairing
+ * The circle method is the standard algorithm to create a schedule for a
+ * round-robin tournament. All competitors are assigned to numbers, and then
+ * paired in the first round (assuming 10 players):
+ * All competitors are assigned to numbers, and then paired in the first round
+ * using a 10 players tournamenent
+ *
+ * Starting with player 1, assign n/2 playert to the top array, from left to
+ * right, then assign players to the bottom array, from right to left;
+ * Round 1
+ * top:    00  01  02  03  04
+ * bottom: 09  08  07  06  05
+ *
+ * Next, fix player 0 in the top array at position 0; slice the bottom's array
+ * first element, 08, and slice it in the top array, after player 0; this moves
+ * all remaining top array elements to the right, in a clockwise fashion:
+ * top:    00  08  01  02  03  04
+ * bottom: 09  07  06  05
+ *
+ * Next, pop the last element from the top array and push into to the bottom
+ * array
+ * Round 2
+ * top:    00  09  01  02  03
+ * bottom: 08  07  06  05  04
+ *
+ * Repeaat this process to complete all remaining rounds.
+ *
+ * In cases of an odd number of players, we add a ghost player; anyone playing
+ * againt the ghost player have a roud bye. In the example above, player 09
+ * would be player -1 and we would have:
+ * Round 1
+ * top:    00  01  02  03  04
+ * bottom: -1  08  07  06  05
+ *
+ * and
+ *
+ * Round 2
+ * top:    00  -1  01  02  03
+ * bottom: 08  07  06  05  04
+ *
+ * meaning that in round 1, player 0 has a round bye, and in round 2 player 7
+ * has a round bye.
+ *
+ * This leaves with the quetion of how to represent the rounds and their
+ * pairings. We will use one array for each round, where an array cell index
+ * represents the player number and the array's cell content their round's
+ * opponent:
+ * Round 1
+ * top:    00  01  02  03  04
+ * bottom: 09  08  07  06  05
+ * round:  00  01  02  03  04  05  06  07  08  09 // index
+ *         09  08  07  06  05  04  03  02  01  00 // content
+ *
+ * And
+ *
+ * Round 2
+ * top:    00  09  01  02  03
+ * bottom: 08  07  06  05  04
+ * round:  00  01  02  03  04  05  06  07  08  09 // index
+ *         08  06  05  04  03  02  01  09  00  07 // content
+ *
+ * @param {p: number} - The numbrt of round robin tournament players
+ * @return {number[][]} An array of rounds, as explained above
  */
-export const calculateCircleMethod = (players: number): number[][] {
-  pairings: number[][] = [];
+export const calculateCircleMethod = (p: number): Array<Array<string>> => {
+  let round: string[];
+  let pairings: Array<Array<string>> = [];
+  let playerCollection: number[] = [];
+  let players: number = 0;
+  let rounds: number = 0;
+  let roundGames: number =  0;
+  let ghostPlayer: number = -1;
+  let top: number[] = [];
+  let bottom: number[] = [];
+
+
+  for (let i = 0; i < p; i++ ) {
+    playerCollection[i] = i
+  }
+  // Insert a ghost player, if needed
+  if ((p % 2 === 1)) {
+    // We have a ghost player
+    playerCollection.push(p);
+    ghostPlayer = p;
+  }
+  console.log(`playerCollection: ` + JSON.stringify(playerCollection));
+
+  // The number of players is now the playerCollection length
+  players = playerCollection.length;
+  console.log(`players: ` + players);
+
+  // Now that we have an even number of plauyers, the number of rounds allwauy
+  // the number of players minus one
+  rounds = players - 1
+
+
+  // The  number of games per round is half of the number of players
+  roundGames =  players / 2
+
+  // Assign the first half of the players to the top array and the second half
+  // to the botto array
+  for (let i = 0; i < players/2; i++) {
+    top.push(playerCollection[i]);
+    bottom.push(playerCollection[(players - 1) - i])
+  }
+  console.log(`top: ` + JSON.stringify(top));
+  console.log(`bottom: ` + JSON.stringify(bottom));
+  console.log(`ghostPlayer: ` + ghostPlayer);
+
+  // Pair the first round
+  round = [];
+  for (let i = 0; i < players/2; i ++) {
+    let topPlayer: number = top[i];
+    let topPlayerS = "" + (topPlayer < 10 ? "0" : "") + topPlayer;
+    let bottomPlayer: number = bottom[i];
+    let bottomPlayerS = "" + (bottomPlayer < 10 ? "0" : "") + bottomPlayer;
+    let pairing: string = "";
+    if (topPlayer !== ghostPlayer) {
+      if (bottomPlayer !== ghostPlayer) {
+        // neither is playig a ghost player
+        pairing = printf("%2s%3s%2s", topPlayerS, " - ", bottomPlayerS);
+      } else {
+        // bottom player is a ghost player
+        pairing = printf("%2s%5s", topPlayerS, "->bye");
+      }
+    } else {
+      // top player is a ghost player
+      pairing = printf("%2s%5s", bottomPlayerS, "->bye");
+    }
+      round.push(pairing);
+  }
+  console.log(`round 1:` + JSON.stringify(round));
+
+
+  return pairings;
 }
 /*
 Chess Tournament - Simple Round Robin pairings
@@ -190,64 +327,4 @@ round 4  |         |         |         |
 ---------|---------|---------|---------|----
 round 5  |         |         |         |
 ---------|---------|---------|---------|----
-*/
-
-/*
-# circleMethod(players: number): number[][]
-
-// If the number of players is odd, we will add a ghost player; anyone playing
-// the ghost in a round player has a round bye. In our case, if ghostPlayer is
-// different than -1, then we have a ghost player and it is the player + 1
-ghostPlayer = players % 2 === 0 ? - 1 : players + 1
-
-// Ensure we have an even number of players
-players = players % 2 === 0 ? players : players + 1
-
-// Now that we have an even number of plauyers, the number of rounds allwauy the
-// number of players minus one
-rounds = players - 1
-
-// And the number of games per round is half of the number of players
-roundGames =  players / 2
-
-// All competitors are assigned to numbers, and then paired in the first round
-// using a 10 players tournamenent
-
-// Starting with player 1, assign n/2 playert to withe pieces, from left to
-// right, then from right to left, assign players to the black pieces;
-
-// top:    00  01  02  03  04
-// bottom: 09  08  07  06  05
-from (let i = 0, i < roundGames; i++) {
-top[i] = i;
-bottom[(roundGames - 1) - i] = roundGames + i;
-}
-
-//          index:  00  01  02  03  04  05  06  07  08  09
-// Round 01 Array: [09, 08, 07, 06, 05, 04, 03, 02, 01, 00]
-from (let i = 0, i < roundGames; i++) {
-round[top[i]] = bottom[i];
-round[bottom[i]] = top[i]
-}
-
-
-// Next, fix player 1 and move the players in a clockwise fashion
-// top:    00  09  01  02  03
-// bottom: 08  07  06  05  04
-// Take the leftmost bottom element and insert as the second top element;
-// Take the right most top element and append to the bottom
-top.splice(1,0,bottom.shift());
-bottom.push(top.pop());
-
-//          index:  00  01  02  03  04  05  06  07  08  09
-// Round 02 Array: [08  06  05  04  03  02  01  09  00  07]
-
-
-
-// Next, fix player 1 and move the players in a clockwise fashion
-// top:    00  08  09  01  02
-// botton: 07  06  05  04  03
-
-//          index:  00  01  02  03  04  05  06  07  08  09
-// Round 03 Array: [07  04  03  02  01  09  08  00  05  06]
 */
