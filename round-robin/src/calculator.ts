@@ -173,7 +173,8 @@ export const showPairings = (tournamentPlayers: number, schedule: number[][]): v
     console.log("\n");
 };
 
-
+type RoundT = string[]
+type PairingsT = RoundT[]
 /**
  * The circle method is the standard algorithm to create a schedule for a
  * round-robin tournament. All competitors are assigned to numbers, and then
@@ -238,78 +239,80 @@ export const showPairings = (tournamentPlayers: number, schedule: number[][]): v
  * @param {p: number} - The numbrt of round robin tournament players
  * @return {number[][]} An array of rounds, as explained above
  */
-export const calculateCircleMethod = (p: number): Array<Array<string>> => {
-  let round: string[];
-  let pairings: Array<Array<string>> = [];
-  let playerCollection: number[] = [];
-  let players: number = 0;
-  let rounds: number = 0;
-  let roundGames: number =  0;
-  let ghostPlayer: number = -1;
-  let top: number[] = [];
-  let bottom: number[] = [];
+export const calculateCircleMethod = (p: number): RoundT => {
+    let round: number[];
+    let pairings: RoundT = [];
+    let playerCollection: number[] = [];
+    let players: number = 0;
+    let rounds: number = 0;
+    let roundGames: number =  0;
+    let ghostPlayer: number = -1;
+    let top: number[] = [];
+    let bottom: number[] = [];
 
-
-  for (let i = 0; i < p; i++ ) {
-    playerCollection[i] = i
-  }
-  // Insert a ghost player, if needed
-  if ((p % 2 === 1)) {
-    // We have a ghost player
-    playerCollection.push(p);
-    ghostPlayer = p;
-  }
-  console.log(`playerCollection: ` + JSON.stringify(playerCollection));
-
-  // The number of players is now the playerCollection length
-  players = playerCollection.length;
-  console.log(`players: ` + players);
-
-  // Now that we have an even number of plauyers, the number of rounds allwauy
-  // the number of players minus one
-  rounds = players - 1
-
-
-  // The  number of games per round is half of the number of players
-  roundGames =  players / 2
-
-  // Assign the first half of the players to the top array and the second half
-  // to the botto array
-  for (let i = 0; i < players/2; i++) {
-    top.push(playerCollection[i]);
-    bottom.push(playerCollection[(players - 1) - i])
-  }
-  console.log(`top: ` + JSON.stringify(top));
-  console.log(`bottom: ` + JSON.stringify(bottom));
-  console.log(`ghostPlayer: ` + ghostPlayer);
-
-  // Pair the first round
-  round = [];
-  for (let i = 0; i < players/2; i ++) {
-    let topPlayer: number = top[i];
-    let topPlayerS = "" + (topPlayer < 10 ? "0" : "") + topPlayer;
-    let bottomPlayer: number = bottom[i];
-    let bottomPlayerS = "" + (bottomPlayer < 10 ? "0" : "") + bottomPlayer;
-    let pairing: string = "";
-    if (topPlayer !== ghostPlayer) {
-      if (bottomPlayer !== ghostPlayer) {
-        // neither is playig a ghost player
-        pairing = printf("%2s%3s%2s", topPlayerS, " - ", bottomPlayerS);
-      } else {
-        // bottom player is a ghost player
-        pairing = printf("%2s%5s", topPlayerS, "->bye");
-      }
-    } else {
-      // top player is a ghost player
-      pairing = printf("%2s%5s", bottomPlayerS, "->bye");
+    for (let i = 0; i < p; i++ ) {
+        playerCollection[i] = i;
     }
-      round.push(pairing);
-  }
-  console.log(`round 1:` + JSON.stringify(round));
+    // Insert a ghost player, if needed
+    if ((p % 2 === 1)) {
+        // We have a ghost player
+        playerCollection.push(p);
+        ghostPlayer = p;
+    }
+    console.log(`playerCollection: ` + JSON.stringify(playerCollection));
 
+    // The number of players is now the playerCollection length
+    players = playerCollection.length;
+    console.log(`players: ` + players);
 
-  return pairings;
-}
+    // Now that we have an even number of plauyers, the number of rounds allwauy
+    // the number of players minus one
+    rounds = players - 1;
+
+    // The  number of games per round is half of the number of players
+    roundGames =  players / 2;
+
+    // Assign the first half of the players to the top array and the second half
+    // to the bottom array
+    for (let i = 0; i < players / 2; i++) {
+        top.push(playerCollection[i]);
+        bottom.push(playerCollection[(players - 1) - i]);
+    }
+    console.log(`top: ` + JSON.stringify(top));
+    console.log(`bottom: ` + JSON.stringify(bottom));
+    console.log(`ghostPlayer: ` + ghostPlayer);
+
+    // Pair the first round
+    round = [];
+    for (let i = 0; i < players / 2; i++) {
+        round[top[i]] = bottom[i] === ghostPlayer ? -1 : bottom[i] ;
+        round[bottom[i]] = top[i] === ghostPlayer ? -1 : top[i] ;
+    }
+    // for (let i = 0; i < players / 2; i ++) {
+    //   const topPlayer: number = top[i];
+    //   const topPlayerS = "" + (topPlayer < 10 ? "0" : "") + topPlayer;
+    //   const bottomPlayer: number = bottom[i];
+    //   const bottomPlayerS = "" + (bottomPlayer < 10 ? "0" : "") + bottomPlayer;
+    //   let pairing: string = "";
+    //   if (topPlayer !== ghostPlayer) {
+    //     if (bottomPlayer !== ghostPlayer) {
+    //       // neither is playig a ghost player
+    //       pairing = printf("%2s%3s%2s", topPlayerS, " - ", bottomPlayerS);
+    //     } else {
+    //       // bottom player is a ghost player
+    //       pairing = printf("%2s%5s", topPlayerS, "->bye");
+    //     }
+    //   } else {
+    //     // top player is a ghost player
+    //     pairing = printf("%2s%5s", bottomPlayerS, "->bye");
+    //   }
+    //   round.push(pairing);
+    // }
+    // console.log(`round 1:` + JSON.stringify(round));
+    console.log(`round 1:` + JSON.stringify(round));
+
+    return pairings;
+};
 /*
 Chess Tournament - Simple Round Robin pairings
 6        |----------------------------------
