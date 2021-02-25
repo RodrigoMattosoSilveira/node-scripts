@@ -75,46 +75,20 @@ export const calculateCircleMethod = (numberOfPlayers: number): TournamentRound[
 
   console.log(printf(printTop));
   console.log(printf(printBottom));
-  // console.log(`top: ${JSON.stringify(top)}`);
-  // console.log(`bottom: ${JSON.stringify(bottom)}`);
-
-  // export type TournamentRound = {
-  //   // A round's games collection
-  //   games: Game[];
-  //   // If present, it  represents the player with round bye
-  //   byePlayer?: number;
-  // }
-  // export type Game = {
-  //   whitePieces: number;
-  //   blackPieces: number;
-  // }
 
   // Pair the first round
   let tournamentRound: TournamentRound = {
     games: []
   };
-  // for (let i = 0; i < np / 2; i++) {
-  //     games[top[i]] = bottom[i] === ghostPlayer ? -1 : bottom[i] ;
-  //     games[bottom[i]] = top[i] === ghostPlayer ? -1 : top[i] ;
-  // }
-  let game: Game = {
-    whitePiecesPlayer: 0,
-    blackPiecesPlayer: 0
-  };
+
   console.log("top: " + JSON.stringify(top));
   console.log("bottom: " + JSON.stringify(bottom));
   for (let i = 0; i < np / 2; i++) {
-    console.log("top[ " + i + "]: " + JSON.stringify(top[i]));
-    console.log("bottom[ " + i + "]: " + JSON.stringify(bottom[i]));
+    // console.log("top[ " + i + "]: " + JSON.stringify(top[i]));
+    // console.log("bottom[ " + i + "]: " + JSON.stringify(bottom[i]));
     if (top[i] !== ghostPlayer && bottom[i] !== ghostPlayer) {
         // neither is playig a ghost player
-        game = {
-          whitePiecesPlayer: 0,
-          blackPiecesPlayer: 0
-        }
-        game["whitePiecesPlayer"] = top[i];
-        game["blackPiecesPlayer"] = bottom[i];
-        tournamentRound.games.push(game);
+        tournamentRound.games.push({"whitePiecesPlayer": top[i], "blackPiecesPlayer": bottom[i]});
       } else {
       if (top[i] === ghostPlayer) {
         // bottom[i] cell refers to the ghost player
