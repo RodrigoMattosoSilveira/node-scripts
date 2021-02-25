@@ -7,7 +7,7 @@
  */
 
 import printf from "printf";
-import { TournamentRound, Game} from './types';
+import { TournamentRound, Game, TournamentRounds} from './types';
 
 /**
  * The circle method is the standard algorithm to create a schedule for a
@@ -17,8 +17,8 @@ import { TournamentRound, Game} from './types';
  * @return {TournamentRound} An array of TournamentRound, as explained above
  *
  */
-export const calculateCircleMethod = (numberOfPlayers: number): TournamentRound[] => {
-  let tournamentRounds: TournamentRound[] = [];
+export const calculateCircleMethod = (numberOfPlayers: number): TournamentRounds => {
+  let tournamentRounds: TournamentRounds = [];
 
   console.log(printf("%-18s%-20s", `numberOfPlayers:`, "" + numberOfPlayers));
 
@@ -81,20 +81,16 @@ export const calculateCircleMethod = (numberOfPlayers: number): TournamentRound[
     games: []
   };
 
-  console.log("top: " + JSON.stringify(top));
-  console.log("bottom: " + JSON.stringify(bottom));
   for (let i = 0; i < np / 2; i++) {
-    // console.log("top[ " + i + "]: " + JSON.stringify(top[i]));
-    // console.log("bottom[ " + i + "]: " + JSON.stringify(bottom[i]));
     if (top[i] !== ghostPlayer && bottom[i] !== ghostPlayer) {
-        // neither is playig a ghost player
+        // both are playing real opponents
         tournamentRound.games.push({"whitePiecesPlayer": top[i], "blackPiecesPlayer": bottom[i]});
       } else {
       if (top[i] === ghostPlayer) {
-        // bottom[i] cell refers to the ghost player
+        // bottom[i] cell refers to the round's bye player
         tournamentRound.byePlayer = bottom[i];
       } else {
-        // top[i] cell refers to the ghost player
+        // top[i] cell refers to the round's bye player
         tournamentRound.byePlayer = top[i];
       }
     }
