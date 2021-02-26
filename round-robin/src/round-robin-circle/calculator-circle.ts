@@ -77,49 +77,30 @@ export const calculateCircleMethod = (numberOfPlayers: number): TournamentRounds
   console.log(printf(printBottom));
 
   // Pair the first round
-  let tournamentRound: TournamentRound = {
-    games: []
-  };
+  let tournamentRound: TournamentRound;
 
-  for (let i = 0; i < np / 2; i++) {
-    if (top[i] !== ghostPlayer && bottom[i] !== ghostPlayer) {
-        // both are playing real opponents
-        tournamentRound.games.push({"whitePiecesPlayer": top[i], "blackPiecesPlayer": bottom[i]});
-      } else {
-      if (top[i] === ghostPlayer) {
-        // bottom[i] cell refers to the round's bye player
-        tournamentRound.byePlayer = bottom[i];
-      } else {
-        // top[i] cell refers to the round's bye player
-        tournamentRound.byePlayer = top[i];
+  for (let j = 0; j < rounds; j++) {
+    tournamentRound = {games: []}
+    for (let i = 0; i < np / 2; i++) {
+      if (top[i] !== ghostPlayer && bottom[i] !== ghostPlayer) {
+          // both are playing real opponents
+          tournamentRound.games.push({"whitePiecesPlayer": top[i], "blackPiecesPlayer": bottom[i]});
+        } else {
+        if (top[i] === ghostPlayer) {
+          // bottom[i] cell refers to the round's bye player
+          tournamentRound.byePlayer = bottom[i];
+        } else {
+          // top[i] cell refers to the round's bye player
+          tournamentRound.byePlayer = top[i];
+        }
       }
     }
+    console.log("\nround " + j + ": " + JSON.stringify(tournamentRound));
+    // Take the leftmost bottom element and insert as the second top element;
+    // Take the right most top element and append to the bottom
+    top.splice(1,0,bottom.shift());
+    bottom.push(top.pop());
   }
-  console.log(`round 1:` + JSON.stringify(tournamentRound));
-  delete tournamentRound.byePlayer;
-
-  // for (let i = 0; i < players / 2; i ++) {
-  //   const topPlayer: number = top[i];
-  //   const topPlayerS = "" + (topPlayer < 10 ? "0" : "") + topPlayer;
-  //   const bottomPlayer: number = bottom[i];
-  //   const bottomPlayerS = "" + (bottomPlayer < 10 ? "0" : "") + bottomPlayer;
-  //   let pairing: string = "";
-  //   if (topPlayer !== ghostPlayer) {
-  //     if (bottomPlayer !== ghostPlayer) {
-  //       // neither is playig a ghost player
-  //       pairing = printf("%2s%3s%2s", topPlayerS, " - ", bottomPlayerS);
-  //     } else {
-  //       // bottom player is a ghost player
-  //       pairing = printf("%2s%5s", topPlayerS, "->bye");
-  //     }
-  //   } else {
-  //     // top player is a ghost player
-  //     pairing = printf("%2s%5s", bottomPlayerS, "->bye");
-  //   }
-  //   round.push(pairing);
-  // }
-  console.log(`round 1:` + JSON.stringify(tournamentRounds));
-  // console.log(printf("%-18s%-20s", "round 1: ", JSON.stringify(games)));
 
   return tournamentRounds;
 };
