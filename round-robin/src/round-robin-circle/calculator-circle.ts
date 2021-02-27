@@ -34,7 +34,7 @@ export const calculateCircleMethod = (numberOfPlayers: number): TournamentRounds
 
   // Now that we have an even number of plauyers, the number of rounds is the
   // number of players minus one
-  let rounds: number = adjustedNumberOfPlayers - 1;
+  let rounds = circleParams.rounds;
   // console.log(printf("%-18s%-20s", `rounds:`, "" + rounds));
 
   // save the number of games per round
