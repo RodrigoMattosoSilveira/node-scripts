@@ -25,3 +25,10 @@ export type TournamentRounds = TournamentRound[];
 export type Tournament = {
   players: Players,
 }
+
+export type CircleParams = {
+  ghostPlayer?: number,
+  np?: number,
+  rounds?: number,
+  gamesPerRound?: number;
+}
