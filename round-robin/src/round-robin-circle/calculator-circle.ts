@@ -38,7 +38,7 @@ export const calculateCircleMethod = (numberOfPlayers: number): TournamentRounds
   // console.log(printf("%-18s%-20s", `rounds:`, "" + rounds));
 
   // save the number of games per round
-  let gamesPerRound: number = numberOfPlayers % 2 === 0 ? (numberOfPlayers / 2) : (numberOfPlayers - 1) / 2;
+  let gamesPerRound = circleParams.gamesPerRound;
   // console.log(printf("%-18s%-20s", `gamesPerRound:`, "" + gamesPerRound));
 
   // Populate the supporting array, players
