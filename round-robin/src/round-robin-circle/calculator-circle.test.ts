@@ -3,10 +3,11 @@ import { TournamentRound, Game, Games, TournamentRounds, ExpectedOpponents, Play
 
 describe('Round Robin Calculator', () => {
   let numberOfPlayers: number;
+  let circleParams: CircleParams;
   let ghostPlayer: number = numberOfPlayers % 2 === 0 ? Number.MAX_VALUE : numberOfPlayers;
-  let numberOfGamesPerRound: number;
-  let tournamentPlayersAdjusted: number;
-  let numberOfRounds: number;
+  let gamesPerRound: number;
+  let adjustedNumberOfPlayers: number;
+  let rounds: number;
 
   let opponentCandidates: Player[] = [];
   let expectedOpponents: Player[]  = [];
@@ -20,11 +21,10 @@ describe('Round Robin Calculator', () => {
 
   describe('The calculateCircleParams function', () => {
     let numberOfPlayers: number;
-    let circleParams: CircleParams;
     describe('when calculating for an even number of players', () => {
       beforeAll(() => {
         numberOfPlayers = 10
-        circleParams = rrc_calculator.calculateCircleParams(numberOfPlayers)
+        circleParams = rrc_calculator.calculateCircleParams(numberOfPlayers);
       });
       it('calculates ghostPlayer correctly', () => {
         expect(circleParams.ghostPlayer).toEqual(Number.MAX_VALUE);
@@ -37,14 +37,33 @@ describe('Round Robin Calculator', () => {
       })
       it('calculates gamesPerRound correctly', () => {
         expect(circleParams.gamesPerRound).toEqual(numberOfPlayers / 2);
-    })
+      })
+    });
+    describe('when calculating for an odd number of players', () => {
+      beforeAll(() => {
+        numberOfPlayers = 11
+        circleParams = rrc_calculator.calculateCircleParams(numberOfPlayers)
+      });
+      it('calculates ghostPlayer correctly', () => {
+        expect(circleParams.ghostPlayer).toEqual(numberOfPlayers);
+      })
+      it('calculates adjustedNumberOfPlayers correctly', () => {
+        expect(circleParams.adjustedNumberOfPlayers).toEqual(numberOfPlayers + 1);
+      })
+      it('calculates rounds correctly', () => {
+        expect(circleParams.rounds).toEqual(circleParams.adjustedNumberOfPlayers-1);
+      })
+      it('calculates gamesPerRound correctly', () => {
+        expect(circleParams.gamesPerRound).toEqual((numberOfPlayers - 1) / 2);
+      })
     });
   });
   describe('for even number of players', () => {
     numberOfPlayers = 10;
-    numberOfGamesPerRound = numberOfPlayers % 2 === 0 ? numberOfPlayers / 2: (numberOfPlayers - 1) / 2;
-    tournamentPlayersAdjusted = numberOfPlayers % 2 === 0 ? numberOfPlayers: numberOfPlayers + 1;
-    numberOfRounds = tournamentPlayersAdjusted - 1;
+    circleParams = rrc_calculator.calculateCircleParams(numberOfPlayers);
+    gamesPerRound = circleParams.gamesPerRound;
+    adjustedNumberOfPlayers = circleParams.adjustedNumberOfPlayers;
+    rounds = circleParams.rounds;
     beforeAll(() => {
       tournamentRounds = rrc_calculator.calculateCircleMethod(numberOfPlayers);
     });
@@ -77,7 +96,7 @@ describe('Round Robin Calculator', () => {
     });
     it('with every player playing all other players', async done => {
       opponentCandidates = [];
-      for (let player = 0; player < tournamentPlayersAdjusted; player++) {
+      for (let player = 0; player < adjustedNumberOfPlayers; player++) {
         opponentCandidates.push(player);
       }
       // console.log("opponentCandidates: " + JSON.stringify(opponentCandidates));
@@ -94,11 +113,11 @@ describe('Round Robin Calculator', () => {
 
         // For each round
         actualOpponents = [];
-        for (let i = 0; i < numberOfRounds; i++) {
+        for (let i = 0; i < rounds; i++) {
           tournamentRound = tournamentRounds[i];
           opponent = NO_OPPONENT_FOUND;
           // Find the player's opponent and save it
-          for (let j = 0; j < numberOfGamesPerRound; j++) {
+          for (let j = 0; j < gamesPerRound; j++) {
             if (tournamentRound.games[j].whitePiecesPlayer === player) {
               opponent = tournamentRound.games[j].blackPiecesPlayer
             } else {
@@ -120,7 +139,7 @@ describe('Round Robin Calculator', () => {
       done();
     });
     it('with every player playing one game per round', async done => {
-      for (let i = 0; i < numberOfRounds; i++) {
+      for (let i = 0; i < rounds; i++) {
         // console.log("round: " + i);
         tournamentRound = tournamentRounds[i];
         // console.log("tournamentRound: " + JSON.stringify(tournamentRound));
@@ -128,7 +147,7 @@ describe('Round Robin Calculator', () => {
           // console.log("player: " + player);
           playerGamesPerRound = 0;
           // console.log("numberOfGamesPerRound: " + numberOfGamesPerRound);
-          for (let k = 0; k < numberOfGamesPerRound; k++) {
+          for (let k = 0; k < gamesPerRound; k++) {
             // console.log("game: " + JSON.stringify(tournamentRound.games[k]));
             if (tournamentRound.games[k].whitePiecesPlayer === player ||
                 tournamentRound.games[k].blackPiecesPlayer === player) {

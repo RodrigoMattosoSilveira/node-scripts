@@ -121,7 +121,7 @@ export const calculateCircleParams = (numberOfPlayers: number): CircleParams => 
     // console.log(printf("%-18s%-20s", `ghostPlayer:`, (ghostPlayer === Number.MAX_VALUE) ? "No ghostPlayer" : "" + "Yes: " + ghostPlayer));
 
     // save the working number of players, accounting for the ghostPlayer
-    circleParams.adjustedNumberOfPlayers = numberOfPlayers % 2 === 0 ? numberOfPlayers : numberOfPlayers + 1;;
+    circleParams.adjustedNumberOfPlayers = numberOfPlayers % 2 === 0 ? numberOfPlayers : numberOfPlayers + 1;
     // console.log(printf("%-18s%-20s", `np:`, "" + np));
 
     // Now that we have an even number of plauyers, the number of rounds is the
