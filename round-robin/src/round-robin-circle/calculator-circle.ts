@@ -7,7 +7,7 @@
  */
 
 import printf from "printf";
-import { TournamentRound, TournamentRounds, CircleParams, Tournament, Game, Games} from './types';
+import { CircleParams, Game, Games, Tournament, TournamentRound, TournamentRounds} from "./types";
 
 /**
  * The circle method is the standard algorithm to create a schedule for a
@@ -20,29 +20,29 @@ import { TournamentRound, TournamentRounds, CircleParams, Tournament, Game, Game
 export const calculateCircleMethod = (numberOfPlayers: number): TournamentRounds => {
     // console.log(printf("%-18s%-20s", `numberOfPlayers:`, "" + numberOfPlayers));
     //
-  let tournamentRounds: TournamentRounds = [];
+  const tournamentRounds: TournamentRounds = [];
 
-  let circleParams: CircleParams = calculateCircleParams(numberOfPlayers);
+  const circleParams: CircleParams = calculateCircleParams(numberOfPlayers);
 
   // Add a ghostPlayer if numberOfPlayers is odd
-  let ghostPlayer = circleParams.ghostPlayer;
+  const ghostPlayer = circleParams.ghostPlayer;
   // console.log(printf("%-18s%-20s", `ghostPlayer:`, (ghostPlayer === Number.MAX_VALUE) ? "No ghostPlayer" : "" + "Yes: " + ghostPlayer));
 
   // save the working number of players, accounting for the ghostPlayer
-  let adjustedNumberOfPlayers = circleParams.adjustedNumberOfPlayers;
+  const adjustedNumberOfPlayers = circleParams.adjustedNumberOfPlayers;
   // console.log(printf("%-18s%-20s", `np:`, "" + np));
 
   // Now that we have an even number of plauyers, the number of rounds is the
   // number of players minus one
-  let rounds = circleParams.rounds;
+  const rounds = circleParams.rounds;
   // console.log(printf("%-18s%-20s", `rounds:`, "" + rounds));
 
   // save the number of games per round
-  let gamesPerRound = circleParams.gamesPerRound;
+  const gamesPerRound = circleParams.gamesPerRound;
   // console.log(printf("%-18s%-20s", `gamesPerRound:`, "" + gamesPerRound));
 
   // Populate the supporting array, players
-  let players: number[] = [];
+  const players: number[] = [];
   for (let i = 0; i < numberOfPlayers; i++) {
     players.push(i);
   }
@@ -52,8 +52,8 @@ export const calculateCircleMethod = (numberOfPlayers: number): TournamentRounds
   }
   // console.log(printf("%-18s%-20s", `players:`, JSON.stringify(players)));
 
-  let top: number[] = [];
-  let bottom: number[] = [];
+  const top: number[] = [];
+  const bottom: number[] = [];
   let printTop: string = "";
   let printBottom: string = "";
 
@@ -164,7 +164,6 @@ export const showPairings = (tournament: Tournament): void => {
     const tournamentRounds = tournament.tournamentRounds;
     // console.log(`tournamentRounds: ` + JSON.stringify(tournamentRounds));
 
-
     let printLine: string = "";
     // console.log(`showPairings/rounds: ${rounds}`);
     // console.log(`showPairings/roundGames: ${gamesPerRound}`);
@@ -175,7 +174,7 @@ export const showPairings = (tournament: Tournament): void => {
     for (let i = 0; i <= gamesPerRound; i++) {
         printLine += printf("%10s", "----------|");
     }
-    if (ghostPlayer !==Number.MAX_VALUE) {
+    if (ghostPlayer !== Number.MAX_VALUE) {
         printLine += printf("%10s", "----------|");
     }
     console.log(printLine);
@@ -197,21 +196,21 @@ export const showPairings = (tournament: Tournament): void => {
     }
     console.log(printLine);
     for (let i = 0; i < rounds; i++) {
-        let tournamentRound: TournamentRound = tournamentRounds[i];
+        const tournamentRound: TournamentRound = tournamentRounds[i];
         // console.log(`tournamentRound: ` + JSON.stringify(tournamentRound));
-        let games: Games = tournamentRound.games;
+        const games: Games = tournamentRound.games;
         // console.log(`tournamentRound games: ` + JSON.stringify(games));
         printLine = printf("%s%-2d%s", "round ", i + 1, "  |");
         for (let j = 0; j < gamesPerRound; j++) {
             // printLine += printf("%10s", "          |");
-            let game: Game = games[j];
+            const game: Game = games[j];
             // console.log(`tournamentRound game: ` + JSON.stringify(game));
-            let whitePiecesPlayer: number = game.whitePiecesPlayer;
-            let blackPiecesPlayer: number = game.blackPiecesPlayer
+            const whitePiecesPlayer: number = game.whitePiecesPlayer;
+            const blackPiecesPlayer: number = game.blackPiecesPlayer;
             printLine += printf("%2s%-2d%3s%-2d%2s", " ", whitePiecesPlayer, " - ", blackPiecesPlayer, " |");
         }
         if (ghostPlayer !== Number.MAX_VALUE) {
-          printLine += printf("%4s%2s%5s", " ", ""+tournamentRound.byePlayer, "|");
+          printLine += printf("%4s%2s%5s", " ", "" + tournamentRound.byePlayer, "|");
         }
         console.log(printLine);
         printLine = "";

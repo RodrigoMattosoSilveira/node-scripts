@@ -6,7 +6,8 @@
     "jsRules": {},
     "rules": {
         "no-console": false,
-        "no-trailing-whitespace": false
+        "no-trailing-whitespace": false,
+        "max-line-length": [true, 160]
     },
     "rulesDirectory": []
 }

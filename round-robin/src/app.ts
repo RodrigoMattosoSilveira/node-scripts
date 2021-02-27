@@ -7,13 +7,12 @@
  */
 // import fs from "fs";
 // import axios from 'axios';
-import printf from "printf"
+import printf from "printf";
 import yargs from "yargs";
 
 // import * as calculator from "./calculator";
-import {Tournament} from "./round-robin-circle/types";
 import * as rrc_calculator from "./round-robin-circle/calculator-circle";
-
+import {Tournament} from "./round-robin-circle/types";
 
 let numberOfPlayers: number = 0;
 
@@ -33,9 +32,9 @@ console.log(printf("%-18s%-20s", `numberOfPlayers:`, "" + numberOfPlayers));
 // schedule = calculator.calculate(tournamentPlayers);
 // calculator.showResults(tournamentPlayers, schedule);
 // calculator.showPairings(tournamentPlayers, schedule);
-let tournament: Tournament = {
-  type: `round-robin`,
+const tournament: Tournament = {
   numberOfPlayers: numberOfPlayers,
-  tournamentRounds: rrc_calculator.calculateCircleMethod(numberOfPlayers)
+  tournamentRounds: rrc_calculator.calculateCircleMethod(numberOfPlayers),
+  type: "round-robin"
 };
 rrc_calculator.showPairings(tournament);
