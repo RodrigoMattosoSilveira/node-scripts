@@ -165,13 +165,107 @@ describe('Round Robin Calculator', () => {
       beforeAll(() => {
         numberOfPlayers = 11;
         circleParams = rrc_calculator.calculateCircleParams(numberOfPlayers);
-        gamesPerRound = circleParams.gamesPerRound;
-        adjustedNumberOfPlayers = circleParams.adjustedNumberOfPlayers;
-        rounds = circleParams.rounds;
+        gamesPerRound = 5
+        adjustedNumberOfPlayers = 12
+        rounds = 11;
         tournamentRounds = rrc_calculator.calculateCircleMethod(numberOfPlayers);
       });
-      it('calculates 10 rounds', () => {
-        expect(tournamentRounds.length).toEqual(10)
+      it('calculates 11 rounds', () => {
+        expect(tournamentRounds.length).toEqual(11)
+      });
+      it('calculates 5 games per round (11 players)', () => {
+        // round 1
+        expect(tournamentRounds[1].games.length).toEqual(gamesPerRound);
+        expect(tournamentRounds[2].games.length).toEqual(gamesPerRound);
+        expect(tournamentRounds[3].games.length).toEqual(gamesPerRound);
+        expect(tournamentRounds[4].games.length).toEqual(gamesPerRound);
+        expect(tournamentRounds[5].games.length).toEqual(gamesPerRound);
+        expect(tournamentRounds[6].games.length).toEqual(gamesPerRound);
+        expect(tournamentRounds[7].games.length).toEqual(gamesPerRound);
+        expect(tournamentRounds[8].games.length).toEqual(gamesPerRound);
+      });
+      it('with a round by player in any round (11 players)', () => {
+        expect(tournamentRounds[1].byePlayer).toBeTruthy();
+        expect(tournamentRounds[2].byePlayer).toBeTruthy();
+        expect(tournamentRounds[3].byePlayer).toBeTruthy();
+        expect(tournamentRounds[4].byePlayer).toBeTruthy();
+        expect(tournamentRounds[5].byePlayer).toBeTruthy();
+        expect(tournamentRounds[6].byePlayer).toBeTruthy();
+        expect(tournamentRounds[7].byePlayer).toBeTruthy();
+        expect(tournamentRounds[8].byePlayer).toBeTruthy();
+      });
+      it('with every player playing all other players', () => {
+        opponentCandidates = [];
+        for (let player = 0; player < numberOfPlayers; player++) {
+          opponentCandidates.push(player);
+        }
+        // console.log("opponentCandidates: " + JSON.stringify(opponentCandidates));
+
+        // for each player
+        for (let player = 0; player < numberOfPlayers; player++) {
+          // console.log("Validating player: " + player);
+          expectedOpponents = opponentCandidates.slice();
+          // console.log("expectedOpponents: " + JSON.stringify(expectedOpponents));
+
+          // note that the splice method removes the element(s) from the array and
+          // RETURNS the removed element(s)
+          expectedOpponents.splice(player, 1);
+          // console.log("expectedOpponents: " + JSON.stringify(expectedOpponents));
+
+          // For each round
+          actualOpponents = [];
+          for (let i = 0; i < rounds; i++) {
+            tournamentRound = tournamentRounds[i];
+            opponent = NO_OPPONENT_FOUND;
+            // Find the player's opponent and save it
+            for (let j = 0; j < gamesPerRound; j++) {
+              // console.log("tournamentRound.games[" + j + "]: " + JSON.stringify(tournamentRound.games[j]));
+              if (tournamentRound.games[j].whitePiecesPlayer === player) {
+                opponent = tournamentRound.games[j].blackPiecesPlayer
+              } else {
+                if (tournamentRound.games[j].blackPiecesPlayer === player) {
+                    opponent = tournamentRound.games[j].whitePiecesPlayer
+                }
+              }
+              if (opponent !== NO_OPPONENT_FOUND) {
+                break;
+              }
+            }
+            if (player === tournamentRound.byePlayer) {
+              expect(opponent).toEqual(NO_OPPONENT_FOUND);
+            } else {
+              expect(opponent).not.toEqual(NO_OPPONENT_FOUND);
+              expect(opponent).not.toEqual(player);
+              actualOpponents.push(opponent);
+            }
+          }
+          // console.log("actualOpponents: " + JSON.stringify(actualOpponents));
+          expect(actualOpponents.sort()).toEqual(expectedOpponents.sort());
+        }
+      });
+      it('with every player playing one game per round, except when they have a round bye', () => {
+        for (let i = 0; i < rounds; i++) {
+          // console.log("round: " + i);
+          tournamentRound = tournamentRounds[i];
+          // console.log("tournamentRound: " + JSON.stringify(tournamentRound));
+          for (let player = 0; player < numberOfPlayers; player++) {
+            // console.log("player: " + player);
+            playerGamesPerRound = 0;
+            // console.log("numberOfGamesPerRound: " + numberOfGamesPerRound);
+            for (let k = 0; k < gamesPerRound; k++) {
+              // console.log("game: " + JSON.stringify(tournamentRound.games[k]));
+              if (tournamentRound.games[k].whitePiecesPlayer === player ||
+                  tournamentRound.games[k].blackPiecesPlayer === player) {
+                  playerGamesPerRound++;
+              }
+            }
+            if (player === tournamentRound.byePlayer) {
+              expect(playerGamesPerRound).toEqual(0);
+            } else {
+              expect(playerGamesPerRound).toEqual(1);
+            }
+          }
+        }
       });
     });
   });
