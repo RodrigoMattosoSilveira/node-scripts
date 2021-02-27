@@ -6,8 +6,8 @@
     "author": "Rodrigo Silveira",
     "license": "MIT",
     "scripts": {
-        "start10": "tsc && node dist/app.js --players=10",
-        "start11": "tsc && node dist/app.js --players=11",
+        "start10": "tsc && node dist/src/app.js --players=10",
+        "start11": "tsc && node dist/src/app.js --players=11",
         "test": "jest"
     },
     "dependencies": {

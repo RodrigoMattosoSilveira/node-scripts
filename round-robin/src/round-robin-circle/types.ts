@@ -23,7 +23,9 @@ export type TournamentRound = {
 export type TournamentRounds = TournamentRound[];
 
 export type Tournament = {
-  players: Players,
+  numberOfPlayers: number,
+  tournamentRounds: TournamentRounds,
+  type: string
 }
 
 export type CircleParams = {

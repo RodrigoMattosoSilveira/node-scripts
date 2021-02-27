@@ -7,7 +7,7 @@
  */
 
 import printf from "printf";
-import { TournamentRound, TournamentRounds, CircleParams} from './types';
+import { TournamentRound, TournamentRounds, CircleParams, Tournament, Game, Games} from './types';
 
 /**
  * The circle method is the standard algorithm to create a schedule for a
@@ -154,3 +154,74 @@ round 4  |         |         |         |
 round 5  |         |         |         |
 ---------|---------|---------|---------|----
 */
+
+export const showPairings = (tournament: Tournament): void => {
+    const circleParams: CircleParams = calculateCircleParams(tournament.numberOfPlayers);
+    const numberOfPlayers = tournament.numberOfPlayers;
+    const rounds = circleParams.rounds;
+    const ghostPlayer = circleParams.ghostPlayer;
+    const gamesPerRound = circleParams.gamesPerRound;
+    const tournamentRounds = tournament.tournamentRounds;
+    // console.log(`tournamentRounds: ` + JSON.stringify(tournamentRounds));
+
+
+    let printLine: string = "";
+    // console.log(`showPairings/rounds: ${rounds}`);
+    // console.log(`showPairings/roundGames: ${gamesPerRound}`);
+    // console.log(`showPairings/ghostPlayer: ${ghostPlayer}`);
+
+    console.log(`\nChess Tournament - Simple Round Robin pairings for ${ghostPlayer} players`);
+    printLine = "";
+    for (let i = 0; i <= gamesPerRound; i++) {
+        printLine += printf("%10s", "----------|");
+    }
+    if (ghostPlayer !==Number.MAX_VALUE) {
+        printLine += printf("%10s", "----------|");
+    }
+    console.log(printLine);
+    printLine = printf("%-10s", "rounds    |");
+    for (let i = 0; i < gamesPerRound; i++) {
+        const gameNumberString = i + 1 < 10 ? "0" + (i + 1) : "" + (i + 1);
+        printLine += printf("%4s%-2s%4s%s", " ", gameNumberString, " ", "|");
+    }
+    if (ghostPlayer !== Number.MAX_VALUE) {
+      printLine += printf("%4s%-3s%3s%s", " ", "Bye", " ", "|");
+    }
+    console.log(printLine);
+    printLine = "";
+    for (let i = 0; i <= gamesPerRound; i++) {
+        printLine += printf("%10s", "----------|");
+    }
+    if (ghostPlayer !== Number.MAX_VALUE) {
+        printLine += printf("%10s", "----------|");
+    }
+    console.log(printLine);
+    for (let i = 0; i < rounds; i++) {
+        let tournamentRound: TournamentRound = tournamentRounds[i];
+        // console.log(`tournamentRound: ` + JSON.stringify(tournamentRound));
+        let games: Games = tournamentRound.games;
+        // console.log(`tournamentRound games: ` + JSON.stringify(games));
+        printLine = printf("%s%-2d%s", "round ", i + 1, "  |");
+        for (let j = 0; j < gamesPerRound; j++) {
+            // printLine += printf("%10s", "          |");
+            let game: Game = games[j];
+            // console.log(`tournamentRound game: ` + JSON.stringify(game));
+            let whitePiecesPlayer: number = game.whitePiecesPlayer;
+            let blackPiecesPlayer: number = game.blackPiecesPlayer
+            printLine += printf("%2s%-2d%3s%-2d%2s", " ", whitePiecesPlayer, " - ", blackPiecesPlayer, " |");
+        }
+        if (ghostPlayer !== Number.MAX_VALUE) {
+          printLine += printf("%4s%2s%5s", " ", ""+tournamentRound.byePlayer, "|");
+        }
+        console.log(printLine);
+        printLine = "";
+        for (let j = 0; j <= gamesPerRound; j++) {
+            printLine += printf("%10s", "----------|");
+        }
+        if (ghostPlayer !== Number.MAX_VALUE) {
+            printLine += printf("%10s", "----------|");
+        }
+        console.log(printLine);
+    }
+    console.log("\n");
+};

@@ -11,17 +11,19 @@ import printf from "printf"
 import yargs from "yargs";
 
 // import * as calculator from "./calculator";
+import {Tournament} from "./round-robin-circle/types";
 import * as rrc_calculator from "./round-robin-circle/calculator-circle";
 
-let tournamentPlayers: number = 0;
+
+let numberOfPlayers: number = 0;
 
 // Login
 console.log(`Round Robin@0.0.1`);
 
 // Show number of players
 const input = yargs.argv;
-tournamentPlayers = Number(input.players);
-console.log(printf("%-18s%-20s", `tournmentPlayers:`, "" + tournamentPlayers));
+numberOfPlayers = Number(input.players);
+console.log(printf("%-18s%-20s", `numberOfPlayers:`, "" + numberOfPlayers));
 
 // Calculate and show the hard-coded schedule
 // schedule = calculator.calculateHard();
@@ -31,5 +33,9 @@ console.log(printf("%-18s%-20s", `tournmentPlayers:`, "" + tournamentPlayers));
 // schedule = calculator.calculate(tournamentPlayers);
 // calculator.showResults(tournamentPlayers, schedule);
 // calculator.showPairings(tournamentPlayers, schedule);
-
-rrc_calculator.calculateCircleMethod(tournamentPlayers);
+let tournament: Tournament = {
+  type: `round-robin`,
+  numberOfPlayers: numberOfPlayers,
+  tournamentRounds: rrc_calculator.calculateCircleMethod(numberOfPlayers)
+};
+rrc_calculator.showPairings(tournament);
