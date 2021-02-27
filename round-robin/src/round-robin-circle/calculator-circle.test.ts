@@ -67,11 +67,10 @@ describe('Round Robin Calculator', () => {
     beforeAll(() => {
       tournamentRounds = rrc_calculator.calculateCircleMethod(numberOfPlayers);
     });
-    it('calculates 9 rounds', async done => {
+    it('calculates 9 rounds', () => {
       expect(tournamentRounds.length).toEqual(numberOfPlayers-1)
-      done();
     });
-    it('calculates 5 games per round', async done => {
+    it('calculates 5 games per round', () => {
       // round 1
       expect(tournamentRounds[1].games.length).toEqual(numberOfPlayers/2);
       expect(tournamentRounds[2].games.length).toEqual(numberOfPlayers/2);
@@ -81,9 +80,8 @@ describe('Round Robin Calculator', () => {
       expect(tournamentRounds[6].games.length).toEqual(numberOfPlayers/2);
       expect(tournamentRounds[7].games.length).toEqual(numberOfPlayers/2);
       expect(tournamentRounds[8].games.length).toEqual(numberOfPlayers/2);
-      done();
     });
-    it('without any round by player in any round', async done => {
+    it('without any round by player in any round', () => {
       expect(tournamentRounds[1].byePlayer).toBeFalsy();
       expect(tournamentRounds[2].byePlayer).toBeFalsy();
       expect(tournamentRounds[3].byePlayer).toBeFalsy();
@@ -92,9 +90,8 @@ describe('Round Robin Calculator', () => {
       expect(tournamentRounds[6].byePlayer).toBeFalsy();
       expect(tournamentRounds[7].byePlayer).toBeFalsy();
       expect(tournamentRounds[8].byePlayer).toBeFalsy();
-      done();
     });
-    it('with every player playing all other players', async done => {
+    it('with every player playing all other players', () => {
       opponentCandidates = [];
       for (let player = 0; player < adjustedNumberOfPlayers; player++) {
         opponentCandidates.push(player);
@@ -136,9 +133,8 @@ describe('Round Robin Calculator', () => {
         // console.log("actualOpponents: " + JSON.stringify(actualOpponents));
         expect(actualOpponents.sort()).toEqual(expectedOpponents.sort());
       }
-      done();
     });
-    it('with every player playing one game per round', async done => {
+    it('with every player playing one game per round', () => {
       for (let i = 0; i < rounds; i++) {
         // console.log("round: " + i);
         tournamentRound = tournamentRounds[i];
@@ -157,7 +153,6 @@ describe('Round Robin Calculator', () => {
           expect(playerGamesPerRound).toEqual(1);
         }
       }
-      done();
     });
   });
 });
