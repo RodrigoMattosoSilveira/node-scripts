@@ -7,7 +7,7 @@
  */
 
 import printf from "printf";
-import { TournamentRound, Game, TournamentRounds} from './types';
+import { TournamentRound, TournamentRounds, CircleParams} from './types';
 
 /**
  * The circle method is the standard algorithm to create a schedule for a
@@ -27,12 +27,12 @@ export const calculateCircleMethod = (numberOfPlayers: number): TournamentRounds
   // console.log(printf("%-18s%-20s", `ghostPlayer:`, (ghostPlayer === Number.MAX_VALUE) ? "No ghostPlayer" : "" + "Yes: " + ghostPlayer));
 
   // save the working number of players, accounting for the ghostPlayer
-  let np: number = numberOfPlayers % 2 === 0 ? numberOfPlayers : numberOfPlayers + 1;;
+  let adjustedNumberOfPlayers: number = numberOfPlayers % 2 === 0 ? numberOfPlayers : numberOfPlayers + 1;;
   // console.log(printf("%-18s%-20s", `np:`, "" + np));
 
   // Now that we have an even number of plauyers, the number of rounds is the
   // number of players minus one
-  let rounds: number = np - 1;
+  let rounds: number = adjustedNumberOfPlayers - 1;
   // console.log(printf("%-18s%-20s", `rounds:`, "" + rounds));
 
   // save the number of games per round
@@ -57,9 +57,9 @@ export const calculateCircleMethod = (numberOfPlayers: number): TournamentRounds
 
   // Assign the first half of the players to the top array and the second half
   // to the bottom array
-  for (let i = 0; i < np / 2; i++) {
+  for (let i = 0; i < adjustedNumberOfPlayers / 2; i++) {
       top.push(players[i]);
-      bottom.push(players[(np - 1) - i]);
+      bottom.push(players[(adjustedNumberOfPlayers - 1) - i]);
   }
 
   printTop    = printf("%-18s", "top:");
@@ -81,7 +81,7 @@ export const calculateCircleMethod = (numberOfPlayers: number): TournamentRounds
 
   for (let j = 0; j < rounds; j++) {
     tournamentRound = {games: []}
-    for (let i = 0; i < np / 2; i++) {
+    for (let i = 0; i < adjustedNumberOfPlayers / 2; i++) {
       if (top[i] !== ghostPlayer && bottom[i] !== ghostPlayer) {
           // both are playing real opponents
           tournamentRound.games.push({"whitePiecesPlayer": top[i], "blackPiecesPlayer": bottom[i]});
@@ -105,6 +105,30 @@ export const calculateCircleMethod = (numberOfPlayers: number): TournamentRounds
 
   return tournamentRounds;
 };
+
+export const calculateCircleParams = (numberOfPlayers: number): CircleParams => {
+  let circleParams: CircleParams;
+
+    // Add a ghostPlayer if numberOfPlayers is odd
+    circleParams.ghostPlayer = numberOfPlayers % 2 === 0 ? Number.MAX_VALUE : numberOfPlayers;
+    // console.log(printf("%-18s%-20s", `ghostPlayer:`, (ghostPlayer === Number.MAX_VALUE) ? "No ghostPlayer" : "" + "Yes: " + ghostPlayer));
+
+    // save the working number of players, accounting for the ghostPlayer
+    circleParams.np = numberOfPlayers % 2 === 0 ? numberOfPlayers : numberOfPlayers + 1;;
+    // console.log(printf("%-18s%-20s", `np:`, "" + np));
+
+    // Now that we have an even number of plauyers, the number of rounds is the
+    // number of players minus one
+    circleParams.rounds = circleParams.np - 1;
+    // console.log(printf("%-18s%-20s", `rounds:`, "" + rounds));
+
+    // save the number of games per round
+      circleParams.gamesPerRound = numberOfPlayers % 2 === 0 ? (numberOfPlayers / 2) : (numberOfPlayers - 1) / 2;
+    // console.log(printf("%-18s%-20s", `gamesPerRound:`, "" + gamesPerRound));
+
+    return circleParams
+}
+
 /*
 Chess Tournament - Simple Round Robin pairings
 6        |----------------------------------
