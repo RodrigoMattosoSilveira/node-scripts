@@ -1,5 +1,5 @@
 import * as rrc_calculator from "./calculator-circle";
-import { TournamentRound, Game, Games, TournamentRounds, ExpectedOpponents, Player, Players} from './types';
+import { TournamentRound, Game, Games, TournamentRounds, ExpectedOpponents, Player, Players, CircleParams} from './types';
 
 describe('Round Robin Calculator', () => {
   let numberOfPlayers: number;
@@ -18,6 +18,28 @@ describe('Round Robin Calculator', () => {
   let tournamentRound: TournamentRound;
   let tournamentRounds: TournamentRounds;
 
+  describe('The calculateCircleParams function', () => {
+    let numberOfPlayers: number;
+    let circleParams: CircleParams;
+    describe('when calculating for an even number of players', () => {
+      beforeAll(() => {
+        numberOfPlayers = 10
+        circleParams = rrc_calculator.calculateCircleParams(numberOfPlayers)
+      });
+      it('calculates ghostPlayer correctly', () => {
+        expect(circleParams.ghostPlayer).toEqual(Number.MAX_VALUE);
+      })
+      it('calculates adjustedNumberOfPlayers correctly', () => {
+        expect(circleParams.adjustedNumberOfPlayers).toEqual(numberOfPlayers);
+      })
+      it('calculates rounds correctly', () => {
+        expect(circleParams.rounds).toEqual(circleParams.adjustedNumberOfPlayers-1);
+      })
+      it('calculates gamesPerRound correctly', () => {
+        expect(circleParams.gamesPerRound).toEqual(numberOfPlayers / 2);
+    })
+    });
+  });
   describe('for even number of players', () => {
     numberOfPlayers = 10;
     numberOfGamesPerRound = numberOfPlayers % 2 === 0 ? numberOfPlayers / 2: (numberOfPlayers - 1) / 2;
