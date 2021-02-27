@@ -20,24 +20,24 @@ import { TournamentRound, Game, TournamentRounds} from './types';
 export const calculateCircleMethod = (numberOfPlayers: number): TournamentRounds => {
   let tournamentRounds: TournamentRounds = [];
 
-  console.log(printf("%-18s%-20s", `numberOfPlayers:`, "" + numberOfPlayers));
+  // console.log(printf("%-18s%-20s", `numberOfPlayers:`, "" + numberOfPlayers));
 
   // Add a ghostPlayer if numberOfPlayers is odd
   let ghostPlayer: number = numberOfPlayers % 2 === 0 ? Number.MAX_VALUE : numberOfPlayers;
-  console.log(printf("%-18s%-20s", `ghostPlayer:`, (ghostPlayer === Number.MAX_VALUE) ? "No ghostPlayer" : "" + "Yes: " + ghostPlayer));
+  // console.log(printf("%-18s%-20s", `ghostPlayer:`, (ghostPlayer === Number.MAX_VALUE) ? "No ghostPlayer" : "" + "Yes: " + ghostPlayer));
 
   // save the working number of players, accounting for the ghostPlayer
   let np: number = numberOfPlayers % 2 === 0 ? numberOfPlayers : numberOfPlayers + 1;;
-  console.log(printf("%-18s%-20s", `np:`, "" + np));
+  // console.log(printf("%-18s%-20s", `np:`, "" + np));
 
   // Now that we have an even number of plauyers, the number of rounds is the
   // number of players minus one
-  let rounds: number = numberOfPlayers % 2 === 0 ?  numberOfPlayers - 1 : numberOfPlayers - 1;
-  console.log(printf("%-18s%-20s", `rounds:`, "" + rounds));
+  let rounds: number = np - 1;
+  // console.log(printf("%-18s%-20s", `rounds:`, "" + rounds));
 
   // save the number of games per round
   let gamesPerRound: number = numberOfPlayers % 2 === 0 ? (numberOfPlayers / 2) : (numberOfPlayers - 1) / 2;
-  console.log(printf("%-18s%-20s", `gamesPerRound:`, "" + gamesPerRound));
+  // console.log(printf("%-18s%-20s", `gamesPerRound:`, "" + gamesPerRound));
 
   // Populate the supporting array, players
   let players: number[] = [];
@@ -48,7 +48,7 @@ export const calculateCircleMethod = (numberOfPlayers: number): TournamentRounds
   if ((numberOfPlayers % 2 === 1)) {
       players.push(numberOfPlayers);
   }
-  console.log(printf("%-18s%-20s", `players:`, JSON.stringify(players)));
+  // console.log(printf("%-18s%-20s", `players:`, JSON.stringify(players)));
 
   let top: number[] = [];
   let bottom: number[] = [];
@@ -73,8 +73,8 @@ export const calculateCircleMethod = (numberOfPlayers: number): TournamentRounds
   printTop    += printf("%1s", "]")
   printBottom += printf("%1s", "]")
 
-  console.log(printf(printTop));
-  console.log(printf(printBottom));
+  // console.log(printf(printTop));
+  // console.log(printf(printBottom));
 
   // Pair the first round
   let tournamentRound: TournamentRound;
@@ -95,9 +95,10 @@ export const calculateCircleMethod = (numberOfPlayers: number): TournamentRounds
         }
       }
     }
-    console.log("\nround " + j + ": " + JSON.stringify(tournamentRound));
+    // console.log("\nround " + j + ": " + JSON.stringify(tournamentRound));
     // Take the leftmost bottom element and insert as the second top element;
     // Take the right most top element and append to the bottom
+    tournamentRounds.push(tournamentRound)
     top.splice(1,0,bottom.shift());
     bottom.push(top.pop());
   }

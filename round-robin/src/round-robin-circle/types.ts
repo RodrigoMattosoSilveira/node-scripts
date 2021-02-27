@@ -6,9 +6,12 @@ export type Game = {
   whitePiecesPlayer: number;
   blackPiecesPlayer: number;
 }
+export type Games = Game[];
 
 export type Player = number;
 export type Players = Player[];
+export type ExpectedOpponents = Players[];
+
 
 export type TournamentRound = {
   // A round's games collection
