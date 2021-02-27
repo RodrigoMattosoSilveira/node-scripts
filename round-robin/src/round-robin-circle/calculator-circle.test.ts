@@ -2,7 +2,7 @@ import * as rrc_calculator from "./calculator-circle";
 import { TournamentRound, Game, Games, TournamentRounds, ExpectedOpponents, Player, Players} from './types';
 
 describe('Round Robin Calculator', () => {
-  let tournamentPlayers: number;
+  let numberOfPlayers: number;
   let numberOfGamesPerRound: number;
   let tournamentPlayersAdjusted: number;
   let numberOfRounds: number;
@@ -18,27 +18,27 @@ describe('Round Robin Calculator', () => {
   let tournamentRounds: TournamentRounds;
 
   describe('for even number of players', () => {
-    tournamentPlayers = 10;
-    numberOfGamesPerRound = tournamentPlayers % 2 === 0 ? tournamentPlayers / 2: (tournamentPlayers - 1) / 2;
-    tournamentPlayersAdjusted = tournamentPlayers % 2 === 0 ? tournamentPlayers: tournamentPlayers + 1;
+    numberOfPlayers = 10;
+    numberOfGamesPerRound = numberOfPlayers % 2 === 0 ? numberOfPlayers / 2: (numberOfPlayers - 1) / 2;
+    tournamentPlayersAdjusted = numberOfPlayers % 2 === 0 ? numberOfPlayers: numberOfPlayers + 1;
     numberOfRounds = tournamentPlayersAdjusted - 1;
     beforeAll(() => {
-      tournamentRounds = rrc_calculator.calculateCircleMethod(tournamentPlayers);
+      tournamentRounds = rrc_calculator.calculateCircleMethod(numberOfPlayers);
     });
     it('calculates 9 rounds', async done => {
-      expect(tournamentRounds.length).toEqual(tournamentPlayers-1)
+      expect(tournamentRounds.length).toEqual(numberOfPlayers-1)
       done();
     });
     it('calculates 5 games per round', async done => {
       // round 1
-      expect(tournamentRounds[1].games.length).toEqual(tournamentPlayers/2);
-      expect(tournamentRounds[2].games.length).toEqual(tournamentPlayers/2);
-      expect(tournamentRounds[3].games.length).toEqual(tournamentPlayers/2);
-      expect(tournamentRounds[4].games.length).toEqual(tournamentPlayers/2);
-      expect(tournamentRounds[5].games.length).toEqual(tournamentPlayers/2);
-      expect(tournamentRounds[6].games.length).toEqual(tournamentPlayers/2);
-      expect(tournamentRounds[7].games.length).toEqual(tournamentPlayers/2);
-      expect(tournamentRounds[8].games.length).toEqual(tournamentPlayers/2);
+      expect(tournamentRounds[1].games.length).toEqual(numberOfPlayers/2);
+      expect(tournamentRounds[2].games.length).toEqual(numberOfPlayers/2);
+      expect(tournamentRounds[3].games.length).toEqual(numberOfPlayers/2);
+      expect(tournamentRounds[4].games.length).toEqual(numberOfPlayers/2);
+      expect(tournamentRounds[5].games.length).toEqual(numberOfPlayers/2);
+      expect(tournamentRounds[6].games.length).toEqual(numberOfPlayers/2);
+      expect(tournamentRounds[7].games.length).toEqual(numberOfPlayers/2);
+      expect(tournamentRounds[8].games.length).toEqual(numberOfPlayers/2);
       done();
     });
     it('without any round by player in any round', async done => {
@@ -59,7 +59,7 @@ describe('Round Robin Calculator', () => {
       }
       // console.log("opponentCandidates: " + JSON.stringify(opponentCandidates));
       // for each player
-      for (let player = 0; player < tournamentPlayers; player++) {
+      for (let player = 0; player < numberOfPlayers; player++) {
         // console.log("Validating player: " + player);
         expectedOpponents = opponentCandidates.slice();
         // console.log("expectedOpponents: " + JSON.stringify(expectedOpponents));
@@ -101,7 +101,7 @@ describe('Round Robin Calculator', () => {
         // console.log("round: " + i);
         tournamentRound = tournamentRounds[i];
         // console.log("tournamentRound: " + JSON.stringify(tournamentRound));
-        for (let player = 0; player < tournamentPlayers; player++) {
+        for (let player = 0; player < numberOfPlayers; player++) {
           // console.log("player: " + player);
           playerGamesPerRound = 0;
           // console.log("numberOfGamesPerRound: " + numberOfGamesPerRound);
