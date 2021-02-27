@@ -3,6 +3,7 @@ import { TournamentRound, Game, Games, TournamentRounds, ExpectedOpponents, Play
 
 describe('Round Robin Calculator', () => {
   let numberOfPlayers: number;
+  let ghostPlayer: number = numberOfPlayers % 2 === 0 ? Number.MAX_VALUE : numberOfPlayers;
   let numberOfGamesPerRound: number;
   let tournamentPlayersAdjusted: number;
   let numberOfRounds: number;
