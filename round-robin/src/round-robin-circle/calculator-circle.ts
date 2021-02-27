@@ -25,11 +25,11 @@ export const calculateCircleMethod = (numberOfPlayers: number): TournamentRounds
   let circleParams: CircleParams = calculateCircleParams(numberOfPlayers);
 
   // Add a ghostPlayer if numberOfPlayers is odd
-  let ghostPlayer= circleParams.ghostPlayer;
+  let ghostPlayer = circleParams.ghostPlayer;
   // console.log(printf("%-18s%-20s", `ghostPlayer:`, (ghostPlayer === Number.MAX_VALUE) ? "No ghostPlayer" : "" + "Yes: " + ghostPlayer));
 
   // save the working number of players, accounting for the ghostPlayer
-  let adjustedNumberOfPlayers: number = numberOfPlayers % 2 === 0 ? numberOfPlayers : numberOfPlayers + 1;;
+  let adjustedNumberOfPlayers = circleParams.adjustedNumberOfPlayers;
   // console.log(printf("%-18s%-20s", `np:`, "" + np));
 
   // Now that we have an even number of plauyers, the number of rounds is the
