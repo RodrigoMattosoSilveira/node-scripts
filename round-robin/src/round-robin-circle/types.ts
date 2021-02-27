@@ -28,7 +28,7 @@ export type Tournament = {
 
 export type CircleParams = {
   ghostPlayer?: number,
-  np?: number,
+  adjustedNumberOfPlayers?: number,
   rounds?: number,
   gamesPerRound?: number;
 }

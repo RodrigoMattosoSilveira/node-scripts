@@ -18,9 +18,11 @@ import { TournamentRound, TournamentRounds, CircleParams} from './types';
  *
  */
 export const calculateCircleMethod = (numberOfPlayers: number): TournamentRounds => {
+    // console.log(printf("%-18s%-20s", `numberOfPlayers:`, "" + numberOfPlayers));
+    //
   let tournamentRounds: TournamentRounds = [];
 
-  // console.log(printf("%-18s%-20s", `numberOfPlayers:`, "" + numberOfPlayers));
+    let circleParams: CircleParams = calculateCircleParams(numberOfPlayers);
 
   // Add a ghostPlayer if numberOfPlayers is odd
   let ghostPlayer: number = numberOfPlayers % 2 === 0 ? Number.MAX_VALUE : numberOfPlayers;
@@ -107,19 +109,24 @@ export const calculateCircleMethod = (numberOfPlayers: number): TournamentRounds
 };
 
 export const calculateCircleParams = (numberOfPlayers: number): CircleParams => {
-  let circleParams: CircleParams;
+  let circleParams: CircleParams = {
+    ghostPlayer: Number.MIN_SAFE_INTEGER,
+    adjustedNumberOfPlayers: Number.MIN_SAFE_INTEGER,
+    rounds: Number.MIN_SAFE_INTEGER,
+    gamesPerRound: Number.MIN_SAFE_INTEGER
+  };
 
     // Add a ghostPlayer if numberOfPlayers is odd
     circleParams.ghostPlayer = numberOfPlayers % 2 === 0 ? Number.MAX_VALUE : numberOfPlayers;
     // console.log(printf("%-18s%-20s", `ghostPlayer:`, (ghostPlayer === Number.MAX_VALUE) ? "No ghostPlayer" : "" + "Yes: " + ghostPlayer));
 
     // save the working number of players, accounting for the ghostPlayer
-    circleParams.np = numberOfPlayers % 2 === 0 ? numberOfPlayers : numberOfPlayers + 1;;
+    circleParams.adjustedNumberOfPlayers = numberOfPlayers % 2 === 0 ? numberOfPlayers : numberOfPlayers + 1;;
     // console.log(printf("%-18s%-20s", `np:`, "" + np));
 
     // Now that we have an even number of plauyers, the number of rounds is the
     // number of players minus one
-    circleParams.rounds = circleParams.np - 1;
+    circleParams.rounds = circleParams.adjustedNumberOfPlayers - 1;
     // console.log(printf("%-18s%-20s", `rounds:`, "" + rounds));
 
     // save the number of games per round
