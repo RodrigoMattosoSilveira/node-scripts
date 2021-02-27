@@ -22,10 +22,10 @@ export const calculateCircleMethod = (numberOfPlayers: number): TournamentRounds
     //
   let tournamentRounds: TournamentRounds = [];
 
-    let circleParams: CircleParams = calculateCircleParams(numberOfPlayers);
+  let circleParams: CircleParams = calculateCircleParams(numberOfPlayers);
 
   // Add a ghostPlayer if numberOfPlayers is odd
-  let ghostPlayer: number = numberOfPlayers % 2 === 0 ? Number.MAX_VALUE : numberOfPlayers;
+  let ghostPlayer= circleParams.ghostPlayer;
   // console.log(printf("%-18s%-20s", `ghostPlayer:`, (ghostPlayer === Number.MAX_VALUE) ? "No ghostPlayer" : "" + "Yes: " + ghostPlayer));
 
   // save the working number of players, accounting for the ghostPlayer
