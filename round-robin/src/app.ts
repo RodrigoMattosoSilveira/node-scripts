@@ -32,9 +32,10 @@ console.log(printf("%-18s%-20s", `numberOfPlayers:`, "" + numberOfPlayers));
 // schedule = calculator.calculate(tournamentPlayers);
 // calculator.showResults(tournamentPlayers, schedule);
 // calculator.showPairings(tournamentPlayers, schedule);
-const tournament: Tournament = {
-  numberOfPlayers: numberOfPlayers,
-  tournamentRounds: rrc_calculator.calculateCircleMethod(numberOfPlayers),
-  type: "round-robin"
-};
+
+const tournament: Tournament = {numberOfPlayers: 0, tournamentRounds: [], type: ""};
+tournament.numberOfPlayers = numberOfPlayers;
+tournament.tournamentRounds = rrc_calculator.calculateCircleMethod(numberOfPlayers);
+tournament.type = "round-robin";
+
 rrc_calculator.showPairings(tournament);
