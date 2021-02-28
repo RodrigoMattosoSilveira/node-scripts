@@ -25,7 +25,7 @@
  */
 
 import printf from "printf";
-import { CircleParams, Color, Colors, Game, Games, Player, Tournament, TournamentRound, TournamentRounds} from "./types";
+import { BLACK_PIECES, Player, Tournament} from "./types";
 
 /**
  * The circle method is the standard algorithm to create a schedule for a
@@ -50,7 +50,8 @@ export const calculateColors = (tournament: Tournament): void => {
  */
 export const playedWithBlackPiecesInLastGame = (player: Player): boolean => {
     const ppcl = player.pieceColors.length;
-    return  ppcl === 0 ? false : player.pieceColors[ppcl - 1] === -1;
+    // console.log(`playedWithBlackPiecesInLastGame/player: ` + JSON.stringify(player));
+    return  ppcl === 0 ? false : player.pieceColors[ppcl - 1] === BLACK_PIECES;
 };
 
 /**
@@ -69,7 +70,7 @@ export const playedWithBlackPiecesInLastTwoGames = (player: Player): boolean => 
     } else {
         const lastTwoGames = player.pieceColors.slice(-2);
         const lastTwoGamesAcc = lastTwoGames.reduce((acc: number, el: number ) => acc += el);
-        returnVal = (lastTwoGamesAcc === -2);
+        returnVal = (lastTwoGamesAcc === (BLACK_PIECES + BLACK_PIECES));
     }
     return returnVal;
 };
@@ -82,10 +83,8 @@ export const playedWithBlackPiecesInLastTwoGames = (player: Player): boolean => 
  * @return {number} the number of time the player played with the black pieces
  */
 export const getHowManyGamesWithBlackPieces = (player: Player): number => {
-    return player.pieceColors.reduce((accumulator: number, element: number ) => {
-        if (element === -1 ) {
-            accumulator += element;
-        }
-        return accumulator;
-    });
+    let timesWithBlack: number = 0;
+    // console.log(`getHowManyGamesWithBlackPieces/player: ` + JSON.stringify(player));
+    player.pieceColors.forEach( (el) => el === BLACK_PIECES ? timesWithBlack += el : timesWithBlack += 0);
+    return Math.abs(timesWithBlack);
 };
