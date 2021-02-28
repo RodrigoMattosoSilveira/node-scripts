@@ -8,12 +8,14 @@
     "scripts": {
         "start10": "tsc && node dist/src/app.js --players=10",
         "start11": "tsc && node dist/src/app.js --players=11",
-        "test": "jest"
+        "test": "jest --detectOpenHandles",
+        "test_color": "jest --detectOpenHandles -t 'Calculate Color'"
     },
     "dependencies": {
         "axios": "^0.21.1",
         "printf": "^0.6.0",
         "shortid": "^2.2.16",
+        "ts-node": "^9.1.1",
         "yargs": "^16.2.0"
     },
     "devDependencies": {

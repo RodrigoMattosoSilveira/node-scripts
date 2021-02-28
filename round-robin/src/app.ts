@@ -12,7 +12,7 @@ import yargs from "yargs";
 
 // import * as calculator from "./calculator";
 import * as rrc_calculator from "./round-robin-circle/calculator-circle";
-import {Tournament} from "./round-robin-circle/types";
+import {Player, Players, Tournament} from "./round-robin-circle/types";
 
 let numberOfPlayers: number = 0;
 
@@ -32,10 +32,18 @@ console.log(printf("%-18s%-20s", `numberOfPlayers:`, "" + numberOfPlayers));
 // schedule = calculator.calculate(tournamentPlayers);
 // calculator.showResults(tournamentPlayers, schedule);
 // calculator.showPairings(tournamentPlayers, schedule);
+const generatePlayers = (np: number): Players => {
+    const players: Players = [];
+    for (let i = 0; i < np; i++) {
+        const player: Player = { id: i, rating: 1, pieceColors: []};
+        players.push({...player});
+    }
+    return players;
+};
+const tournament: Tournament = {numberOfPlayers: 0, players: [], tournamentRounds: [], type: ""};
 
-const tournament: Tournament = {numberOfPlayers: 0, tournamentRounds: [], type: ""};
+tournament.type = "round-robin";
+tournament.players = generatePlayers(numberOfPlayers);
 tournament.numberOfPlayers = numberOfPlayers;
 tournament.tournamentRounds = rrc_calculator.calculateCircleMethod(numberOfPlayers);
-tournament.type = "round-robin";
-
 rrc_calculator.showPairings(tournament);

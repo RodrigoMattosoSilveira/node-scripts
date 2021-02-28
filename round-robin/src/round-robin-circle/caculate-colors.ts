@@ -25,7 +25,7 @@
  */
 
 import printf from "printf";
-import { CircleParams, Game, Games, Tournament, TournamentRound, TournamentRounds} from "./types";
+import { CircleParams, Color, Colors, Game, Games, Player, Tournament, TournamentRound, TournamentRounds} from "./types";
 
 /**
  * The circle method is the standard algorithm to create a schedule for a
@@ -35,7 +35,57 @@ import { CircleParams, Game, Games, Tournament, TournamentRound, TournamentRound
  * @return {TournamentRound} An array of TournamentRound, as explained above
  *
  */
-export const calculateColors = (tournment: Tournament): void => {
+export const calculateColors = (tournament: Tournament): void => {
     // Allocate round 1.  It allocates the first round colors based on players'
     // ratings, with the highest rated player playing black pieces;
-}
+};
+
+/**
+ * playedWithBlackPiecesInLastGame - Asserts whether the player played with
+ * the black pieces in the last game
+ *
+ * @param  {Player} player the player
+ * @return {boolean} true if the  player played with the black pieces in the
+ * last game; false otherwise
+ */
+export const playedWithBlackPiecesInLastGame = (player: Player): boolean => {
+    const ppcl = player.pieceColors.length;
+    return  ppcl === 0 ? false : player.pieceColors[ppcl - 1] === -1;
+};
+
+/**
+ * playedWithBlackPiecesInLastTwoGames - Asserts whether the player played with
+ * the black pieces in the last two games
+ *
+ * @param  {Player} player the player
+ * @return {boolean} true if the  player played with the black pieces in the
+ * last two games; false otherwise
+ */
+export const playedWithBlackPiecesInLastTwoGames = (player: Player): boolean => {
+    let returnVal: boolean;
+    const ppcl = player.pieceColors.length;
+    if (ppcl < 2) {
+        returnVal =  false;
+    } else {
+        const lastTwoGames = player.pieceColors.slice(-2);
+        const lastTwoGamesAcc = lastTwoGames.reduce((acc: number, el: number ) => acc += el);
+        returnVal = (lastTwoGamesAcc === -2);
+    }
+    return returnVal;
+};
+
+/**
+ * getHowManyGamesWithBlackPieces - calculates how many time the `player` played
+ * with the black pieces.
+ *
+ * @param  {Player} player the player
+ * @return {number} the number of time the player played with the black pieces
+ */
+export const getHowManyGamesWithBlackPieces = (player: Player): number => {
+    return player.pieceColors.reduce((accumulator: number, element: number ) => {
+        if (element === -1 ) {
+            accumulator += element;
+        }
+        return accumulator;
+    });
+};
