@@ -25,7 +25,7 @@
  */
 
 import printf from "printf";
-import { BLACK_PIECES, Player, Tournament} from "./types";
+import { BLACK_PIECES, Color, Game, NO_PIECES, Player, Tournament, WHITE_PIECES} from "./types";
 
 /**
  * The circle method is the standard algorithm to create a schedule for a
@@ -35,11 +35,52 @@ import { BLACK_PIECES, Player, Tournament} from "./types";
  * @return {TournamentRound} An array of TournamentRound, as explained above
  *
  */
-export const calculateColors = (tournament: Tournament): void => {
+export const calculateRoundRobinColors = (tournament: Tournament): void => {
     // Allocate round 1.  It allocates the first round colors based on players'
     // ratings, with the highest rated player playing black pieces;
 };
 
+export const calculateRColors = (player1: Player, player2: Player): Game => {
+    // const game: Game;
+    //
+    // // Set the initial stage
+    // if (player1.rating <= player2.rating) {
+    //     game.whitePiecesPlayer = player1.id;
+    //     game.blackPiecesPlayer = player2.id;
+    // } else {
+    //     game.whitePiecesPlayer = player2.id;
+    //     game.blackPiecesPlayer = player1.id;
+    // }
+    //
+    // // Now change the players' piece Colors based on the last game each played
+    //
+
+    return null;
+};
+
+/**
+ * flipPlayerPiecesColor - Reverses the pieces' color assigned to a player based
+ * on their last game's pirces color. Keep the assigned color ff this is the
+ * player's first game or the player had a round bye; flip otherwise
+ *
+ * @param  {Color} currentColor the player's current pieces' color
+ * @param  {Player} player the player
+ * @return {Color} The computed color
+ */
+export const flipPlayerPiecesColor = (currentColor: Color, player: Player): Color => {
+    let color: Color;
+    const ppcl = player.pieceColors.length;
+    if (ppcl === 0 || player.pieceColors[ppcl - 1] === NO_PIECES) {
+        color = currentColor;
+    } else {
+        if (player.pieceColors[ppcl - 1] === WHITE_PIECES) {
+            color = BLACK_PIECES;
+        } else {
+            color = WHITE_PIECES;
+        }
+    }
+    return color;
+};
 /**
  * playedWithBlackPiecesInLastGame - Asserts whether the player played with
  * the black pieces in the last game
