@@ -3,8 +3,8 @@ export type TournamentPlayer = {
 };
 
 export type Game = {
-  whitePiecesPlayer: number;
-  blackPiecesPlayer: number;
+    blackPiecesPlayer: number;
+    whitePiecesPlayer: number;
 };
 export type Games = Game[];
 
