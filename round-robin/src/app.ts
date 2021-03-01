@@ -11,6 +11,8 @@ import printf from "printf";
 import yargs from "yargs";
 
 // import * as calculator from "./calculator";
+// import * as calc_color from "./round-robin-circle/caculate-colors";
+import * as calc_color from "./round-robin-circle/caculate-colors";
 import * as rrc_calculator from "./round-robin-circle/calculator-circle";
 import {Player, Players, Tournament} from "./round-robin-circle/types";
 
@@ -22,7 +24,7 @@ console.log(`Round Robin@0.0.1`);
 // Show number of players
 const input = yargs.argv;
 numberOfPlayers = Number(input.players);
-console.log(printf("%-18s%-20s", `numberOfPlayers:`, "" + numberOfPlayers));
+console.log(printf("%-18s%-20d", `numberOfPlayers:`, "" + numberOfPlayers));
 
 // Calculate and show the hard-coded schedule
 // schedule = calculator.calculateHard();
@@ -35,7 +37,7 @@ console.log(printf("%-18s%-20s", `numberOfPlayers:`, "" + numberOfPlayers));
 const generatePlayers = (np: number): Players => {
     const players: Players = [];
     for (let i = 0; i < np; i++) {
-        const player: Player = { id: i, rating: 1, pieceColors: []};
+        const player: Player = { id: i, rating: i, pieceColors: []};
         players.push({...player});
     }
     return players;
@@ -46,4 +48,6 @@ tournament.type = "round-robin";
 tournament.players = generatePlayers(numberOfPlayers);
 tournament.numberOfPlayers = numberOfPlayers;
 tournament.tournamentRounds = rrc_calculator.calculateCircleMethod(numberOfPlayers);
+rrc_calculator.showPairings(tournament);
+calc_color.calculateRoundRobinColors(tournament);
 rrc_calculator.showPairings(tournament);

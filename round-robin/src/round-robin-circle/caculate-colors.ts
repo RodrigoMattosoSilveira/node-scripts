@@ -36,8 +36,27 @@ import { BLACK_PIECES, Color, Game, NO_PIECES, Player, Tournament, WHITE_PIECES}
  *
  */
 export const calculateRoundRobinColors = (tournament: Tournament): void => {
-    // Allocate round 1.  It allocates the first round colors based on players'
-    // ratings, with the highest rated player playing black pieces;
+    for (const tournamentRound of tournament.tournamentRounds) {
+        let player1: Player;
+        let player2: Player;
+        for (let game of tournamentRound.games) {
+            console.log(`calculateRoundRobinColors before: ` + JSON.stringify(game));
+            // get the players and their pirces' colors
+            player1 = tournament.players.find((el) => game.whitePiecesPlayer === el.id);
+            player2 = tournament.players.find((el) => game.blackPiecesPlayer === el.id);
+            game = {...calculateGameColors(player1, player2)};
+            console.log(`calculateRoundRobinColors after: ` + JSON.stringify(game));
+
+            // update the players pieceColors arrays
+            if (game.whitePiecesPlayer === player1.id) {
+                player1.pieceColors.push(WHITE_PIECES);
+                player2.pieceColors.push(BLACK_PIECES);
+            } else {
+                player1.pieceColors.push(BLACK_PIECES);
+                player2.pieceColors.push(WHITE_PIECES);
+            }
+        }
+    }
 };
 
 /**
