@@ -120,10 +120,10 @@ describe(`Round Robin Calculator`, () => {
             // Find the player`s opponent and save it
             for (let j = 0; j < gamesPerRound; j++) {
               if (tournamentRound.games[j].whitePiecesPlayer === player) {
-                opponent = tournamentRound.games[j].blackPiecesPlayer
+                opponent = tournamentRound.games[j].blackPiecesPlayer;
               } else {
                 if (tournamentRound.games[j].blackPiecesPlayer === player) {
-                    opponent = tournamentRound.games[j].whitePiecesPlayer
+                    opponent = tournamentRound.games[j].whitePiecesPlayer;
                 }
               }
               if (opponent !== NO_OPPONENT_FOUND) {

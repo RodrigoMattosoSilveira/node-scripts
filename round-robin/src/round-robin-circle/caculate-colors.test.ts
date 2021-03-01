@@ -1,6 +1,7 @@
 import * as calc_color from "./caculate-colors";
 import {BLACK_PIECES,
     Color,
+    Game,
     NO_PIECES,
     Player,
     WHITE_PIECES,
@@ -8,7 +9,10 @@ import {BLACK_PIECES,
 
 describe(`Calculate Color`, () => {
     let player: Player;
+    let player1: Player;
+    let player2: Player;
     let assignedColor: Color;
+    let game: Game;
     describe(`playedWithBlackPiecesInLastGame`, () => {
         it(`whith no games played`, () => {
             player = {
@@ -154,6 +158,106 @@ describe(`Calculate Color`, () => {
             assignedColor = BLACK_PIECES;
             player = { id: 1, pieceColors: [BLACK_PIECES], rating: 1};
             expect(calc_color.flipPlayerPiecesColor(assignedColor, player)).toEqual(WHITE_PIECES);
+        });
+    });
+    describe(`calculateGameColors`, () => {
+        describe(`no games played`, () => {
+            it(`both players playig their first game`, () => {
+                player1 = { id: 1, pieceColors: [], rating: 1};
+                player2 = { id: 2, pieceColors: [], rating: 2};
+                game = calc_color.calculateGameColors(player1, player2);
+                expect(game.whitePiecesPlayer).toEqual(player1.id);
+                expect(game.blackPiecesPlayer).toEqual(player2.id);
+            });
+        });
+        describe(`one game played`, () => {
+            it(`player1 had a bye and player2 played WHITE_PIECES`, () => {
+                player1 = { id: 1, pieceColors: [NO_PIECES], rating: 1};
+                player2 = { id: 2, pieceColors: [WHITE_PIECES], rating: 2};
+                game = calc_color.calculateGameColors(player1, player2);
+                expect(game.whitePiecesPlayer).toEqual(player1.id);
+                expect(game.blackPiecesPlayer).toEqual(player2.id);
+            });
+            it(`player1 had a bye and player2 played BLACK_PIECES`, () => {
+                player1 = { id: 1, pieceColors: [NO_PIECES], rating: 1};
+                player2 = { id: 2, pieceColors: [BLACK_PIECES], rating: 2};
+                game = calc_color.calculateGameColors(player1, player2);
+                expect(game.whitePiecesPlayer).toEqual(player1.id);
+                expect(game.blackPiecesPlayer).toEqual(player2.id);
+            });
+            it(`player1 played WHITE_PIECES and player2 had a bye`, () => {
+                player1 = { id: 1, pieceColors: [WHITE_PIECES], rating: 1};
+                player2 = { id: 2, pieceColors: [NO_PIECES], rating: 2};
+                game = calc_color.calculateGameColors(player1, player2);
+                expect(game.whitePiecesPlayer).toEqual(player1.id);
+                expect(game.blackPiecesPlayer).toEqual(player2.id);
+            });
+            it(`player1 played BLACK_PIECES and player2 had a bye`, () => {
+                player1 = { id: 1, pieceColors: [BLACK_PIECES], rating: 1};
+                player2 = { id: 2, pieceColors: [NO_PIECES], rating: 2};
+                game = calc_color.calculateGameColors(player1, player2);
+                expect(game.whitePiecesPlayer).toEqual(player1.id);
+                expect(game.blackPiecesPlayer).toEqual(player2.id);
+            });
+            it(`player1 played WHITE_PIECES and player2 played WHITE_PIECES`, () => {
+                player1 = { id: 1, pieceColors: [WHITE_PIECES], rating: 1};
+                player2 = { id: 2, pieceColors: [WHITE_PIECES], rating: 2};
+                game = calc_color.calculateGameColors(player1, player2);
+                expect(game.whitePiecesPlayer).toEqual(player1.id);
+                expect(game.blackPiecesPlayer).toEqual(player2.id);
+            });
+            it(`player1 played WHITE_PIECES and player2 played BLACK_PIECES`, () => {
+                player1 = { id: 1, pieceColors: [WHITE_PIECES], rating: 1};
+                player2 = { id: 2, pieceColors: [BLACK_PIECES], rating: 2};
+                game = calc_color.calculateGameColors(player1, player2);
+                expect(game.whitePiecesPlayer).toEqual(player2.id);
+                expect(game.blackPiecesPlayer).toEqual(player1.id);
+            });
+
+            it(`player1 played BLACK_PIECES and player2 played BLACK_PIECES`, () => {
+                player1 = { id: 1, pieceColors: [BLACK_PIECES], rating: 1};
+                player2 = { id: 2, pieceColors: [BLACK_PIECES], rating: 2};
+                game = calc_color.calculateGameColors(player1, player2);
+                expect(game.whitePiecesPlayer).toEqual(player1.id);
+                expect(game.blackPiecesPlayer).toEqual(player2.id);
+            });
+            it(`player1 played BLACK_PIECES and player2 played WHITE_PIECES`, () => {
+                player1 = { id: 1, pieceColors: [BLACK_PIECES], rating: 1};
+                player2 = { id: 2, pieceColors: [WHITE_PIECES], rating: 2};
+                game = calc_color.calculateGameColors(player1, player2);
+                expect(game.whitePiecesPlayer).toEqual(player1.id);
+                expect(game.blackPiecesPlayer).toEqual(player2.id);
+            });
+        });
+        describe(`two games played`, () => {
+            it(`player1 WW and player2 WW`, () => {
+                player1 = { id: 1, pieceColors: [WHITE_PIECES, WHITE_PIECES], rating: 1};
+                player2 = { id: 2, pieceColors: [WHITE_PIECES, WHITE_PIECES], rating: 2};
+                game = calc_color.calculateGameColors(player1, player2);
+                expect(game.whitePiecesPlayer).toEqual(player1.id);
+                expect(game.blackPiecesPlayer).toEqual(player2.id);
+            });
+            it(`player1 WW and player2 BB`, () => {
+                player1 = { id: 1, pieceColors: [WHITE_PIECES, WHITE_PIECES], rating: 1};
+                player2 = { id: 2, pieceColors: [BLACK_PIECES, BLACK_PIECES], rating: 2};
+                game = calc_color.calculateGameColors(player1, player2);
+                expect(game.whitePiecesPlayer).toEqual(player2.id);
+                expect(game.blackPiecesPlayer).toEqual(player1.id);
+            });
+            it(`player1 BB and player2 WW`, () => {
+                player1 = { id: 1, pieceColors: [BLACK_PIECES, BLACK_PIECES], rating: 1};
+                player2 = { id: 2, pieceColors: [WHITE_PIECES, WHITE_PIECES], rating: 2};
+                game = calc_color.calculateGameColors(player1, player2);
+                expect(game.whitePiecesPlayer).toEqual(player1.id);
+                expect(game.blackPiecesPlayer).toEqual(player2.id);
+            });
+            it(`player1 BB and player2 BB`, () => {
+                player1 = { id: 1, pieceColors: [BLACK_PIECES, BLACK_PIECES], rating: 1};
+                player2 = { id: 2, pieceColors: [BLACK_PIECES, BLACK_PIECES], rating: 2};
+                game = calc_color.calculateGameColors(player1, player2);
+                expect(game.whitePiecesPlayer).toEqual(player1.id);
+                expect(game.blackPiecesPlayer).toEqual(player2.id);
+            });
         });
     });
 });
