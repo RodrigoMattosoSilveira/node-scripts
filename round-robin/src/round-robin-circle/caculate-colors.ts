@@ -40,20 +40,22 @@ export const calculateRoundRobinColors = (tournament: Tournament): void => {
         let player1: Player;
         let player2: Player;
         for (let game of tournamentRound.games) {
-            console.log(`calculateRoundRobinColors before: ` + JSON.stringify(game));
+            // console.log(`calculateRoundRobinColors before: ` + JSON.stringify(game));
             // get the players and their pirces' colors
             player1 = tournament.players.find((el) => game.whitePiecesPlayer === el.id);
             player2 = tournament.players.find((el) => game.blackPiecesPlayer === el.id);
-            game = {...calculateGameColors(player1, player2)};
-            console.log(`calculateRoundRobinColors after: ` + JSON.stringify(game));
+            game = {...game, ...calculateGameColors(player1, player2)};
+            // console.log(`calculateRoundRobinColors after: ` + JSON.stringify(game));
 
             // update the players pieceColors arrays
+            console.log(`calculateRoundRobinColors player1 pieceColors before: ` + JSON.stringify(player1.pieceColors));
             if (game.whitePiecesPlayer === player1.id) {
                 player1.pieceColors.push(WHITE_PIECES);
                 player2.pieceColors.push(BLACK_PIECES);
             } else {
                 player1.pieceColors.push(BLACK_PIECES);
                 player2.pieceColors.push(WHITE_PIECES);
+                console.log(`calculateRoundRobinColors player1 pieceColors after: ` + JSON.stringify(player1.pieceColors));
             }
         }
     }
