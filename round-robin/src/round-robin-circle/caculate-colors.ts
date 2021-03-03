@@ -51,30 +51,19 @@ export const calculateRoundRobinColors = (tournament: Tournament): void => {
             player1 = tournament.players.find((el) => game.whitePiecesPlayer === el.id);
             player2 = tournament.players.find((el) => game.blackPiecesPlayer === el.id);
             if (player1.id === 0 || player2.id === 0) {
-              console.log("\ncalculateRoundRobinColors/player :" + JSON.stringify(player1));
-              console.log("calculateRoundRobinColors/player :" + JSON.stringify(player2));
+              // console.log("\ncalculateRoundRobinColors/player :" + JSON.stringify(player1));
+              // console.log("calculateRoundRobinColors/player :" + JSON.stringify(player2));
 
             }
             calculatedGame = calculateGameColors(player1, player2);
             // console.log(`game: ` + JSON.stringify(game) + ", calculatedGame: " + JSON.stringify(calculatedGame))
             if (player1.id === 0 || player2.id === 0) {
-                console.log("calculateRoundRobinColors/game :" + JSON.stringify(game));
-                console.log("calculateRoundRobinColors/calculatedGame :" + JSON.stringify(calculatedGame));
+                // console.log("calculateRoundRobinColors/game :" + JSON.stringify(game));
+                // console.log("calculateRoundRobinColors/calculatedGame :" + JSON.stringify(calculatedGame));
             }
             tournamentRound.games[i] = calculatedGame;
             // game = {...game, ...calculatedGame};
             // console.log(`calculateRoundRobinColors after: ` + JSON.stringify(game));
-
-            // update the players pieceColors arrays
-            // console.log(`calculateRoundRobinColors player1 pieceColors before: ` + JSON.stringify(player1.pieceColors));
-            if (game.whitePiecesPlayer === player1.id) {
-                player1.pieceColors.push(WHITE_PIECES);
-                player2.pieceColors.push(BLACK_PIECES);
-            } else {
-                player1.pieceColors.push(BLACK_PIECES);
-                player2.pieceColors.push(WHITE_PIECES);
-                // console.log(`calculateRoundRobinColors player1 pieceColors after: ` + JSON.stringify(player1.pieceColors));
-            }
         }
     }
     // for (let i = 0; i < tournament.players.length; i++) {
@@ -84,19 +73,23 @@ export const calculateRoundRobinColors = (tournament: Tournament): void => {
 
 /**
  * Selects colors for a game's players:
- * - Allocates WHITE_PIECES to the lowest ranking player and BLACK_PIECES to the
- *   highest one;
- * - It assigns colors based on the players based on their last game, flipping
- *   them;
- * - If both players end up with opposite colors we are done;
- * - It flips the color of a player playing with the BLACK_PIECES, if
- *   they played their last game with the BLACK_PIECES
- * - If both players end up with opposite colors we are done;
- * - It flips the color of a player playing with the BLACK_PIECES, if
- *   they played their last two game with the BLACK_PIECES;
- * - If both players end up with opposite colors we are done;
- * - Allocates WHITE_PIECES to the lowest ranking player and BLACK_PIECES to the
- *   highest one;
+ * - When calculating the first game for the player, allocates WHITE_PIECES to the
+ *   lowest ranking player and BLACK_PIECES to the highest ranking player;
+ * - When calculating games other than the first game:
+ *   - Allocates players' piece colors by flipping their last game's piece color
+ *   - If both players end up with opposite colors we are done;
+ *   - It flips the color of a player playing with the BLACK_PIECES, if
+ *     they played their last game with the BLACK_PIECES
+ *   - If both players end up with opposite colors we are done;
+ *   - It flips the color of a player playing with the BLACK_PIECES, if
+ *     they played their last two game with the BLACK_PIECES;
+ *   - If both players end up with opposite colors we are done;
+ *   - Calculates the difference between the number of games played with
+ *     WHITE_PIECES and BLACK_PIECES by each player; assign the WHITE_PIECES to
+ *     the players who played the least amount of games with the WHITE_PIECES;
+ *   - If both players end up with opposite colors we are done;
+ *   - Aallocate WHITE_PIECES to the lowest ranking player and BLACK_PIECES to
+ *     the highest ranking player;
  *
  * @param  {Player} player1 A game player
  * @param  {Player} player2 A game player
@@ -105,39 +98,39 @@ export const calculateRoundRobinColors = (tournament: Tournament): void => {
  */
 export const calculateGameColors = (player1: Player, player2: Player): Game => {
     const game: Game = {
-        blackPiecesPlayer: Number.MAX_SAFE_INTEGER,
-        whitePiecesPlayer: Number.MAX_SAFE_INTEGER,
+          whitePiecesPlayer: Number.MAX_SAFE_INTEGER,
+          blackPiecesPlayer: Number.MAX_SAFE_INTEGER,
     };
     let player1NextGameColor: number;
     let player2NextGameColor: number;
     let player1PieceScore: number;
     let player2PieceScore: number;
 
-    // Allocates WHITE_PIECES to the lwer ranking player and BLACK_PIECES to
-    // the higher ranking one;
+
     if (player1.pieceColors.length === 0) {
+        //  allocates WHITE_PIECES to the lowest ranking player and BLACK_PIECES
+        // to the highest ranking player;
         if (player1.rating <= player2.rating) {
             player1NextGameColor = WHITE_PIECES;
             player2NextGameColor = BLACK_PIECES;
         } else {
-            player2NextGameColor = WHITE_PIECES;
             player1NextGameColor = BLACK_PIECES;
+            player2NextGameColor = WHITE_PIECES;
         }
-    }
-    // console.log(`calculateGameColors/after rating: P1 - ` + player1NextGameColor + ", P2 - " + player2NextGameColor);
+        console.log("calculateGameColors/First round");
+    } else {
+      if (player1.id === 0 || player2.id === 0) {
+        console.log("calculateGameColors/2+ round/player1 pieceColors: " + JSON.stringify(player1.pieceColors))
+        console.log("calculateGameColors/2+ round/player2 pieceColors: " + JSON.stringify(player2.pieceColors))
+      }
+      // Allocates players' piece colors by flipping their last game's piece
+      // color
+      player1NextGameColor = flipPlayerPiecesColor(player1NextGameColor, player1);
+      player2NextGameColor = flipPlayerPiecesColor(player2NextGameColor, player1);
 
-    // It assigns colors based on the players'last game piece colors, flipping
-    // them;
-    player1NextGameColor = flipPlayerPiecesColor(player1NextGameColor, player1);
-    player2NextGameColor = flipPlayerPiecesColor(player2NextGameColor, player1);
-    // console.log(`calculateGameColors/after flip: P1 - ` + player1NextGameColor + ", P2 - " + player2NextGameColor);
-
-    // If both players end up with opposite colors we are done;
-    // It flips the color of a player playing with the BLACK_PIECES, if
-    // they played their last two game with the BLACK_PIECES;
-    if (player1NextGameColor === player2NextGameColor ) {
-        // Flip the color of the player with the black pieces, it they played
-        // their last game with the black pieces
+      if (player1NextGameColor === player2NextGameColor ) {
+        // It flips the color of a player playing with the BLACK_PIECES, if
+        // they played their last two game with the BLACK_PIECES
         if (player1NextGameColor === BLACK_PIECES && playedWithBlackPiecesInLastGame(player1)) {
             player1NextGameColor = WHITE_PIECES;
         }
@@ -145,51 +138,52 @@ export const calculateGameColors = (player1: Player, player2: Player): Game => {
             player2NextGameColor = WHITE_PIECES;
         }
 
-        // If both players end up with opposite colors we are done;
-        // It flips the color of a player playing with the BLACK_PIECES, if
-        // they played their last two game with the BLACK_PIECES;
         if (player1NextGameColor === player2NextGameColor ) {
-            // Flip the color of the player with the black pieces, it they played
-            // their last game with the black pieces
-            if (player1NextGameColor === BLACK_PIECES && playedWithBlackPiecesInLastTwoGames(player1)) {
-                player1NextGameColor = WHITE_PIECES;
-            }
-            if (player2NextGameColor === BLACK_PIECES && playedWithBlackPiecesInLastTwoGames(player2)) {
-                player2NextGameColor = WHITE_PIECES;
-            }
-
+          // It flips the color of a player playing with the BLACK_PIECES, if
+          // they played their last two game with the BLACK_PIECES;
+          if (player1NextGameColor === BLACK_PIECES && playedWithBlackPiecesInLastTwoGames(player1)) {
+              player1NextGameColor = WHITE_PIECES;
+          }
+          if (player2NextGameColor === BLACK_PIECES && playedWithBlackPiecesInLastTwoGames(player2)) {
+              player2NextGameColor = WHITE_PIECES;
+          }
+        }
+        if (player1NextGameColor === player2NextGameColor ) {
+          // Calculates the difference between the number of games played with
+          // WHITE_PIECES and BLACK_PIECES by each player; assign the
+          // WHITE_PIECES to the players who played the least amount of games
+          // with the WHITE_PIECES;
+          if (player1NextGameColor === player2NextGameColor ) {
             // If both players end up with opposite colors we are done;
-            // Calculate the players' piece score (1 for white pieces, -1 for black
-            // pieces). The player with the highest score plays black;
-            if (player1NextGameColor === player2NextGameColor ) {
-              player1PieceScore = player1.pieceColors.reduce((acc, el) => acc + el);
-              player2PieceScore = player2.pieceColors.reduce((acc, el) => acc + el);
-              if (player1PieceScore < player2PieceScore) {
-                player1NextGameColor = WHITE_PIECES;
-                player2NextGameColor = BLACK_PIECES;
-              } else {
-                if (player1PieceScore > player1PieceScore) {
-                  player1NextGameColor = BLACK_PIECES;
-                  player2NextGameColor = WHITE_PIECES;
-                }
+            // Allocates WHITE_PIECES to the lower ranking player and BLACK_PIECES
+            // to the higher ranking one;
+
+            player1PieceScore = player1.pieceColors.reduce((acc, el) => acc + el);
+            player2PieceScore = player2.pieceColors.reduce((acc, el) => acc + el);
+            if (player1PieceScore < player2PieceScore)  {
+              player1NextGameColor = WHITE_PIECES;
+              player2NextGameColor = BLACK_PIECES;
+            } else {
+              if (player1PieceScore > player2PieceScore)  {
+                player1NextGameColor = BLACK_PIECES;
+                player2NextGameColor = WHITE_PIECES;
               }
             }
-        }
-
-        // If both players end up with opposite colors we are done;
-        // Allocates WHITE_PIECES to the lower ranking player and BLACK_PIECES
-        // to the higher ranking one;
-        if (player1NextGameColor === player2NextGameColor ) {
-            if (player1.rating <= player2.rating) {
-                player1NextGameColor = WHITE_PIECES;
-                player2NextGameColor = BLACK_PIECES;
-            } else {
-                player2NextGameColor = WHITE_PIECES;
-                player1NextGameColor = BLACK_PIECES;
+            if (player1NextGameColor === player2NextGameColor ) {
+              if (player1.rating <= player2.rating) {
+                  player1NextGameColor = WHITE_PIECES;
+                  player2NextGameColor = BLACK_PIECES;
+              } else {
+                  player2NextGameColor = WHITE_PIECES;
+                  player1NextGameColor = BLACK_PIECES;
+              }
             }
+          }
         }
+      } else {
+        // console.log("Flipped Colors and got different colors");
+      }
     }
-
     if (player1NextGameColor === WHITE_PIECES) {
         game.whitePiecesPlayer = player1.id;
         game.blackPiecesPlayer = player2.id;
@@ -197,6 +191,12 @@ export const calculateGameColors = (player1: Player, player2: Player): Game => {
         game.whitePiecesPlayer = player2.id;
         game.blackPiecesPlayer = player1.id;
     }
+    player1.pieceColors.push(player1NextGameColor);
+    player2.pieceColors.push(player2NextGameColor);
+    if (player1.id === 0 || player2.id === 0) {
+      console.log("calculateGameColors/allocation: " + JSON.stringify(game))
+    }
+
     return game;
 };
 
