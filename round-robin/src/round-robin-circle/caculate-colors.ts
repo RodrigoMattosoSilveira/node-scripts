@@ -38,7 +38,7 @@ export const calculateRoundRobinColors = (tournament: Tournament): void => {
     for (const tournamentRound of tournament.tournamentRounds) {
         let player1: Player;
         let player2: Player;
-        let games: Games = tournamentRound.games;
+        const games: Games = tournamentRound.games;
         let calculatedGame: Game;
 
         // console.log("\ntournamentRound.games: " + JSON.stringify(tournamentRound.games))
@@ -47,21 +47,23 @@ export const calculateRoundRobinColors = (tournament: Tournament): void => {
         for (let i = 0; i < games.length; i++) {
             // console.log(`calculateRoundRobinColors before: ` + JSON.stringify(game));
             // get the players and their pirces' colors
-            let game: Game = games[i]
+            let game: Game = games[i];
             player1 = tournament.players.find((el) => game.whitePiecesPlayer === el.id);
             player2 = tournament.players.find((el) => game.blackPiecesPlayer === el.id);
-            calculatedGame = calculateGameColors(player1, player2);
-            // console.log(`game: ` + JSON.stringify(game) + ", calculatedGame: " + JSON.stringify(calculatedGame))
             if (player1.id === 0 || player2.id === 0) {
               console.log("\ncalculateRoundRobinColors/player :" + JSON.stringify(player1));
               console.log("calculateRoundRobinColors/player :" + JSON.stringify(player2));
 
             }
-            game = {...game, ...calculatedGame};
-            // console.log(`calculateRoundRobinColors after: ` + JSON.stringify(game));
+            calculatedGame = calculateGameColors(player1, player2);
+            // console.log(`game: ` + JSON.stringify(game) + ", calculatedGame: " + JSON.stringify(calculatedGame))
             if (player1.id === 0 || player2.id === 0) {
-              console.log("calculateRoundRobinColors/game :" +JSON.stringify(game));
+                console.log("calculateRoundRobinColors/game :" + JSON.stringify(game));
+                console.log("calculateRoundRobinColors/calculatedGame :" + JSON.stringify(calculatedGame));
             }
+            tournamentRound.games[i] = calculatedGame;
+            // game = {...game, ...calculatedGame};
+            // console.log(`calculateRoundRobinColors after: ` + JSON.stringify(game));
 
             // update the players pieceColors arrays
             // console.log(`calculateRoundRobinColors player1 pieceColors before: ` + JSON.stringify(player1.pieceColors));
@@ -113,12 +115,14 @@ export const calculateGameColors = (player1: Player, player2: Player): Game => {
 
     // Allocates WHITE_PIECES to the lwer ranking player and BLACK_PIECES to
     // the higher ranking one;
-    if (player1.rating <= player2.rating) {
-        player1NextGameColor = WHITE_PIECES;
-        player2NextGameColor = BLACK_PIECES;
-    } else {
-        player2NextGameColor = WHITE_PIECES;
-        player1NextGameColor = BLACK_PIECES;
+    if (player1.pieceColors.length === 0) {
+        if (player1.rating <= player2.rating) {
+            player1NextGameColor = WHITE_PIECES;
+            player2NextGameColor = BLACK_PIECES;
+        } else {
+            player2NextGameColor = WHITE_PIECES;
+            player1NextGameColor = BLACK_PIECES;
+        }
     }
     // console.log(`calculateGameColors/after rating: P1 - ` + player1NextGameColor + ", P2 - " + player2NextGameColor);
 
