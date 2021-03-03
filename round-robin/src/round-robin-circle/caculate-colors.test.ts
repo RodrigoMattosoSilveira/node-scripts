@@ -234,30 +234,30 @@ describe(`Calculate Color`, () => {
                 player1 = { id: 1, pieceColors: [WHITE_PIECES, WHITE_PIECES], rating: 1};
                 player2 = { id: 2, pieceColors: [WHITE_PIECES, WHITE_PIECES], rating: 2};
                 game = calc_color.calculateGameColors(player1, player2);
-                expect(game.whitePiecesPlayer).toEqual(player1.id);
-                expect(game.blackPiecesPlayer).toEqual(player2.id);
+                expect(player1.id).toEqual(game.whitePiecesPlayer);
+                expect(player2.id).toEqual(game.blackPiecesPlayer);
             });
             it(`player1 WW and player2 BB`, () => {
                 player1 = { id: 1, pieceColors: [WHITE_PIECES, WHITE_PIECES], rating: 1};
                 player2 = { id: 2, pieceColors: [BLACK_PIECES, BLACK_PIECES], rating: 2};
                 game = calc_color.calculateGameColors(player1, player2);
-                expect(game.whitePiecesPlayer).toEqual(player2.id);
-                expect(game.blackPiecesPlayer).toEqual(player1.id);
+                expect(player1.id).toEqual(game.blackPiecesPlayer);
+                expect(player2.id).toEqual(game.whitePiecesPlayer);
             });
             it(`player1 BB and player2 WW`, () => {
                 player1 = { id: 1, pieceColors: [BLACK_PIECES, BLACK_PIECES], rating: 1};
                 player2 = { id: 2, pieceColors: [WHITE_PIECES, WHITE_PIECES], rating: 2};
                 game = calc_color.calculateGameColors(player1, player2);
-                expect(game.whitePiecesPlayer).toEqual(player1.id);
-                expect(game.blackPiecesPlayer).toEqual(player2.id);
+                expect(player1.id).toEqual(game.whitePiecesPlayer);
+                expect(player2.id).toEqual(game.blackPiecesPlayer);
             });
             it(`player1 BB and player2 BB`, () => {
                 player1 = { id: 1, pieceColors: [BLACK_PIECES, BLACK_PIECES], rating: 1};
                 player2 = { id: 2, pieceColors: [BLACK_PIECES, BLACK_PIECES], rating: 2};
                 game = calc_color.calculateGameColors(player1, player2);
-                expect(game.whitePiecesPlayer).toEqual(player1.id);
-                expect(game.blackPiecesPlayer).toEqual(player2.id);
-            });
+                expect(player1.id).toEqual(game.whitePiecesPlayer);
+                expect(player2.id).toEqual(game.blackPiecesPlayer);
+          });
         });
     });
 });

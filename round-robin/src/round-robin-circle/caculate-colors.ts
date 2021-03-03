@@ -23,9 +23,7 @@
  * pieces to the lowest rated player and the black pieces to the highest rated
  * player;
  */
-
-import printf from "printf";
-import { BLACK_PIECES, Color, Game, NO_PIECES, Player, Tournament, WHITE_PIECES} from "./types";
+import { BLACK_PIECES, Color, Game, Games, NO_PIECES, Player, Tournament, WHITE_PIECES} from "./types";
 
 /**
  * The circle method is the standard algorithm to create a schedule for a
@@ -36,29 +34,50 @@ import { BLACK_PIECES, Color, Game, NO_PIECES, Player, Tournament, WHITE_PIECES}
  *
  */
 export const calculateRoundRobinColors = (tournament: Tournament): void => {
+    // console.log(`calculateRoundRobinColors/players: ` + JSON.stringify(tournament.players));
     for (const tournamentRound of tournament.tournamentRounds) {
         let player1: Player;
         let player2: Player;
-        for (let game of tournamentRound.games) {
+        let games: Games = tournamentRound.games;
+        let calculatedGame: Game;
+
+        // console.log("\ntournamentRound.games: " + JSON.stringify(tournamentRound.games))
+        // console.log("\ngames: " + JSON.stringify(games))
+
+        for (let i = 0; i < games.length; i++) {
             // console.log(`calculateRoundRobinColors before: ` + JSON.stringify(game));
             // get the players and their pirces' colors
+            let game: Game = games[i]
             player1 = tournament.players.find((el) => game.whitePiecesPlayer === el.id);
             player2 = tournament.players.find((el) => game.blackPiecesPlayer === el.id);
-            game = {...game, ...calculateGameColors(player1, player2)};
+            calculatedGame = calculateGameColors(player1, player2);
+            // console.log(`game: ` + JSON.stringify(game) + ", calculatedGame: " + JSON.stringify(calculatedGame))
+            if (player1.id === 0 || player2.id === 0) {
+              console.log("\ncalculateRoundRobinColors/player :" + JSON.stringify(player1));
+              console.log("calculateRoundRobinColors/player :" + JSON.stringify(player2));
+
+            }
+            game = {...game, ...calculatedGame};
             // console.log(`calculateRoundRobinColors after: ` + JSON.stringify(game));
+            if (player1.id === 0 || player2.id === 0) {
+              console.log("calculateRoundRobinColors/game :" +JSON.stringify(game));
+            }
 
             // update the players pieceColors arrays
-            console.log(`calculateRoundRobinColors player1 pieceColors before: ` + JSON.stringify(player1.pieceColors));
+            // console.log(`calculateRoundRobinColors player1 pieceColors before: ` + JSON.stringify(player1.pieceColors));
             if (game.whitePiecesPlayer === player1.id) {
                 player1.pieceColors.push(WHITE_PIECES);
                 player2.pieceColors.push(BLACK_PIECES);
             } else {
                 player1.pieceColors.push(BLACK_PIECES);
                 player2.pieceColors.push(WHITE_PIECES);
-                console.log(`calculateRoundRobinColors player1 pieceColors after: ` + JSON.stringify(player1.pieceColors));
+                // console.log(`calculateRoundRobinColors player1 pieceColors after: ` + JSON.stringify(player1.pieceColors));
             }
         }
     }
+    // for (let i = 0; i < tournament.players.length; i++) {
+    //   console.log("\nttournament.players " + i + ": " + JSON.stringify( tournament.players[i].pieceColors))
+    // }
 };
 
 /**
@@ -89,6 +108,8 @@ export const calculateGameColors = (player1: Player, player2: Player): Game => {
     };
     let player1NextGameColor: number;
     let player2NextGameColor: number;
+    let player1PieceScore: number;
+    let player2PieceScore: number;
 
     // Allocates WHITE_PIECES to the lwer ranking player and BLACK_PIECES to
     // the higher ranking one;
@@ -101,7 +122,7 @@ export const calculateGameColors = (player1: Player, player2: Player): Game => {
     }
     // console.log(`calculateGameColors/after rating: P1 - ` + player1NextGameColor + ", P2 - " + player2NextGameColor);
 
-    // It assigns colors based on the players based on their last game, flipping
+    // It assigns colors based on the players'last game piece colors, flipping
     // them;
     player1NextGameColor = flipPlayerPiecesColor(player1NextGameColor, player1);
     player2NextGameColor = flipPlayerPiecesColor(player2NextGameColor, player1);
@@ -131,6 +152,23 @@ export const calculateGameColors = (player1: Player, player2: Player): Game => {
             }
             if (player2NextGameColor === BLACK_PIECES && playedWithBlackPiecesInLastTwoGames(player2)) {
                 player2NextGameColor = WHITE_PIECES;
+            }
+
+            // If both players end up with opposite colors we are done;
+            // Calculate the players' piece score (1 for white pieces, -1 for black
+            // pieces). The player with the highest score plays black;
+            if (player1NextGameColor === player2NextGameColor ) {
+              player1PieceScore = player1.pieceColors.reduce((acc, el) => acc + el);
+              player2PieceScore = player2.pieceColors.reduce((acc, el) => acc + el);
+              if (player1PieceScore < player2PieceScore) {
+                player1NextGameColor = WHITE_PIECES;
+                player2NextGameColor = BLACK_PIECES;
+              } else {
+                if (player1PieceScore > player1PieceScore) {
+                  player1NextGameColor = BLACK_PIECES;
+                  player2NextGameColor = WHITE_PIECES;
+                }
+              }
             }
         }
 
