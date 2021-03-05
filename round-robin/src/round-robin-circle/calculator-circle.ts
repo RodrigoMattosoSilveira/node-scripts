@@ -169,7 +169,7 @@ export const showPairings = (tournament: Tournament): void => {
     // console.log(`showPairings/roundGames: ${gamesPerRound}`);
     // console.log(`showPairings/ghostPlayer: ${ghostPlayer}`);
 
-    console.log(`\nChess Tournament - Simple Round Robin pairings for ${ghostPlayer} players`);
+    console.log(`\nChess Tournament - Simple Round Robin pairings for ${numberOfPlayers} players`);
     printLine = "";
     for (let i = 0; i <= gamesPerRound; i++) {
         printLine += printf("%10s", "----------|");

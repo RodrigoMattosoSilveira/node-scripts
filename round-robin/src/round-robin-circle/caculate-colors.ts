@@ -47,7 +47,7 @@ export const calculateRoundRobinColors = (tournament: Tournament): void => {
         for (let i = 0; i < games.length; i++) {
             // console.log(`calculateRoundRobinColors before: ` + JSON.stringify(game));
             // get the players and their pirces' colors
-            let game: Game = games[i];
+            const game: Game = games[i];
             player1 = tournament.players.find((el) => game.whitePiecesPlayer === el.id);
             player2 = tournament.players.find((el) => game.blackPiecesPlayer === el.id);
             if (player1.id === 0 || player2.id === 0) {
@@ -98,14 +98,13 @@ export const calculateRoundRobinColors = (tournament: Tournament): void => {
  */
 export const calculateGameColors = (player1: Player, player2: Player): Game => {
     const game: Game = {
-          whitePiecesPlayer: Number.MAX_SAFE_INTEGER,
-          blackPiecesPlayer: Number.MAX_SAFE_INTEGER,
+        blackPiecesPlayer: Number.MAX_SAFE_INTEGER,
+        whitePiecesPlayer: Number.MAX_SAFE_INTEGER,
     };
     let player1NextGameColor: number;
     let player2NextGameColor: number;
     let player1PieceScore: number;
     let player2PieceScore: number;
-
 
     if (player1.pieceColors.length === 0) {
         //  allocates WHITE_PIECES to the lowest ranking player and BLACK_PIECES
@@ -117,11 +116,11 @@ export const calculateGameColors = (player1: Player, player2: Player): Game => {
             player1NextGameColor = BLACK_PIECES;
             player2NextGameColor = WHITE_PIECES;
         }
-        console.log("calculateGameColors/First round");
+        // console.log("calculateGameColors/First round");
     } else {
       if (player1.id === 0 || player2.id === 0) {
-        console.log("calculateGameColors/2+ round/player1 pieceColors: " + JSON.stringify(player1.pieceColors))
-        console.log("calculateGameColors/2+ round/player2 pieceColors: " + JSON.stringify(player2.pieceColors))
+        // console.log("calculateGameColors/2+ round/player1 pieceColors: " + JSON.stringify(player1.pieceColors));
+        // console.log("calculateGameColors/2+ round/player2 pieceColors: " + JSON.stringify(player2.pieceColors));
       }
       // Allocates players' piece colors by flipping their last game's piece
       // color
@@ -194,7 +193,7 @@ export const calculateGameColors = (player1: Player, player2: Player): Game => {
     player1.pieceColors.push(player1NextGameColor);
     player2.pieceColors.push(player2NextGameColor);
     if (player1.id === 0 || player2.id === 0) {
-      console.log("calculateGameColors/allocation: " + JSON.stringify(game))
+      // console.log("calculateGameColors/allocation: " + JSON.stringify(game))
     }
 
     return game;
