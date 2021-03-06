@@ -118,70 +118,74 @@ export const calculateGameColors = (player1: Player, player2: Player): Game => {
         }
         // console.log("calculateGameColors/First round");
     } else {
-      if (player1.id === 0 || player2.id === 0) {
-        // console.log("calculateGameColors/2+ round/player1 pieceColors: " + JSON.stringify(player1.pieceColors));
-        // console.log("calculateGameColors/2+ round/player2 pieceColors: " + JSON.stringify(player2.pieceColors));
-      }
-      // Allocates players' piece colors by flipping their last game's piece
-      // color
-      player1NextGameColor = flipPlayerPiecesColor(player1, player2);
-      player2NextGameColor = flipPlayerPiecesColor(player2, player1);
+        // if (player1.id === 0 || player2.id === 0) {
+        //     console.log("calculateGameColors/2+ round/player1 pieceColors: " + JSON.stringify(player1.pieceColors));
+        //     console.log("calculateGameColors/2+ round/player2 pieceColors: " + JSON.stringify(player2.pieceColors));
+        // }
 
-      if (player1NextGameColor === player2NextGameColor ) {
-        // It flips the color of a player playing with the BLACK_PIECES, if
-        // they played their last two game with the BLACK_PIECES
-        if (player1NextGameColor === BLACK_PIECES && playedWithBlackPiecesInLastGame(player1)) {
-            player1NextGameColor = WHITE_PIECES;
-        }
-        if (player2NextGameColor === BLACK_PIECES && playedWithBlackPiecesInLastGame(player2)) {
-            player2NextGameColor = WHITE_PIECES;
-        }
+        // Allocates players' piece colors; If the player had a previous round
+        // bye, we will assign their pieces color to their opponent's previous
+        // round pieces color; otherwise, we will assign their pieces color to
+        // their previous round pieces * color
+        player1NextGameColor = flipPlayerPiecesColor(player1, player2);
+        player2NextGameColor = flipPlayerPiecesColor(player2, player1);
 
+        // If the players' piece colors are different, we are done
         if (player1NextGameColor === player2NextGameColor ) {
-          // It flips the color of a player playing with the BLACK_PIECES, if
-          // they played their last two game with the BLACK_PIECES;
-          if (player1NextGameColor === BLACK_PIECES && playedWithBlackPiecesInLastTwoGames(player1)) {
-              player1NextGameColor = WHITE_PIECES;
-          }
-          if (player2NextGameColor === BLACK_PIECES && playedWithBlackPiecesInLastTwoGames(player2)) {
-              player2NextGameColor = WHITE_PIECES;
-          }
-        }
-        if (player1NextGameColor === player2NextGameColor ) {
-          // Calculates the difference between the number of games played with
-          // WHITE_PIECES and BLACK_PIECES by each player; assign the
-          // WHITE_PIECES to the players who played the least amount of games
-          // with the WHITE_PIECES;
-          if (player1NextGameColor === player2NextGameColor ) {
-            // If both players end up with opposite colors we are done;
-            // Allocates WHITE_PIECES to the lower ranking player and BLACK_PIECES
-            // to the higher ranking one;
-
-            player1PieceScore = player1.pieceColors.reduce((acc, el) => acc + el);
-            player2PieceScore = player2.pieceColors.reduce((acc, el) => acc + el);
-            if (player1PieceScore < player2PieceScore)  {
-              player1NextGameColor = WHITE_PIECES;
-              player2NextGameColor = BLACK_PIECES;
-            } else {
-              if (player1PieceScore > player2PieceScore)  {
-                player1NextGameColor = BLACK_PIECES;
+            // It flips the color of a player playing with the BLACK_PIECES, if
+            // they played their last two game with the BLACK_PIECES
+            if (player1NextGameColor === BLACK_PIECES && playedWithBlackPiecesInLastGame(player1)) {
+                player1NextGameColor = WHITE_PIECES;
+            }
+            if (player2NextGameColor === BLACK_PIECES && playedWithBlackPiecesInLastGame(player2)) {
                 player2NextGameColor = WHITE_PIECES;
-              }
             }
+            // If the players' piece colors are different, we are done
             if (player1NextGameColor === player2NextGameColor ) {
-              if (player1.rating <= player2.rating) {
-                  player1NextGameColor = WHITE_PIECES;
-                  player2NextGameColor = BLACK_PIECES;
-              } else {
-                  player2NextGameColor = WHITE_PIECES;
-                  player1NextGameColor = BLACK_PIECES;
-              }
+                // It flips the color of a player playing with the BLACK_PIECES, if
+                // they played their last two game with the BLACK_PIECES;
+                if (player1NextGameColor === BLACK_PIECES && playedWithBlackPiecesInLastTwoGames(player1)) {
+                    player1NextGameColor = WHITE_PIECES;
+                }
+                if (player2NextGameColor === BLACK_PIECES && playedWithBlackPiecesInLastTwoGames(player2)) {
+                    player2NextGameColor = WHITE_PIECES;
+                }
+                // If the players' piece colors are different, we are done
+                if (player1NextGameColor === player2NextGameColor ) {
+                    // Calculates the difference between the number of games
+                    // played with WHITE_PIECES and BLACK_PIECES by each player;
+                    // assign the WHITE_PIECES to the players who played the
+                    // least amount of games with the WHITE_PIECES;
+                    player1PieceScore = player1.pieceColors.reduce((acc, el) => acc + el);
+                    player2PieceScore = player2.pieceColors.reduce((acc, el) => acc + el);
+                    if (player1PieceScore < player2PieceScore)  {
+                        player1NextGameColor = WHITE_PIECES;
+                        player2NextGameColor = BLACK_PIECES;
+                    } else {
+                        if (player1PieceScore > player2PieceScore)  {
+                            player1NextGameColor = BLACK_PIECES;
+                            player2NextGameColor = WHITE_PIECES;
+                        }
+                    }
+                    // If the players' piece colors are different, we are done
+                    if (player1NextGameColor === player2NextGameColor ) {
+                        // Assign the WHITE_PIECES to the player with the
+                        // lowest rating
+                        if (player1.rating <= player2.rating) {
+                          player1NextGameColor = WHITE_PIECES;
+                          player2NextGameColor = BLACK_PIECES;
+                        } else {
+                          player2NextGameColor = WHITE_PIECES;
+                          player1NextGameColor = BLACK_PIECES;
+                        }
+                    }
+                }
+            } else {
+                //
             }
-          }
+        } else {
+            // console.log("Flipped Colors and got different colors");
         }
-      } else {
-        // console.log("Flipped Colors and got different colors");
-      }
     }
     if (player1NextGameColor === WHITE_PIECES) {
         game.whitePiecesPlayer = player1.id;

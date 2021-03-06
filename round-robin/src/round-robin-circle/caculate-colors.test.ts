@@ -120,44 +120,25 @@ describe(`Calculate Color`, () => {
     });
     describe(`flipPlayerPiecesColor`, () => {
         it(`with no games played and a WHITE_PIECES assignment`, () => {
-            assignedColor = WHITE_PIECES;
-            player = { id: 1, pieceColors: [], rating: 1};
-            expect(calc_color.flipPlayerPiecesColor(assignedColor, player)).toEqual(WHITE_PIECES);
+            player1 = { id: 1, pieceColors: [], rating: 1};
+            player2 = { id: 1, pieceColors: [WHITE_PIECES], rating: 1};
+            expect(calc_color.flipPlayerPiecesColor(player1, player2)).toEqual(WHITE_PIECES);
         });
         it(`with no games played and a BLACK_PIECES assignment`, () => {
-            assignedColor = BLACK_PIECES;
-            player = { id: 1, pieceColors: [], rating: 1};
-            expect(calc_color.flipPlayerPiecesColor(assignedColor, player)).toEqual(BLACK_PIECES);
-        });
-        it(`with a bye round played and a WHITE_PIECES assignment`, () => {
-            assignedColor = WHITE_PIECES;
-            player = { id: 1, pieceColors: [NO_PIECES], rating: 1};
-            expect(calc_color.flipPlayerPiecesColor(assignedColor, player)).toEqual(WHITE_PIECES);
-        });
-        it(`with a bye round played and a BLACK_PIECES assignment`, () => {
-            assignedColor = BLACK_PIECES;
-            player = { id: 1, pieceColors: [NO_PIECES], rating: 1};
-            expect(calc_color.flipPlayerPiecesColor(assignedColor, player)).toEqual(BLACK_PIECES);
+            player1 = { id: 1, pieceColors: [], rating: 1};
+            player2 = { id: 1, pieceColors: [BLACK_PIECES], rating: 1};
+            expect(calc_color.flipPlayerPiecesColor(player1, player2)).toEqual(BLACK_PIECES);
         });
         it(`with a gameplayed as WHITE_PIECES and a WHITE_PIECES assignment`, () => {
             assignedColor = WHITE_PIECES;
-            player = { id: 1, pieceColors: [WHITE_PIECES], rating: 1};
-            expect(calc_color.flipPlayerPiecesColor(assignedColor, player)).toEqual(BLACK_PIECES);
-        });
-        it(`with a gameplayed as WHITE_PIECES and a BLACK_PIECES assignment`, () => {
-            assignedColor = BLACK_PIECES;
-            player = { id: 1, pieceColors: [WHITE_PIECES], rating: 1};
-            expect(calc_color.flipPlayerPiecesColor(assignedColor, player)).toEqual(BLACK_PIECES);
+            player1 = { id: 1, pieceColors: [WHITE_PIECES], rating: 1};
+            player2 = { id: 1, pieceColors: [BLACK_PIECES], rating: 1};
+            expect(calc_color.flipPlayerPiecesColor(player1, player2)).toEqual(BLACK_PIECES);
         });
         it(`with a gameplayed as BLACK_PIECES and a WHITE_PIECES assignment`, () => {
-            assignedColor = WHITE_PIECES;
-            player = { id: 1, pieceColors: [BLACK_PIECES], rating: 1};
-            expect(calc_color.flipPlayerPiecesColor(assignedColor, player)).toEqual(WHITE_PIECES);
-        });
-        it(`with a gameplayed as BLACK_PIECES and a BLACK_PIECES assignment`, () => {
-            assignedColor = BLACK_PIECES;
-            player = { id: 1, pieceColors: [BLACK_PIECES], rating: 1};
-            expect(calc_color.flipPlayerPiecesColor(assignedColor, player)).toEqual(WHITE_PIECES);
+            player1 = { id: 1, pieceColors: [BLACK_PIECES], rating: 1};
+            player2 = { id: 1, pieceColors: [BLACK_PIECES], rating: 1};
+            expect(calc_color.flipPlayerPiecesColor(player1, player2)).toEqual(WHITE_PIECES);
         });
     });
     describe(`calculateGameColors`, () => {
