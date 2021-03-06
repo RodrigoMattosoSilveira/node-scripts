@@ -124,8 +124,8 @@ export const calculateGameColors = (player1: Player, player2: Player): Game => {
       }
       // Allocates players' piece colors by flipping their last game's piece
       // color
-      player1NextGameColor = flipPlayerPiecesColor(player1NextGameColor, player1);
-      player2NextGameColor = flipPlayerPiecesColor(player2NextGameColor, player1);
+      player1NextGameColor = flipPlayerPiecesColor(player1, player2);
+      player2NextGameColor = flipPlayerPiecesColor(player2, player1);
 
       if (player1NextGameColor === player2NextGameColor ) {
         // It flips the color of a player playing with the BLACK_PIECES, if
@@ -200,19 +200,20 @@ export const calculateGameColors = (player1: Player, player2: Player): Game => {
 };
 
 /**
- * flipPlayerPiecesColor - Reverses the pieces' color assigned to a player based
- * on their last game's pirces color. Keep the assigned color ff this is the
- * player's first game or the player had a round bye; flip otherwise
+ * flipPlayerPiecesColor - If the player had a previous round bye, we will
+ * assign their pieces color to their opponent's previous round pieces color;
+ * otherwise, we will assign their pieces color to their previous round pieces
+ * color
  *
- * @param  {Color} currentColor the player's current pieces' color
- * @param  {Player} player the player
+ * @param  {Player} player the player for which we are assigning colors
+ * @param  {Player} opponent the player's opponent
  * @return {Color} The computed color
  */
-export const flipPlayerPiecesColor = (currentColor: Color, player: Player): Color => {
+export const flipPlayerPiecesColor = (player: Player, opponent: Player): Color => {
     let color: Color;
     const ppcl = player.pieceColors.length;
-    if (ppcl === 0 || player.pieceColors[ppcl - 1] === NO_PIECES) {
-        color = currentColor;
+    if (player.pieceColors[ppcl - 1] === NO_PIECES) {
+        color = opponent.pieceColors[ppcl - 1];
     } else {
         if (player.pieceColors[ppcl - 1] === WHITE_PIECES) {
             color = BLACK_PIECES;
@@ -222,6 +223,7 @@ export const flipPlayerPiecesColor = (currentColor: Color, player: Player): Colo
     }
     return color;
 };
+
 /**
  * playedWithBlackPiecesInLastGame - Asserts whether the player played with
  * the black pieces in the last game
