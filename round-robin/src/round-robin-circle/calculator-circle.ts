@@ -65,15 +65,15 @@ export const calculateCircleMethod = (numberOfPlayers: number): TournamentRounds
   }
 
   printTop    = printf("%-18s", "top:");
-  printTop    += printf("%1s", "[")
+  printTop    += printf("%1s", "[");
   printBottom = printf("%-18s", "bottom:");
-  printBottom += printf("%1s", "[")
+  printBottom += printf("%1s", "[");
   for (let i  = 0; i < top.length; i++) {
-    printTop    += printf("%3d", top[i])
+    printTop    += printf("%3d", top[i]);
     printBottom += printf("%3d", bottom[i]);
   }
-  printTop    += printf("%1s", "]")
-  printBottom += printf("%1s", "]")
+  printTop    += printf("%1s", "]");
+  printBottom += printf("%1s", "]");
 
   // console.log(printf(printTop));
   // console.log(printf(printBottom));
@@ -82,11 +82,11 @@ export const calculateCircleMethod = (numberOfPlayers: number): TournamentRounds
   let tournamentRound: TournamentRound;
 
   for (let j = 0; j < rounds; j++) {
-    tournamentRound = {games: []}
+    tournamentRound = {games: []};
     for (let i = 0; i < adjustedNumberOfPlayers / 2; i++) {
       if (top[i] !== ghostPlayer && bottom[i] !== ghostPlayer) {
           // both are playing real opponents
-          tournamentRound.games.push({"whitePiecesPlayer": top[i], "blackPiecesPlayer": bottom[i]});
+          tournamentRound.games.push({whitePiecesPlayer: top[i], blackPiecesPlayer: bottom[i]});
         } else {
         if (top[i] === ghostPlayer) {
           // bottom[i] cell refers to the round's bye player
@@ -100,8 +100,8 @@ export const calculateCircleMethod = (numberOfPlayers: number): TournamentRounds
     // console.log("\nround " + j + ": " + JSON.stringify(tournamentRound));
     // Take the leftmost bottom element and insert as the second top element;
     // Take the right most top element and append to the bottom
-    tournamentRounds.push(tournamentRound)
-    top.splice(1,0,bottom.shift());
+    tournamentRounds.push(tournamentRound);
+    top.splice(1 , 0, bottom.shift());
     bottom.push(top.pop());
   }
 
@@ -109,12 +109,12 @@ export const calculateCircleMethod = (numberOfPlayers: number): TournamentRounds
 };
 
 export const calculateCircleParams = (numberOfPlayers: number): CircleParams => {
-  let circleParams: CircleParams = {
-    ghostPlayer: Number.MIN_SAFE_INTEGER,
-    adjustedNumberOfPlayers: Number.MIN_SAFE_INTEGER,
-    rounds: Number.MIN_SAFE_INTEGER,
-    gamesPerRound: Number.MIN_SAFE_INTEGER
-  };
+    const circleParams: CircleParams = {
+        adjustedNumberOfPlayers: Number.MIN_SAFE_INTEGER,
+        gamesPerRound: Number.MIN_SAFE_INTEGER,
+        ghostPlayer: Number.MIN_SAFE_INTEGER,
+        rounds: Number.MIN_SAFE_INTEGER,
+    };
 
     // Add a ghostPlayer if numberOfPlayers is odd
     circleParams.ghostPlayer = numberOfPlayers % 2 === 0 ? Number.MAX_VALUE : numberOfPlayers;
@@ -130,11 +130,11 @@ export const calculateCircleParams = (numberOfPlayers: number): CircleParams => 
     // console.log(printf("%-18s%-20s", `rounds:`, "" + rounds));
 
     // save the number of games per round
-      circleParams.gamesPerRound = numberOfPlayers % 2 === 0 ? (numberOfPlayers / 2) : (numberOfPlayers - 1) / 2;
+    circleParams.gamesPerRound = numberOfPlayers % 2 === 0 ? (numberOfPlayers / 2) : (numberOfPlayers - 1) / 2;
     // console.log(printf("%-18s%-20s", `gamesPerRound:`, "" + gamesPerRound));
 
-    return circleParams
-}
+    return circleParams;
+};
 
 /*
 Chess Tournament - Simple Round Robin pairings
