@@ -43,98 +43,128 @@ describe(`Berger Tables`, (): void => {
 	});
 	describe(`6 players`, (): void => {
 		beforeAll(() => {
-          numberOfPlayers = 6;
+			numberOfPlayers = 6;
+			numberOfRounds = numberOfPlayers - 1;
+			numberOfGamesPerRound = numberOfPlayers/2;
+
+			playersGamesInTournament = fillPlayersGamesInTournament(numberOfPlayers, numberOfRounds, 0);
+			expectedPlayersGamesInTournament = fillPlayersGamesInTournament(numberOfPlayers, numberOfRounds, 1);
+
+			bergerTable = getBergerTable(numberOfPlayers);
+			tournamentRounds = bergerTable.rounds;
+
+			playersGamesInTournament = calculatePlayersGamesInTournament(numberOfPlayers, numberOfRounds, tournamentRounds);
         });
 		it(`has 6 players table`, (): void => {
-			foundTable = false;
-			for (let i = 0; i < bergerTables.length; i++) {
-				bergerTable = bergerTables[i];
-				if (bergerTable.players === numberOfPlayers) {
-					foundTable = true;
-					break;
-				}
-			}
-			expect(foundTable).toEqual(true);
+			expect(bergerTable).toBeTruthy;
+		});
+		it(`all 6 players plays in all rounds`, (): void => {
+			expect(playersGamesInTournament).toEqual(expectedPlayersGamesInTournament);
 		});
 	});
 	describe(`8 players`, (): void => {
 		beforeAll(() => {
-          numberOfPlayers = 8;
+			numberOfPlayers = 8;
+			numberOfRounds = numberOfPlayers - 1;
+			numberOfGamesPerRound = numberOfPlayers/2;
+
+			playersGamesInTournament = fillPlayersGamesInTournament(numberOfPlayers, numberOfRounds, 0);
+			expectedPlayersGamesInTournament = fillPlayersGamesInTournament(numberOfPlayers, numberOfRounds, 1);
+
+			bergerTable = getBergerTable(numberOfPlayers);
+			tournamentRounds = bergerTable.rounds;
+
+			playersGamesInTournament = calculatePlayersGamesInTournament(numberOfPlayers, numberOfRounds, tournamentRounds);
         });
 		it(`has 8 players table`, (): void => {
-			foundTable = false;
-			for (let i = 0; i < bergerTables.length; i++) {
-				bergerTable = bergerTables[i];
-				if (bergerTable.players === numberOfPlayers) {
-					foundTable = true;
-					break;
-				}
-			}
-			expect(foundTable).toEqual(true);
+			expect(bergerTable).toBeTruthy;
+		});
+		it(`all 8 players plays in all rounds`, (): void => {
+			expect(playersGamesInTournament).toEqual(expectedPlayersGamesInTournament);
 		});
 	});
 	describe(`10 players`, (): void => {
 		beforeAll(() => {
-          numberOfPlayers = 10;
+			numberOfPlayers = 10;
+			numberOfRounds = numberOfPlayers - 1;
+			numberOfGamesPerRound = numberOfPlayers/2;
+
+			playersGamesInTournament = fillPlayersGamesInTournament(numberOfPlayers, numberOfRounds, 0);
+			expectedPlayersGamesInTournament = fillPlayersGamesInTournament(numberOfPlayers, numberOfRounds, 1);
+
+			bergerTable = getBergerTable(numberOfPlayers);
+			tournamentRounds = bergerTable.rounds;
+
+			playersGamesInTournament = calculatePlayersGamesInTournament(numberOfPlayers, numberOfRounds, tournamentRounds);
         });
 		it(`has 10 players table`, (): void => {
-			foundTable = false;
-			for (let i = 0; i < bergerTables.length; i++) {
-				bergerTable = bergerTables[i];
-				if (bergerTable.players === numberOfPlayers) {
-					foundTable = true;
-					break;
-				}
-			}
-			expect(foundTable).toEqual(true);
+			expect(bergerTable).toBeTruthy;
+		});
+		it(`all 10 players plays in all rounds`, (): void => {
+			expect(playersGamesInTournament).toEqual(expectedPlayersGamesInTournament);
 		});
 	});
 	describe(`12 players`, (): void => {
 		beforeAll(() => {
-          numberOfPlayers = 12;
+			numberOfPlayers = 12;
+			numberOfRounds = numberOfPlayers - 1;
+			numberOfGamesPerRound = numberOfPlayers/2;
+
+			playersGamesInTournament = fillPlayersGamesInTournament(numberOfPlayers, numberOfRounds, 0);
+			expectedPlayersGamesInTournament = fillPlayersGamesInTournament(numberOfPlayers, numberOfRounds, 1);
+
+			bergerTable = getBergerTable(numberOfPlayers);
+			tournamentRounds = bergerTable.rounds;
+
+			playersGamesInTournament = calculatePlayersGamesInTournament(numberOfPlayers, numberOfRounds, tournamentRounds);
         });
 		it(`has 12 players table`, (): void => {
-			foundTable = false;
-			for (let i = 0; i < bergerTables.length; i++) {
-				bergerTable = bergerTables[i];
-				if (bergerTable.players === numberOfPlayers) {
-					foundTable = true;
-					break;
-				}
-			}
-			expect(foundTable).toEqual(true);
+			expect(bergerTable).toBeTruthy;
+		});
+		it(`all 12 players plays in all rounds`, (): void => {
+			expect(playersGamesInTournament).toEqual(expectedPlayersGamesInTournament);
 		});
 	});
 	describe(`14 players`, (): void => {
 		beforeAll(() => {
-          numberOfPlayers = 14;
+			numberOfPlayers = 14;
+			numberOfRounds = numberOfPlayers - 1;
+			numberOfGamesPerRound = numberOfPlayers/2;
+
+			playersGamesInTournament = fillPlayersGamesInTournament(numberOfPlayers, numberOfRounds, 0);
+			expectedPlayersGamesInTournament = fillPlayersGamesInTournament(numberOfPlayers, numberOfRounds, 1);
+
+			bergerTable = getBergerTable(numberOfPlayers);
+			tournamentRounds = bergerTable.rounds;
+
+			playersGamesInTournament = calculatePlayersGamesInTournament(numberOfPlayers, numberOfRounds, tournamentRounds);
         });
 		it(`has 14 players table`, (): void => {
-			foundTable = false;
-			for (let i = 0; i < bergerTables.length; i++) {
-				bergerTable = bergerTables[i];
-				if (bergerTable.players === numberOfPlayers) {
-					foundTable = true;
-					break;
-				}
-			}
-			expect(foundTable).toEqual(true);
+			expect(bergerTable).toBeTruthy;
+		});
+		it(`all 14 players plays in all rounds`, (): void => {
+			expect(playersGamesInTournament).toEqual(expectedPlayersGamesInTournament);
 		});
 	});
 	describe(`16 players`, (): void => {
 		beforeAll(() => {
-          numberOfPlayers = 16;
+			numberOfPlayers = 16;
+			numberOfRounds = numberOfPlayers - 1;
+			numberOfGamesPerRound = numberOfPlayers/2;
+
+			playersGamesInTournament = fillPlayersGamesInTournament(numberOfPlayers, numberOfRounds, 0);
+			expectedPlayersGamesInTournament = fillPlayersGamesInTournament(numberOfPlayers, numberOfRounds, 1);
+
+			bergerTable = getBergerTable(numberOfPlayers);
+			tournamentRounds = bergerTable.rounds;
+
+			playersGamesInTournament = calculatePlayersGamesInTournament(numberOfPlayers, numberOfRounds, tournamentRounds);
         });
 		it(`has 16 players table`, (): void => {
-			foundTable = false;
-			for (let i = 0; i < bergerTables.length; i++) {
-				bergerTable = bergerTables[i];
-				if (bergerTable.players === numberOfPlayers) {
-					foundTable = true;
-					break;
-				}
-			}
-			expect(foundTable).toEqual(true);
+			expect(bergerTable).toBeTruthy;
+		});
+		it(`all 16 players plays in all rounds`, (): void => {
+			expect(playersGamesInTournament).toEqual(expectedPlayersGamesInTournament);
 		});
 	});
 });
