@@ -1,0 +1,531 @@
+[
+	{
+	    "players": 4,
+	    "rounds": [
+			[
+				{"whitePiecesPlayer": 1, "blackPiecesPlayer": 4},
+				{"whitePiecesPlayer": 2, "blackPiecesPlayer": 3}
+			],
+			[
+				{"whitePiecesPlayer": 4, "blackPiecesPlayer": 3},
+				{"whitePiecesPlayer": 1, "blackPiecesPlayer": 2}
+			],
+			[
+				{"whitePiecesPlayer": 2, "blackPiecesPlayer": 4},
+				{"whitePiecesPlayer": 3, "blackPiecesPlayer": 1}
+			]
+	  ]
+	},
+	{
+		"players": 6,
+	    "rounds": [
+			[
+				{"whitePiecesPlayer": 1, "blackPiecesPlayer": 6},
+				{"whitePiecesPlayer": 2, "blackPiecesPlayer": 5},
+				{"whitePiecesPlayer": 3, "blackPiecesPlayer": 4}
+			],
+			[
+				{"whitePiecesPlayer": 6, "blackPiecesPlayer": 4},
+				{"whitePiecesPlayer": 5, "blackPiecesPlayer": 3},
+				{"whitePiecesPlayer": 1, "blackPiecesPlayer": 2}
+			],
+			[
+				{"whitePiecesPlayer": 2, "blackPiecesPlayer": 6},
+				{"whitePiecesPlayer": 3, "blackPiecesPlayer": 1},
+				{"whitePiecesPlayer": 4, "blackPiecesPlayer": 5}
+			],
+			[
+				{"whitePiecesPlayer": 6, "blackPiecesPlayer": 5},
+				{"whitePiecesPlayer": 1, "blackPiecesPlayer": 4},
+				{"whitePiecesPlayer": 2, "blackPiecesPlayer": 3}
+			],
+			[
+				{"whitePiecesPlayer": 3, "blackPiecesPlayer": 6},
+				{"whitePiecesPlayer": 4, "blackPiecesPlayer": 2},
+				{"whitePiecesPlayer": 5, "blackPiecesPlayer": 1}
+			]
+		]
+	},
+	{
+		"players": 8,
+	    "rounds": [
+			[
+				{"whitePiecesPlayer": 1, "blackPiecesPlayer": 8},
+				{"whitePiecesPlayer": 2, "blackPiecesPlayer": 7},
+				{"whitePiecesPlayer": 3, "blackPiecesPlayer": 6},
+				{"whitePiecesPlayer": 4, "blackPiecesPlayer": 5}
+			],
+			[
+				{"whitePiecesPlayer": 8, "blackPiecesPlayer": 5},
+				{"whitePiecesPlayer": 6, "blackPiecesPlayer": 4},
+				{"whitePiecesPlayer": 7, "blackPiecesPlayer": 3},
+				{"whitePiecesPlayer": 1, "blackPiecesPlayer": 2}
+			],
+			[
+				{"whitePiecesPlayer": 2, "blackPiecesPlayer": 8},
+				{"whitePiecesPlayer": 3, "blackPiecesPlayer": 1},
+				{"whitePiecesPlayer": 4, "blackPiecesPlayer": 7},
+				{"whitePiecesPlayer": 5, "blackPiecesPlayer": 6}
+			],
+			[
+				{"whitePiecesPlayer": 8, "blackPiecesPlayer": 6},
+				{"whitePiecesPlayer": 7, "blackPiecesPlayer": 5},
+				{"whitePiecesPlayer": 1, "blackPiecesPlayer": 4},
+				{"whitePiecesPlayer": 2, "blackPiecesPlayer": 3}
+			],
+			[
+				{"whitePiecesPlayer": 3, "blackPiecesPlayer": 8},
+				{"whitePiecesPlayer": 4, "blackPiecesPlayer": 2},
+				{"whitePiecesPlayer": 5, "blackPiecesPlayer": 1},
+				{"whitePiecesPlayer": 6, "blackPiecesPlayer": 7}
+			],
+			[
+				{"whitePiecesPlayer": 8, "blackPiecesPlayer": 7},
+				{"whitePiecesPlayer": 1, "blackPiecesPlayer": 6},
+				{"whitePiecesPlayer": 2, "blackPiecesPlayer": 5},
+				{"whitePiecesPlayer": 3, "blackPiecesPlayer": 4}
+			],
+			[
+				{"whitePiecesPlayer": 4, "blackPiecesPlayer": 8},
+				{"whitePiecesPlayer": 5, "blackPiecesPlayer": 3},
+				{"whitePiecesPlayer": 6, "blackPiecesPlayer": 2},
+				{"whitePiecesPlayer": 7, "blackPiecesPlayer": 1}
+			]
+		]
+	},
+	{
+		"players": 10,
+		"rounds": [
+			[
+				{"whitePiecesPlayer": 1, "blackPiecesPlayer": 10},
+				{"whitePiecesPlayer": 2, "blackPiecesPlayer": 9},
+				{"whitePiecesPlayer": 3, "blackPiecesPlayer": 8},
+				{"whitePiecesPlayer": 4, "blackPiecesPlayer": 7},
+				{"whitePiecesPlayer": 5, "blackPiecesPlayer": 6}
+			],
+			[
+				{"whitePiecesPlayer": 10, "blackPiecesPlayer": 6},
+				{"whitePiecesPlayer": 7, "blackPiecesPlayer": 5},
+				{"whitePiecesPlayer": 8, "blackPiecesPlayer": 4},
+				{"whitePiecesPlayer": 9, "blackPiecesPlayer": 3},
+				{"whitePiecesPlayer": 1, "blackPiecesPlayer": 2}
+			],
+			[
+				{"whitePiecesPlayer": 2, "blackPiecesPlayer": 10},
+				{"whitePiecesPlayer": 3, "blackPiecesPlayer": 1},
+				{"whitePiecesPlayer": 4, "blackPiecesPlayer": 9},
+				{"whitePiecesPlayer": 5, "blackPiecesPlayer": 8},
+				{"whitePiecesPlayer": 6, "blackPiecesPlayer": 7}
+			],
+			[
+				{"whitePiecesPlayer": 10, "blackPiecesPlayer": 7},
+				{"whitePiecesPlayer": 8, "blackPiecesPlayer": 6},
+				{"whitePiecesPlayer": 9, "blackPiecesPlayer": 5},
+				{"whitePiecesPlayer": 1, "blackPiecesPlayer": 4},
+				{"whitePiecesPlayer": 2, "blackPiecesPlayer": 3}
+			],
+			[
+				{"whitePiecesPlayer": 3, "blackPiecesPlayer": 10},
+				{"whitePiecesPlayer": 4, "blackPiecesPlayer": 2},
+				{"whitePiecesPlayer": 5, "blackPiecesPlayer": 1},
+				{"whitePiecesPlayer": 6, "blackPiecesPlayer": 9},
+				{"whitePiecesPlayer": 7, "blackPiecesPlayer": 8}
+			],
+			[
+				{"whitePiecesPlayer": 10, "blackPiecesPlayer": 8},
+				{"whitePiecesPlayer": 9, "blackPiecesPlayer": 7},
+				{"whitePiecesPlayer": 1, "blackPiecesPlayer": 6},
+				{"whitePiecesPlayer": 2, "blackPiecesPlayer": 5},
+				{"whitePiecesPlayer": 3, "blackPiecesPlayer": 4}
+			],
+			[
+				{"whitePiecesPlayer": 4, "blackPiecesPlayer": 10},
+				{"whitePiecesPlayer": 5, "blackPiecesPlayer": 3},
+				{"whitePiecesPlayer": 6, "blackPiecesPlayer": 2},
+				{"whitePiecesPlayer": 7, "blackPiecesPlayer": 1},
+				{"whitePiecesPlayer": 8, "blackPiecesPlayer": 9}
+			],
+			[
+				{"whitePiecesPlayer": 10, "blackPiecesPlayer": 9},
+				{"whitePiecesPlayer": 1, "blackPiecesPlayer": 8},
+				{"whitePiecesPlayer": 2, "blackPiecesPlayer": 7},
+				{"whitePiecesPlayer": 3, "blackPiecesPlayer": 6},
+				{"whitePiecesPlayer": 4, "blackPiecesPlayer": 5}],
+			[
+				{"whitePiecesPlayer": 5, "blackPiecesPlayer": 10},
+				{"whitePiecesPlayer": 6, "blackPiecesPlayer": 4},
+				{"whitePiecesPlayer": 7, "blackPiecesPlayer": 3},
+				{"whitePiecesPlayer": 8, "blackPiecesPlayer": 2},
+				{"whitePiecesPlayer": 9, "blackPiecesPlayer": 1}
+			]
+	  	]
+	},
+	{
+		"players": 12,
+		"rounds": [
+			[
+				{"whitePiecesPlayer": 1, "blackPiecesPlayer": 12},
+				{"whitePiecesPlayer": 2, "blackPiecesPlayer": 11},
+				{"whitePiecesPlayer": 3, "blackPiecesPlayer": 10},
+				{"whitePiecesPlayer": 4, "blackPiecesPlayer": 9},
+				{"whitePiecesPlayer": 5, "blackPiecesPlayer": 8},
+				{"whitePiecesPlayer": 6, "blackPiecesPlayer": 7}
+			],
+			[
+				{"whitePiecesPlayer": 12, "blackPiecesPlayer": 7},
+				{"whitePiecesPlayer": 8, "blackPiecesPlayer": 6},
+				{"whitePiecesPlayer": 9, "blackPiecesPlayer": 5},
+				{"whitePiecesPlayer": 10, "blackPiecesPlayer": 4},
+				{"whitePiecesPlayer": 11, "blackPiecesPlayer": 3},
+				{"whitePiecesPlayer": 1, "blackPiecesPlayer": 2}
+			],
+			[
+				{"whitePiecesPlayer": 2, "blackPiecesPlayer": 12},
+				{"whitePiecesPlayer": 3, "blackPiecesPlayer": 1},
+				{"whitePiecesPlayer": 4, "blackPiecesPlayer": 11},
+				{"whitePiecesPlayer": 5, "blackPiecesPlayer": 10},
+				{"whitePiecesPlayer": 6, "blackPiecesPlayer": 9},
+				{"whitePiecesPlayer": 7, "blackPiecesPlayer": 8}
+			],
+			[
+				{"whitePiecesPlayer": 12, "blackPiecesPlayer": 8},
+				{"whitePiecesPlayer": 9, "blackPiecesPlayer": 7},
+				{"whitePiecesPlayer": 10, "blackPiecesPlayer": 6},
+				{"whitePiecesPlayer": 11, "blackPiecesPlayer": 5},
+				{"whitePiecesPlayer": 1, "blackPiecesPlayer": 4},
+				{"whitePiecesPlayer": 2, "blackPiecesPlayer": 3}
+			],
+			[
+				{"whitePiecesPlayer": 3, "blackPiecesPlayer": 12},
+				{"whitePiecesPlayer": 4, "blackPiecesPlayer": 2},
+				{"whitePiecesPlayer": 5, "blackPiecesPlayer": 1},
+				{"whitePiecesPlayer": 6, "blackPiecesPlayer": 11},
+				{"whitePiecesPlayer": 7, "blackPiecesPlayer": 10},
+				{"whitePiecesPlayer": 8, "blackPiecesPlayer": 9}
+			],
+			[
+				{"whitePiecesPlayer": 12, "blackPiecesPlayer": 9},
+				{"whitePiecesPlayer": 10, "blackPiecesPlayer": 8},
+				{"whitePiecesPlayer": 11, "blackPiecesPlayer": 7},
+				{"whitePiecesPlayer": 1, "blackPiecesPlayer": 6},
+				{"whitePiecesPlayer": 2, "blackPiecesPlayer": 5},
+				{"whitePiecesPlayer": 3, "blackPiecesPlayer": 4}
+			],
+			[
+				{"whitePiecesPlayer": 4, "blackPiecesPlayer": 12},
+				{"whitePiecesPlayer": 5, "blackPiecesPlayer": 3},
+				{"whitePiecesPlayer": 6, "blackPiecesPlayer": 2},
+				{"whitePiecesPlayer": 7, "blackPiecesPlayer": 1},
+				{"whitePiecesPlayer": 8, "blackPiecesPlayer": 11},
+				{"whitePiecesPlayer": 9, "blackPiecesPlayer": 10}
+			],
+			[
+				{"whitePiecesPlayer": 12, "blackPiecesPlayer": 10},
+				{"whitePiecesPlayer": 11, "blackPiecesPlayer": 9},
+				{"whitePiecesPlayer": 1, "blackPiecesPlayer": 8},
+				{"whitePiecesPlayer": 2, "blackPiecesPlayer": 7},
+				{"whitePiecesPlayer": 3, "blackPiecesPlayer": 6},
+				{"whitePiecesPlayer": 4, "blackPiecesPlayer": 5}
+			],
+			[
+				{"whitePiecesPlayer": 5, "blackPiecesPlayer": 12},
+				{"whitePiecesPlayer": 6, "blackPiecesPlayer": 4},
+				{"whitePiecesPlayer": 7, "blackPiecesPlayer": 3},
+				{"whitePiecesPlayer": 8, "blackPiecesPlayer": 2},
+				{"whitePiecesPlayer": 9, "blackPiecesPlayer": 1},
+				{"whitePiecesPlayer": 10, "blackPiecesPlayer": 11}
+			],
+			[
+				{"whitePiecesPlayer": 12, "blackPiecesPlayer": 11},
+				{"whitePiecesPlayer": 1, "blackPiecesPlayer": 10},
+				{"whitePiecesPlayer": 2, "blackPiecesPlayer": 9},
+				{"whitePiecesPlayer": 3, "blackPiecesPlayer": 8},
+				{"whitePiecesPlayer": 4, "blackPiecesPlayer": 7},
+				{"whitePiecesPlayer": 5, "blackPiecesPlayer": 6}
+			],
+			[
+				{"whitePiecesPlayer": 6, "blackPiecesPlayer": 12},
+				{"whitePiecesPlayer": 7, "blackPiecesPlayer": 5},
+				{"whitePiecesPlayer": 8, "blackPiecesPlayer": 4},
+				{"whitePiecesPlayer": 9, "blackPiecesPlayer": 3},
+				{"whitePiecesPlayer": 10, "blackPiecesPlayer": 2},
+				{"whitePiecesPlayer": 11, "blackPiecesPlayer": 1}
+			]
+	  	]
+	},
+	{
+		"players": 14,
+		"rounds": [
+			[
+				{"whitePiecesPlayer": 1, "blackPiecesPlayer": 14},
+				{"whitePiecesPlayer": 2, "blackPiecesPlayer": 13},
+				{"whitePiecesPlayer": 3, "blackPiecesPlayer": 12},
+				{"whitePiecesPlayer": 4, "blackPiecesPlayer": 11},
+				{"whitePiecesPlayer": 5, "blackPiecesPlayer": 10},
+				{"whitePiecesPlayer": 6, "blackPiecesPlayer": 9},
+				{"whitePiecesPlayer": 7, "blackPiecesPlayer": 8}
+			],
+			[
+				{"whitePiecesPlayer": 14, "blackPiecesPlayer": 8},
+				{"whitePiecesPlayer": 9, "blackPiecesPlayer": 7},
+				{"whitePiecesPlayer": 10, "blackPiecesPlayer": 6},
+				{"whitePiecesPlayer": 11, "blackPiecesPlayer": 5},
+				{"whitePiecesPlayer": 12, "blackPiecesPlayer": 4},
+				{"whitePiecesPlayer": 13, "blackPiecesPlayer": 3},
+				{"whitePiecesPlayer": 1, "blackPiecesPlayer": 2}
+			],
+			[
+				{"whitePiecesPlayer": 2, "blackPiecesPlayer": 14},
+				{"whitePiecesPlayer": 3, "blackPiecesPlayer": 1},
+				{"whitePiecesPlayer": 4, "blackPiecesPlayer": 13},
+				{"whitePiecesPlayer": 5, "blackPiecesPlayer": 12},
+				{"whitePiecesPlayer": 6, "blackPiecesPlayer": 11},
+				{"whitePiecesPlayer": 7, "blackPiecesPlayer": 10},
+				{"whitePiecesPlayer": 8, "blackPiecesPlayer": 9}
+			],
+			[
+				{"whitePiecesPlayer": 14, "blackPiecesPlayer": 9},
+				{"whitePiecesPlayer": 10, "blackPiecesPlayer": 8},
+				{"whitePiecesPlayer": 11, "blackPiecesPlayer": 7},
+				{"whitePiecesPlayer": 12, "blackPiecesPlayer": 6},
+				{"whitePiecesPlayer": 13, "blackPiecesPlayer": 5},
+				{"whitePiecesPlayer": 1, "blackPiecesPlayer": 4},
+				{"whitePiecesPlayer": 2, "blackPiecesPlayer": 3}
+			],
+			[
+				{"whitePiecesPlayer": 3, "blackPiecesPlayer": 14},
+				{"whitePiecesPlayer": 4, "blackPiecesPlayer": 2},
+				{"whitePiecesPlayer": 5, "blackPiecesPlayer": 1},
+				{"whitePiecesPlayer": 6, "blackPiecesPlayer": 13},
+				{"whitePiecesPlayer": 7, "blackPiecesPlayer": 12},
+				{"whitePiecesPlayer": 8, "blackPiecesPlayer": 11},
+				{"whitePiecesPlayer": 9, "blackPiecesPlayer": 10}
+			],
+			[
+				{"whitePiecesPlayer": 14, "blackPiecesPlayer": 10},
+				{"whitePiecesPlayer": 11, "blackPiecesPlayer": 9},
+				{"whitePiecesPlayer": 12, "blackPiecesPlayer": 8},
+				{"whitePiecesPlayer": 13, "blackPiecesPlayer": 7},
+				{"whitePiecesPlayer": 1, "blackPiecesPlayer": 6},
+				{"whitePiecesPlayer": 2, "blackPiecesPlayer": 5},
+				{"whitePiecesPlayer": 3, "blackPiecesPlayer": 4}
+			],
+			[
+				{"whitePiecesPlayer": 4, "blackPiecesPlayer": 14},
+				{"whitePiecesPlayer": 5, "blackPiecesPlayer": 3},
+				{"whitePiecesPlayer": 6, "blackPiecesPlayer": 2},
+				{"whitePiecesPlayer": 7, "blackPiecesPlayer": 1},
+				{"whitePiecesPlayer": 8, "blackPiecesPlayer": 13},
+				{"whitePiecesPlayer": 9, "blackPiecesPlayer": 12},
+				{"whitePiecesPlayer": 10, "blackPiecesPlayer": 11}
+			],
+			[
+				{"whitePiecesPlayer": 14, "blackPiecesPlayer": 11},
+				{"whitePiecesPlayer": 12, "blackPiecesPlayer": 10},
+				{"whitePiecesPlayer": 13, "blackPiecesPlayer": 9},
+				{"whitePiecesPlayer": 1, "blackPiecesPlayer": 8},
+				{"whitePiecesPlayer": 2, "blackPiecesPlayer": 7},
+				{"whitePiecesPlayer": 3, "blackPiecesPlayer": 6},
+				{"whitePiecesPlayer": 4, "blackPiecesPlayer": 5}
+			  ],
+			[
+				{"whitePiecesPlayer": 5, "blackPiecesPlayer": 14},
+				{"whitePiecesPlayer": 6, "blackPiecesPlayer": 4},
+				{"whitePiecesPlayer": 7, "blackPiecesPlayer": 3},
+				{"whitePiecesPlayer": 8, "blackPiecesPlayer": 2},
+				{"whitePiecesPlayer": 9, "blackPiecesPlayer": 1},
+				{"whitePiecesPlayer": 10, "blackPiecesPlayer": 13},
+				{"whitePiecesPlayer": 11, "blackPiecesPlayer": 12}
+			],
+			[
+				{"whitePiecesPlayer": 14, "blackPiecesPlayer": 12},
+				{"whitePiecesPlayer": 13, "blackPiecesPlayer": 11},
+				{"whitePiecesPlayer": 1, "blackPiecesPlayer": 10},
+				{"whitePiecesPlayer": 2, "blackPiecesPlayer": 9},
+				{"whitePiecesPlayer": 3, "blackPiecesPlayer": 8},
+				{"whitePiecesPlayer": 4, "blackPiecesPlayer": 7},
+				{"whitePiecesPlayer": 5, "blackPiecesPlayer": 6}
+			],
+			[
+				{"whitePiecesPlayer": 6, "blackPiecesPlayer": 14},
+				{"whitePiecesPlayer": 7, "blackPiecesPlayer": 5},
+				{"whitePiecesPlayer": 8, "blackPiecesPlayer": 4},
+				{"whitePiecesPlayer": 9, "blackPiecesPlayer": 3},
+				{"whitePiecesPlayer": 10, "blackPiecesPlayer": 2},
+				{"whitePiecesPlayer": 11, "blackPiecesPlayer": 1},
+				{"whitePiecesPlayer": 12, "blackPiecesPlayer": 13}
+			 ],
+			[
+				{"whitePiecesPlayer": 14, "blackPiecesPlayer": 13},
+				{"whitePiecesPlayer": 1, "blackPiecesPlayer": 12},
+				{"whitePiecesPlayer": 2, "blackPiecesPlayer": 11},
+				{"whitePiecesPlayer": 3, "blackPiecesPlayer": 10},
+				{"whitePiecesPlayer": 4, "blackPiecesPlayer": 9},
+				{"whitePiecesPlayer": 5, "blackPiecesPlayer": 8},
+				{"whitePiecesPlayer": 6, "blackPiecesPlayer": 7}
+			],
+			[
+				{"whitePiecesPlayer": 7, "blackPiecesPlayer": 14},
+				{"whitePiecesPlayer": 8, "blackPiecesPlayer": 6},
+				{"whitePiecesPlayer": 9, "blackPiecesPlayer": 5},
+				{"whitePiecesPlayer": 10, "blackPiecesPlayer": 4},
+				{"whitePiecesPlayer": 11, "blackPiecesPlayer": 3},
+				{"whitePiecesPlayer": 12, "blackPiecesPlayer": 2},
+				{"whitePiecesPlayer": 13, "blackPiecesPlayer": 1}
+			 ]
+	  	]
+	},
+	{
+		"players": 16,
+		"rounds": [
+			[
+				{"whitePiecesPlayer": 1, "blackPiecesPlayer": 16},
+				{"whitePiecesPlayer": 2, "blackPiecesPlayer": 15},
+				{"whitePiecesPlayer": 3, "blackPiecesPlayer": 14},
+				{"whitePiecesPlayer": 4, "blackPiecesPlayer": 13},
+				{"whitePiecesPlayer": 5, "blackPiecesPlayer": 12},
+				{"whitePiecesPlayer": 6, "blackPiecesPlayer": 11},
+				{"whitePiecesPlayer": 7, "blackPiecesPlayer": 10},
+				{"whitePiecesPlayer": 8, "blackPiecesPlayer": 9}
+			],
+			[
+				{"whitePiecesPlayer": 16, "blackPiecesPlayer": 9},
+				{"whitePiecesPlayer": 10, "blackPiecesPlayer": 8},
+				{"whitePiecesPlayer": 11, "blackPiecesPlayer": 7},
+				{"whitePiecesPlayer": 12, "blackPiecesPlayer": 6},
+				{"whitePiecesPlayer": 13, "blackPiecesPlayer": 5},
+				{"whitePiecesPlayer": 14, "blackPiecesPlayer": 4},
+				{"whitePiecesPlayer": 15, "blackPiecesPlayer": 3},
+				 {"whitePiecesPlayer": 1, "blackPiecesPlayer": 2}
+			 ],
+			[
+				{"whitePiecesPlayer": 2, "blackPiecesPlayer": 16},
+				{"whitePiecesPlayer": 3, "blackPiecesPlayer": 1},
+				{"whitePiecesPlayer": 4, "blackPiecesPlayer": 15},
+				{"whitePiecesPlayer": 5, "blackPiecesPlayer": 14},
+				{"whitePiecesPlayer": 6, "blackPiecesPlayer": 13},
+				{"whitePiecesPlayer": 7, "blackPiecesPlayer": 12},
+				{"whitePiecesPlayer": 8, "blackPiecesPlayer": 11},
+				{"whitePiecesPlayer": 9, "blackPiecesPlayer": 10}
+			],
+			[
+				{"whitePiecesPlayer": 16, "blackPiecesPlayer": 10},
+				{"whitePiecesPlayer": 11, "blackPiecesPlayer": 9},
+				{"whitePiecesPlayer": 12, "blackPiecesPlayer": 8},
+				{"whitePiecesPlayer": 13, "blackPiecesPlayer": 7},
+				{"whitePiecesPlayer": 14, "blackPiecesPlayer": 6},
+				{"whitePiecesPlayer": 15, "blackPiecesPlayer": 5},
+				{"whitePiecesPlayer": 1, "blackPiecesPlayer": 4},
+				{"whitePiecesPlayer": 2, "blackPiecesPlayer": 3}
+			],
+			[
+				{"whitePiecesPlayer": 3, "blackPiecesPlayer": 16},
+				{"whitePiecesPlayer": 4, "blackPiecesPlayer": 2},
+				{"whitePiecesPlayer": 5, "blackPiecesPlayer": 1},
+				{"whitePiecesPlayer": 6, "blackPiecesPlayer": 15},
+				{"whitePiecesPlayer": 7, "blackPiecesPlayer": 14},
+				{"whitePiecesPlayer": 8, "blackPiecesPlayer": 13},
+				{"whitePiecesPlayer": 9, "blackPiecesPlayer": 12},
+				 {"whitePiecesPlayer": 10, "blackPiecesPlayer": 11}
+			 ],
+			[
+				{"whitePiecesPlayer": 16, "blackPiecesPlayer": 11},
+				{"whitePiecesPlayer": 12, "blackPiecesPlayer": 10},
+				{"whitePiecesPlayer": 13, "blackPiecesPlayer": 9},
+				{"whitePiecesPlayer": 14, "blackPiecesPlayer": 8},
+				{"whitePiecesPlayer": 15, "blackPiecesPlayer": 7},
+				{"whitePiecesPlayer": 1, "blackPiecesPlayer": 6},
+				{"whitePiecesPlayer": 2, "blackPiecesPlayer": 5},
+				{"whitePiecesPlayer": 3, "blackPiecesPlayer": 4}
+			],
+			[
+				{"whitePiecesPlayer": 4, "blackPiecesPlayer": 16},
+				{"whitePiecesPlayer": 5, "blackPiecesPlayer": 3},
+				{"whitePiecesPlayer": 6, "blackPiecesPlayer": 2},
+				 {"whitePiecesPlayer": 7, "blackPiecesPlayer": 1},
+				 {"whitePiecesPlayer": 8, "blackPiecesPlayer": 15},
+				 {"whitePiecesPlayer": 9, "blackPiecesPlayer": 14},
+				 {"whitePiecesPlayer": 10, "blackPiecesPlayer": 13},
+				 {"whitePiecesPlayer": 11, "blackPiecesPlayer": 12}
+			 ],
+			[
+				{"whitePiecesPlayer": 16, "blackPiecesPlayer": 12},
+				{"whitePiecesPlayer": 13, "blackPiecesPlayer": 11},
+				 {"whitePiecesPlayer": 14, "blackPiecesPlayer": 10},
+				 {"whitePiecesPlayer": 15, "blackPiecesPlayer": 9},
+				 {"whitePiecesPlayer": 1, "blackPiecesPlayer": 8},
+				 {"whitePiecesPlayer": 2, "blackPiecesPlayer": 7},
+				 {"whitePiecesPlayer": 3, "blackPiecesPlayer": 6},
+				 {"whitePiecesPlayer": 4, "blackPiecesPlayer": 5}
+			 ],
+			[
+				{"whitePiecesPlayer": 5, "blackPiecesPlayer": 16},
+				{"whitePiecesPlayer": 6, "blackPiecesPlayer": 4},
+				{"whitePiecesPlayer": 7, "blackPiecesPlayer": 3},
+				{"whitePiecesPlayer": 8, "blackPiecesPlayer": 2},
+				{"whitePiecesPlayer": 9, "blackPiecesPlayer": 1},
+				{"whitePiecesPlayer": 10, "blackPiecesPlayer": 15},
+				{"whitePiecesPlayer": 11, "blackPiecesPlayer": 14},
+				{"whitePiecesPlayer": 12, "blackPiecesPlayer": 13}
+			],
+			[
+				{"whitePiecesPlayer": 16, "blackPiecesPlayer": 13},
+				{"whitePiecesPlayer": 14, "blackPiecesPlayer": 12},
+				{"whitePiecesPlayer": 15, "blackPiecesPlayer": 11},
+				{"whitePiecesPlayer": 1, "blackPiecesPlayer": 10},
+				{"whitePiecesPlayer": 2, "blackPiecesPlayer": 9},
+				{"whitePiecesPlayer": 3, "blackPiecesPlayer": 8},
+				{"whitePiecesPlayer": 4, "blackPiecesPlayer": 7},
+				{"whitePiecesPlayer": 5, "blackPiecesPlayer": 6}
+			],
+			[
+				{"whitePiecesPlayer": 6, "blackPiecesPlayer": 16},
+				{"whitePiecesPlayer": 7, "blackPiecesPlayer": 5},
+				{"whitePiecesPlayer": 8, "blackPiecesPlayer": 4},
+				{"whitePiecesPlayer": 9, "blackPiecesPlayer": 3},
+				{"whitePiecesPlayer": 10, "blackPiecesPlayer": 2},
+				{"whitePiecesPlayer": 11, "blackPiecesPlayer": 1},
+				{"whitePiecesPlayer": 12, "blackPiecesPlayer": 15},
+				{"whitePiecesPlayer": 13, "blackPiecesPlayer": 14}
+			],
+			[
+				{"whitePiecesPlayer": 16, "blackPiecesPlayer": 14},
+				{"whitePiecesPlayer": 15, "blackPiecesPlayer": 13},
+				{"whitePiecesPlayer": 1, "blackPiecesPlayer": 12},
+				{"whitePiecesPlayer": 2, "blackPiecesPlayer": 11},
+				{"whitePiecesPlayer": 3, "blackPiecesPlayer": 10},
+				{"whitePiecesPlayer": 4, "blackPiecesPlayer": 9},
+				{"whitePiecesPlayer": 5, "blackPiecesPlayer": 8},
+				{"whitePiecesPlayer": 6, "blackPiecesPlayer": 7}
+			 ],
+			[
+				{"whitePiecesPlayer": 7, "blackPiecesPlayer": 16},
+				{"whitePiecesPlayer": 8, "blackPiecesPlayer": 6},
+				{"whitePiecesPlayer": 9, "blackPiecesPlayer": 5},
+				{"whitePiecesPlayer": 10, "blackPiecesPlayer": 4},
+				{"whitePiecesPlayer": 11, "blackPiecesPlayer": 3},
+				{"whitePiecesPlayer": 12, "blackPiecesPlayer": 2},
+				{"whitePiecesPlayer": 13, "blackPiecesPlayer": 1},
+				{"whitePiecesPlayer": 14, "blackPiecesPlayer": 15}],
+			[
+				{"whitePiecesPlayer": 16, "blackPiecesPlayer": 15},
+				{"whitePiecesPlayer": 1, "blackPiecesPlayer": 14},
+				{"whitePiecesPlayer": 2, "blackPiecesPlayer": 13},
+				{"whitePiecesPlayer": 3, "blackPiecesPlayer": 12},
+				{"whitePiecesPlayer": 4, "blackPiecesPlayer": 11},
+				{"whitePiecesPlayer": 5, "blackPiecesPlayer": 10},
+				{"whitePiecesPlayer": 6, "blackPiecesPlayer": 9},
+				{"whitePiecesPlayer": 7, "blackPiecesPlayer": 8}],
+			[
+				{"whitePiecesPlayer": 8, "blackPiecesPlayer": 16},
+				{"whitePiecesPlayer": 9, "blackPiecesPlayer": 7},
+				{"whitePiecesPlayer": 10, "blackPiecesPlayer": 6},
+				{"whitePiecesPlayer": 11, "blackPiecesPlayer": 5},
+				{"whitePiecesPlayer": 12, "blackPiecesPlayer": 4},
+				{"whitePiecesPlayer": 13, "blackPiecesPlayer": 3},
+				{"whitePiecesPlayer": 14, "blackPiecesPlayer": 2},
+				{"whitePiecesPlayer": 15, "blackPiecesPlayer": 1}
+			]
+		]
+	}
+]
