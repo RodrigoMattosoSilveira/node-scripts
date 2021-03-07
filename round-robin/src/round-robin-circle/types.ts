@@ -44,3 +44,11 @@ export type CircleParams = {
 };
 export type Color = number;
 export type Colors = Color[];
+
+export type BergerTable = {
+    players: number;
+    rounds: Games[];
+}
+export type PlayerGamesInRound = number;
+export type PlayerGamesInRounds = PlayerGamesInRound[];
+export type PlayersGamesInTournament = PlayerGamesInRounds[];

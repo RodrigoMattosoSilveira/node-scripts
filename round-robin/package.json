@@ -9,6 +9,7 @@
         "start10": "tsc && node dist/src/app.js --players=10",
         "start11": "tsc && node dist/src/app.js --players=11",
         "test": "jest --detectOpenHandles",
+        "test_bt": "jest --detectOpenHandles -t 'Berger Tables'",
         "test_color": "jest --detectOpenHandles -t 'Calculate Color'"
     },
     "dependencies": {
