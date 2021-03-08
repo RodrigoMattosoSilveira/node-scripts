@@ -52,3 +52,7 @@ export type BergerTable = {
 export type PlayerGamesInRound = number;
 export type PlayerGamesInRounds = PlayerGamesInRound[];
 export type PlayersGamesInTournament = PlayerGamesInRounds[];
+
+export type PlayerOpenentsInRound = number;
+export type PlayerOpenentsInRounds = PlayerOpenentsInRound[];
+export type PlayersOpenentsInTournament = PlayerOpenentsInRounds[];

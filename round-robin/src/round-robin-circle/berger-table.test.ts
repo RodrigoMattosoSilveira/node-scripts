@@ -4,21 +4,21 @@ import { BergerTable,
 	Games,
 	PlayerGamesInRound,
 	PlayerGamesInRounds,
-	PlayersGamesInTournament } from "./types";
+	PlayersGamesInTournament,
+	PlayersOpenentsInTournament } from "./types";
 
 describe(`Berger Tables`, (): void => {
 	let numberOfPlayers: number;
-	let foundTable: boolean;
 	let bergerTable: BergerTable;
 	let numberOfRounds: number;
 	let numberOfGamesPerRound: number;
-	let playerGamesInRound: PlayerGamesInRound;
-	let playerGamesInRounds: PlayerGamesInRounds;
 	let tournamentRounds: Games[];
-	let tournamentRound: Games;
 	let playersGamesInTournament: PlayersGamesInTournament;
-	let expectedPlayerGamesInRounds: PlayerGamesInRounds;
 	let expectedPlayersGamesInTournament: PlayersGamesInTournament;
+
+	let playersOponentsInTournament: PlayersOpenentsInTournament;
+	let expectedPlayersOponentsInTournament: PlayersOpenentsInTournament;
+
 
 	describe(`4 players`, (): void => {
 		beforeAll(() => {
@@ -37,7 +37,10 @@ describe(`Berger Tables`, (): void => {
 		it(`has 4 players table`, (): void => {
 			expect(bergerTable).toBeTruthy;
 		});
-		it(`all 4 players plays in all rounds`, (): void => {
+		it(`all 4 players play in all rounds`, (): void => {
+			expect(playersGamesInTournament).toEqual(expectedPlayersGamesInTournament);
+		});
+		it(`all 4 players play each other`, (): void => {
 			expect(playersGamesInTournament).toEqual(expectedPlayersGamesInTournament);
 		});
 	});
@@ -58,7 +61,7 @@ describe(`Berger Tables`, (): void => {
 		it(`has 6 players table`, (): void => {
 			expect(bergerTable).toBeTruthy;
 		});
-		it(`all 6 players plays in all rounds`, (): void => {
+		it(`all 6 players play in all rounds`, (): void => {
 			expect(playersGamesInTournament).toEqual(expectedPlayersGamesInTournament);
 		});
 	});
@@ -79,7 +82,7 @@ describe(`Berger Tables`, (): void => {
 		it(`has 8 players table`, (): void => {
 			expect(bergerTable).toBeTruthy;
 		});
-		it(`all 8 players plays in all rounds`, (): void => {
+		it(`all 8 players play in all rounds`, (): void => {
 			expect(playersGamesInTournament).toEqual(expectedPlayersGamesInTournament);
 		});
 	});
@@ -100,7 +103,7 @@ describe(`Berger Tables`, (): void => {
 		it(`has 10 players table`, (): void => {
 			expect(bergerTable).toBeTruthy;
 		});
-		it(`all 10 players plays in all rounds`, (): void => {
+		it(`all 10 players play in all rounds`, (): void => {
 			expect(playersGamesInTournament).toEqual(expectedPlayersGamesInTournament);
 		});
 	});
@@ -121,7 +124,7 @@ describe(`Berger Tables`, (): void => {
 		it(`has 12 players table`, (): void => {
 			expect(bergerTable).toBeTruthy;
 		});
-		it(`all 12 players plays in all rounds`, (): void => {
+		it(`all 12 players play in all rounds`, (): void => {
 			expect(playersGamesInTournament).toEqual(expectedPlayersGamesInTournament);
 		});
 	});
@@ -142,7 +145,7 @@ describe(`Berger Tables`, (): void => {
 		it(`has 14 players table`, (): void => {
 			expect(bergerTable).toBeTruthy;
 		});
-		it(`all 14 players plays in all rounds`, (): void => {
+		it(`all 14 players play in all rounds`, (): void => {
 			expect(playersGamesInTournament).toEqual(expectedPlayersGamesInTournament);
 		});
 	});
@@ -163,7 +166,7 @@ describe(`Berger Tables`, (): void => {
 		it(`has 16 players table`, (): void => {
 			expect(bergerTable).toBeTruthy;
 		});
-		it(`all 16 players plays in all rounds`, (): void => {
+		it(`all 16 players play in all rounds`, (): void => {
 			expect(playersGamesInTournament).toEqual(expectedPlayersGamesInTournament);
 		});
 	});
@@ -187,6 +190,23 @@ const fillPlayersGamesInTournament = (numberOfPlayers: number, numberOfRounds: n
 	}
 	return playersGamesInTournament;
 }
+
+const fillPlayersOpponentsInTournament = (numberOfPlayers: number, numberOfRounds: number, filler: number): PlayersGamesInTournament => {
+	let playersGamesInTournament = new Array(numberOfPlayers);;
+	let k: number = -1;
+	for (let player = 0; player < numberOfPlayers; player ++) {
+		playersGamesInTournament[player] = new Array(numberOfPlayers - 1).fill(filler);
+		for (let opponent = 0; opponent < numberOfPlayers; opponent++) {
+			if (opponent !== player ) {
+				k++;
+				playersGamesInTournament[player][k] = opponent;
+			}
+
+		}
+	}
+	return playersGamesInTournament;
+}
+
 const calculatePlayersGamesInTournament = (numberOfPlayers: number,
 	numberOfRounds: number,
 	tournamentRounds: Games[]): PlayersGamesInTournament => {
@@ -198,15 +218,39 @@ const calculatePlayersGamesInTournament = (numberOfPlayers: number,
 
 	for (let round = 0; round < tournamentRounds.length; round++) {
 		const tournamentRound: Games = tournamentRounds[round];
-		console.log("tournamentRound: " + JSON.stringify(tournamentRound));
+		// console.log("tournamentRound: " + JSON.stringify(tournamentRound));
 		for (let j = 0; j < tournamentRound.length; j ++) {
 			const game = tournamentRound[j];
-			console.log("game: " + JSON.stringify(game));
+			// console.log("game: " + JSON.stringify(game));
 			playersGamesInTournament[game.whitePiecesPlayer][round]++
 			playersGamesInTournament[game.blackPiecesPlayer][round]++
-			console.log("playersGamesInTournament: " + JSON.stringify(playersGamesInTournament));
+			// console.log("playersGamesInTournament: " + JSON.stringify(playersGamesInTournament));
 		}
 	}
 
 	return playersGamesInTournament;
+}
+
+const calculatePlayerOpponentsInTournament = (numberOfPlayers: number,
+	numberOfRounds: number,
+	tournamentRounds: Games[]): PlayersOpenentsInTournament => {
+
+	let playersOpenentsInTournament: PlayersOpenentsInTournament = [];
+	for (let player = 0; player < numberOfPlayers; player ++) {
+		playersOpenentsInTournament[player] = new Array(numberOfRounds).fill(0);
+	}
+
+	for (let round = 0; round < tournamentRounds.length; round++) {
+		const tournamentRound: Games = tournamentRounds[round];
+		console.log("tournamentRound: " + JSON.stringify(tournamentRound));
+		for (let j = 0; j < tournamentRound.length; j ++) {
+			const game = tournamentRound[j];
+			console.log("game: " + JSON.stringify(game));
+			playersOpenentsInTournament[game.whitePiecesPlayer][round] = game.blackPiecesPlayer;
+			playersOpenentsInTournament[game.blackPiecesPlayer][round] = game.whitePiecesPlayer;
+			// console.log("playersGamesInTournament: " + JSON.stringify(playersGamesInTournament));
+		}
+	}
+
+	return playersOpenentsInTournament;
 }
