@@ -37,6 +37,9 @@ describe(`Berger Tables`, (): void => {
 			playersOpponentsInTournament = fillPlayersOpponentsInTournament(numberOfPlayers, numberOfRounds);
 			console.log("playersOpponentsInTournament: " + JSON.stringify(playersOpponentsInTournament));
         });
+		it(`generate the correct  explected playersOponentsInTournament`, (): void => {
+			expect(playersOpponentsInTournament).toEqual([[1,2,3],[0,2,3],[0,1,3],[0,1,2]]);
+		});
 		it(`has 4 players table`, (): void => {
 			expect(bergerTable).toBeTruthy;
 		});
