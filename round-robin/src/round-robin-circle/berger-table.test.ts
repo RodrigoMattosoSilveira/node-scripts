@@ -35,6 +35,7 @@ describe(`Berger Tables`, (): void => {
 
 			playersGamesInTournament = calculatePlayersGamesInTournament(numberOfPlayers, numberOfRounds, tournamentRounds);
 			expectedPlayersOponentsInTournament = fillPlayersOpponentsInTournament(numberOfPlayers, numberOfRounds);
+			console.log("expectedPlayersOponentsInTournament: " + JSON.stringify(expectedPlayersOponentsInTournament));
 			playersOpponentsInTournament = calculatePlayerOpponentsInTournament(numberOfPlayers, numberOfRounds, tournamentRounds);
 			console.log("playersOpponentsInTournament: " + JSON.stringify(playersOpponentsInTournament));
         });
@@ -48,7 +49,7 @@ describe(`Berger Tables`, (): void => {
 			expect(playersGamesInTournament).toEqual(expectedPlayersGamesInTournament);
 		});
 		it(`all 4 players play each other`, (): void => {
-			expect(playersGamesInTournament).toEqual(expectedPlayersOponentsInTournament);
+			expect(playersOpponentsInTournament).toEqual(expectedPlayersOponentsInTournament);
 		});
 	});
 	describe(`6 players`, (): void => {
