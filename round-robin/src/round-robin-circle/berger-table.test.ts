@@ -1,11 +1,13 @@
 
 const bergerTables = require("./berger-tables.json");
 import { BergerTable,
+	Game,
 	Games,
 	PlayerGamesInRound,
 	PlayerGamesInRounds,
 	PlayersGamesInTournament,
-	PlayersOpenentsInTournament } from "./types";
+	PlayersOpenentsInTournament,
+	PlayersPieceAssignment } from "./types";
 
 describe(`Berger Tables`, (): void => {
 	let numberOfPlayers: number;
@@ -19,6 +21,7 @@ describe(`Berger Tables`, (): void => {
 	let playersOponentsInTournament: PlayersOpenentsInTournament;
 	let expectedPlayersOponentsInTournament: PlayersOpenentsInTournament;
 	let playersOpponentsInTournament: PlayersOpenentsInTournament = [];
+	let playersPieceAssignments: PlayersPieceAssignment;
 
 
 	describe(`4 players`, (): void => {
@@ -36,8 +39,10 @@ describe(`Berger Tables`, (): void => {
 			playersGamesInTournament = calculatePlayersGamesInTournament(numberOfPlayers, numberOfRounds, tournamentRounds);
 			expectedPlayersOponentsInTournament = fillPlayersOpponentsInTournament(numberOfPlayers, numberOfRounds);
 			// console.log("expectedPlayersOponentsInTournament: " + JSON.stringify(expectedPlayersOponentsInTournament));
-			playersOpponentsInTournament = calculatePlayerOpponentsInTournament(numberOfPlayers, numberOfRounds, tournamentRounds);
+			playersOpponentsInTournament = calculatePlayerOpponentsInTournament(numberOfPlayers, tournamentRounds);
 			// console.log("playersOpponentsInTournament: " + JSON.stringify(playersOpponentsInTournament));
+			playersPieceAssignments = calculatePlayersPieceAssignment(numberOfPlayers, tournamentRounds);
+			// console.log("04 playersPieceAssignments: " + JSON.stringify(playersPieceAssignments));
         });
 		it(`generate the correct  expected playersOponentsInTournament`, (): void => {
 			expect(expectedPlayersOponentsInTournament).toEqual([[1,2,3],[0,2,3],[0,1,3],[0,1,2]]);
@@ -50,6 +55,12 @@ describe(`Berger Tables`, (): void => {
 		});
 		it(`all 4 players play each other`, (): void => {
 			expect(playersOpponentsInTournament).toEqual(expectedPlayersOponentsInTournament);
+		});
+		it(`all 4 players play a balanced number of games with white and black pieces`, (): void => {
+			let isBalanced = playersPieceAssignments.reduce((accumulator, currentValue) => {
+			  return accumulator && Math.abs(currentValue) < 2
+		  }, true)
+			expect(isBalanced).toBe(true)
 		});
 	});
 	describe(`6 players`, (): void => {
@@ -67,8 +78,10 @@ describe(`Berger Tables`, (): void => {
 			playersGamesInTournament = calculatePlayersGamesInTournament(numberOfPlayers, numberOfRounds, tournamentRounds);
 			expectedPlayersOponentsInTournament = fillPlayersOpponentsInTournament(numberOfPlayers, numberOfRounds);
 			// console.log("expectedPlayersOponentsInTournament: " + JSON.stringify(expectedPlayersOponentsInTournament));
-			playersOpponentsInTournament = calculatePlayerOpponentsInTournament(numberOfPlayers, numberOfRounds, tournamentRounds);
+			playersOpponentsInTournament = calculatePlayerOpponentsInTournament(numberOfPlayers, tournamentRounds);
 			// console.log("playersOpponentsInTournament: " + JSON.stringify(playersOpponentsInTournament));
+			playersPieceAssignments = calculatePlayersPieceAssignment(numberOfPlayers, tournamentRounds);
+			// console.log("06 playersPieceAssignments: " + JSON.stringify(playersPieceAssignments));
         });
 		it(`has 6 players table`, (): void => {
 			expect(bergerTable).toBeTruthy;
@@ -78,6 +91,12 @@ describe(`Berger Tables`, (): void => {
 		});
 		it(`all 6 players play each other`, (): void => {
 			expect(playersOpponentsInTournament).toEqual(expectedPlayersOponentsInTournament);
+		});
+		it(`all 6 players play a balanced number of games with white and black pieces`, (): void => {
+			let isBalanced = playersPieceAssignments.reduce((accumulator, currentValue) => {
+			  return accumulator && Math.abs(currentValue) < 2
+		  }, true)
+			expect(isBalanced).toBe(true)
 		});
 	});
 	describe(`8 players`, (): void => {
@@ -95,8 +114,10 @@ describe(`Berger Tables`, (): void => {
 			playersGamesInTournament = calculatePlayersGamesInTournament(numberOfPlayers, numberOfRounds, tournamentRounds);
 			expectedPlayersOponentsInTournament = fillPlayersOpponentsInTournament(numberOfPlayers, numberOfRounds);
 			// console.log("expectedPlayersOponentsInTournament: " + JSON.stringify(expectedPlayersOponentsInTournament));
-			playersOpponentsInTournament = calculatePlayerOpponentsInTournament(numberOfPlayers, numberOfRounds, tournamentRounds);
+			playersOpponentsInTournament = calculatePlayerOpponentsInTournament(numberOfPlayers, tournamentRounds);
 			// console.log("playersOpponentsInTournament: " + JSON.stringify(playersOpponentsInTournament));
+			playersPieceAssignments = calculatePlayersPieceAssignment(numberOfPlayers, tournamentRounds);
+			// console.log("08 playersPieceAssignments: " + JSON.stringify(playersPieceAssignments));
         });
 		it(`has 8 players table`, (): void => {
 			expect(bergerTable).toBeTruthy;
@@ -106,6 +127,12 @@ describe(`Berger Tables`, (): void => {
 		});
 		it(`all 8 players play each other`, (): void => {
 			expect(playersOpponentsInTournament).toEqual(expectedPlayersOponentsInTournament);
+		});
+		it(`all 8 players play a balanced number of games with white and black pieces`, (): void => {
+			let isBalanced = playersPieceAssignments.reduce((accumulator, currentValue) => {
+			  return accumulator && Math.abs(currentValue) < 2
+		  }, true)
+			expect(isBalanced).toBe(true)
 		});
 	});
 	describe(`10 players`, (): void => {
@@ -123,8 +150,10 @@ describe(`Berger Tables`, (): void => {
 			playersGamesInTournament = calculatePlayersGamesInTournament(numberOfPlayers, numberOfRounds, tournamentRounds);
 			expectedPlayersOponentsInTournament = fillPlayersOpponentsInTournament(numberOfPlayers, numberOfRounds);
 			// console.log("expectedPlayersOponentsInTournament: " + JSON.stringify(expectedPlayersOponentsInTournament));
-			playersOpponentsInTournament = calculatePlayerOpponentsInTournament(numberOfPlayers, numberOfRounds, tournamentRounds);
+			playersOpponentsInTournament = calculatePlayerOpponentsInTournament(numberOfPlayers, tournamentRounds);
 			// console.log("playersOpponentsInTournament: " + JSON.stringify(playersOpponentsInTournament));
+			playersPieceAssignments = calculatePlayersPieceAssignment(numberOfPlayers, tournamentRounds);
+			// console.log("10 playersPieceAssignments: " + JSON.stringify(playersPieceAssignments));
         });
 		it(`has 10 players table`, (): void => {
 			expect(bergerTable).toBeTruthy;
@@ -134,6 +163,12 @@ describe(`Berger Tables`, (): void => {
 		});
 		it(`all 10 players play each other`, (): void => {
 			expect(playersOpponentsInTournament).toEqual(expectedPlayersOponentsInTournament);
+		});
+		it(`all 10 players play a balanced number of games with white and black pieces`, (): void => {
+			let isBalanced = playersPieceAssignments.reduce((accumulator, currentValue) => {
+			  return accumulator && Math.abs(currentValue) < 2
+		  }, true)
+			expect(isBalanced).toBe(true)
 		});
 	});
 	describe(`12 players`, (): void => {
@@ -151,8 +186,10 @@ describe(`Berger Tables`, (): void => {
 			playersGamesInTournament = calculatePlayersGamesInTournament(numberOfPlayers, numberOfRounds, tournamentRounds);
 			expectedPlayersOponentsInTournament = fillPlayersOpponentsInTournament(numberOfPlayers, numberOfRounds);
 			// console.log("expectedPlayersOponentsInTournament: " + JSON.stringify(expectedPlayersOponentsInTournament));
-			playersOpponentsInTournament = calculatePlayerOpponentsInTournament(numberOfPlayers, numberOfRounds, tournamentRounds);
+			playersOpponentsInTournament = calculatePlayerOpponentsInTournament(numberOfPlayers, tournamentRounds);
 			// console.log("playersOpponentsInTournament: " + JSON.stringify(playersOpponentsInTournament));
+			playersPieceAssignments = calculatePlayersPieceAssignment(numberOfPlayers, tournamentRounds);
+			// console.log("12 playersPieceAssignments: " + JSON.stringify(playersPieceAssignments));
         });
 		it(`has 12 players table`, (): void => {
 			expect(bergerTable).toBeTruthy;
@@ -162,6 +199,12 @@ describe(`Berger Tables`, (): void => {
 		});
 		it(`all 12 players play each other`, (): void => {
 			expect(playersOpponentsInTournament).toEqual(expectedPlayersOponentsInTournament);
+		});
+		it(`all 12 players play a balanced number of games with white and black pieces`, (): void => {
+			let isBalanced = playersPieceAssignments.reduce((accumulator, currentValue) => {
+			  return accumulator && Math.abs(currentValue) < 2
+		  }, true)
+			expect(isBalanced).toBe(true)
 		});
 	});
 	describe(`14 players`, (): void => {
@@ -179,8 +222,10 @@ describe(`Berger Tables`, (): void => {
 			playersGamesInTournament = calculatePlayersGamesInTournament(numberOfPlayers, numberOfRounds, tournamentRounds);
 			expectedPlayersOponentsInTournament = fillPlayersOpponentsInTournament(numberOfPlayers, numberOfRounds);
 			// console.log("expectedPlayersOponentsInTournament: " + JSON.stringify(expectedPlayersOponentsInTournament));
-			playersOpponentsInTournament = calculatePlayerOpponentsInTournament(numberOfPlayers, numberOfRounds, tournamentRounds);
+			playersOpponentsInTournament = calculatePlayerOpponentsInTournament(numberOfPlayers, tournamentRounds);
 			// console.log("playersOpponentsInTournament: " + JSON.stringify(playersOpponentsInTournament));
+			playersPieceAssignments = calculatePlayersPieceAssignment(numberOfPlayers, tournamentRounds);
+			// console.log("14 playersPieceAssignments: " + JSON.stringify(playersPieceAssignments));
     });
 		it(`has 14 players table`, (): void => {
 			expect(bergerTable).toBeTruthy;
@@ -190,6 +235,12 @@ describe(`Berger Tables`, (): void => {
 		});
 		it(`all 14 players play each other`, (): void => {
 			expect(playersOpponentsInTournament).toEqual(expectedPlayersOponentsInTournament);
+		});
+		it(`all 14 players play a balanced number of games with white and black pieces`, (): void => {
+			let isBalanced = playersPieceAssignments.reduce((accumulator, currentValue) => {
+			  return accumulator && Math.abs(currentValue) < 2
+		  }, true)
+			expect(isBalanced).toBe(true)
 		});
 	});
 	describe(`16 players`, (): void => {
@@ -207,8 +258,10 @@ describe(`Berger Tables`, (): void => {
 			playersGamesInTournament = calculatePlayersGamesInTournament(numberOfPlayers, numberOfRounds, tournamentRounds);
 			expectedPlayersOponentsInTournament = fillPlayersOpponentsInTournament(numberOfPlayers, numberOfRounds);
 			// console.log("expectedPlayersOponentsInTournament: " + JSON.stringify(expectedPlayersOponentsInTournament));
-			playersOpponentsInTournament = calculatePlayerOpponentsInTournament(numberOfPlayers, numberOfRounds, tournamentRounds);
+			playersOpponentsInTournament = calculatePlayerOpponentsInTournament(numberOfPlayers, tournamentRounds);
 			// console.log("playersOpponentsInTournament: " + JSON.stringify(playersOpponentsInTournament));
+			playersPieceAssignments = calculatePlayersPieceAssignment(numberOfPlayers, tournamentRounds);
+			// console.log("16 playersPieceAssignments: " + JSON.stringify(playersPieceAssignments));
         });
 		it(`has 16 players table`, (): void => {
 			expect(bergerTable).toBeTruthy;
@@ -218,6 +271,12 @@ describe(`Berger Tables`, (): void => {
 		});
 		it(`all 16 players play each other`, (): void => {
 			expect(playersOpponentsInTournament).toEqual(expectedPlayersOponentsInTournament);
+		});
+		it(`all 16 players play a balanced number of games with white and black pieces`, (): void => {
+			let isBalanced = playersPieceAssignments.reduce((accumulator, currentValue) => {
+			  return accumulator && Math.abs(currentValue) < 2
+		  }, true)
+			expect(isBalanced).toBe(true)
 		});
 	});
 });
@@ -231,7 +290,8 @@ const getBergerTable = (numberOfPlayers: number): BergerTable => {
 		}
 	}
 	return bergerTable;
-}
+};
+
 const fillPlayersGamesInTournament = (numberOfPlayers: number, numberOfRounds: number, filler: number): PlayersGamesInTournament => {
 	let playersGamesInTournament = new Array(numberOfPlayers);;
 
@@ -239,7 +299,7 @@ const fillPlayersGamesInTournament = (numberOfPlayers: number, numberOfRounds: n
 		playersGamesInTournament[player] = new Array(numberOfRounds).fill(filler);
 	}
 	return playersGamesInTournament;
-}
+};
 
 const fillPlayersOpponentsInTournament = (numberOfPlayers: number, numberOfRounds: number): PlayersGamesInTournament => {
 	let playersGamesInTournament = new Array();
@@ -252,7 +312,7 @@ const fillPlayersOpponentsInTournament = (numberOfPlayers: number, numberOfRound
 		}
 	}
 	return playersGamesInTournament;
-}
+};
 
 const calculatePlayersGamesInTournament = (numberOfPlayers: number,
 	numberOfRounds: number,
@@ -276,10 +336,17 @@ const calculatePlayersGamesInTournament = (numberOfPlayers: number,
 	}
 
 	return playersGamesInTournament;
-}
+};
 
-const calculatePlayerOpponentsInTournament = (numberOfPlayers: number,
-	numberOfRounds: number,
+/**
+ * calculatePlayerOpponentsInTournament: PlayersOpenentsInTournament
+ * Builds an array of arrays, hosting the ids of each player's opponents
+ *
+ * @param {number} numberOfPlayers
+ * @param {Games[]} tournamentRounds
+ */
+const calculatePlayerOpponentsInTournament = (
+	numberOfPlayers: number,
 	tournamentRounds: Games[]): PlayersOpenentsInTournament => {
 
 	let playersOpenentsInTournament: PlayersOpenentsInTournament = new Array();
@@ -304,4 +371,26 @@ const calculatePlayerOpponentsInTournament = (numberOfPlayers: number,
 	}
 
 	return playersOpenentsInTournament;
-}
+};
+
+/**
+ * calculatePlayersPieceAssignment: PlayersPieceAssignment
+ * Calculates the balance of games played by each player with each color
+ *
+ * @param {number} numberOfPlayers
+ * @param {Games[]} tournamentRounds
+ */
+const calculatePlayersPieceAssignment = (
+	numberOfPlayers: number,
+	tournamentRounds: Games[]): PlayersPieceAssignment => {
+
+	let playersPieceAssignments: PlayersPieceAssignment = new Array(numberOfPlayers).fill(0);
+
+	tournamentRounds.forEach((tournamentRound: Games) => {
+		tournamentRound.forEach((game: Game) => {
+			playersPieceAssignments[game.whitePiecesPlayer] += 1;
+			playersPieceAssignments[game.blackPiecesPlayer] += -1;
+		})
+	})
+	return playersPieceAssignments;
+};

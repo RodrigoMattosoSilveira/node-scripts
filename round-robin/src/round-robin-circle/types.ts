@@ -56,3 +56,6 @@ export type PlayersGamesInTournament = PlayerGamesInRounds[];
 export type PlayerOpenentsInRound = number;
 export type PlayerOpenentsInRounds = PlayerOpenentsInRound[];
 export type PlayersOpenentsInTournament = PlayerOpenentsInRounds[];
+
+export type PlayerPieceAssignment = number;
+export type PlayersPieceAssignment = PlayerPieceAssignment[];
