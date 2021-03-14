@@ -1,0 +1,36 @@
+{
+    "name": "round-robin",
+    "version": "0.0.1",
+    "description": "Plan chess tournament rounds",
+    "main": "index.ts",
+    "author": "Rodrigo Silveira",
+    "license": "MIT",
+    "scripts": {
+        "clean": "rimraf dist/*",
+        "dev:watch": "ts-node-dev --respawn src/main.ts",
+        "dev": "ts-node src/main.ts",
+        "start": "tsc && node dist/src/main.js --wppRanking=1956 --bppRanking=1987",
+        "tsc": "tsc",
+        "test": "jest --detectOpenHandles"
+    },
+    "dependencies": {
+        "axios": "^0.21.1",
+        "printf": "^0.6.0",
+        "shortid": "^2.2.16",
+        "ts-node": "^9.1.1",
+        "yargs": "^16.2.0"
+    },
+    "devDependencies": {
+        "@types/jest": "^26.0.20",
+        "@types/node": "^14.14.31",
+        "@types/printf": "^0.3.1",
+        "@types/yargs": "^16.0.0",
+        "jest": "^26.6.3",
+        "npm-run-all": "^4.1.5",
+        "rimraf": "^3.0.2",
+        "ts-jest": "^26.5.2",
+        "ts-node-dev": "^1.1.6",
+        "tslint": "^6.1.3",
+        "typescript": "^4.2.2"
+    }
+}
