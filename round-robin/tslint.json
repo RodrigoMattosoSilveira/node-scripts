@@ -9,7 +9,7 @@
             true,
             "tabs",
             4
-        ]
+        ],
         "no-console": false,
         "no-trailing-whitespace": false,
         "max-line-length": [true, 160],
