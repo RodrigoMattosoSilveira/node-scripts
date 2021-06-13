@@ -43,4 +43,23 @@ describe(`Monad`, () => {
 			expect(result.get()).toEqual(userError);
 		});
 	});
+
+	describe(`fold`, () => {
+		it(`Ok result`, () => {
+			result = Ok(user);
+			let testVar = `empty`;
+			result.fold(
+				err => testVar = "Err",
+				u => testVar = "Ok");
+			expect(testVar).toEqual("Ok");
+		});
+		it(`Err result`, () => {
+			result = Err(userError);
+			let testVar = `empty`;
+			result.fold(
+				err => testVar = "Err",
+				u => testVar = "Ok");
+			expect(testVar).toEqual("Err");
+		});
+	});
 });
