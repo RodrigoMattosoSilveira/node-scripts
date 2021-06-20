@@ -9,16 +9,14 @@ const users_generated = "./users.generated.json";
 // console.log(users);
 for (i=0; i < users.length; i++) {
     axios.post('http://localhost:3000/user', {
+        email: users[i].email,
         firstName: users[i].firstName,
         lastName: users[i].lastName,
-        email: users[i].email,
-        password: users[i].password,
-        permissionLevel: users[i].permissionLevel,
-        rating: users[i].rating,
+        password: users[i].password
     })
     .then(function (response) {
         // console.log(response);
-        console.log("Created user: " + response.id);
+        console.log("Created user: " + JSON.stringify(response.data));
     })
     .catch(function (error) {
     console.log(error);
