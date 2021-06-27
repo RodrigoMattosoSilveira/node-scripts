@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/monad/monad.iml" filepath="$PROJECT_DIR$/monad/monad.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/node-scripts.iml" filepath="$PROJECT_DIR$/.idea/node-scripts.iml" />
+      <module fileurl="file://$PROJECT_DIR$/one-many-monad/one-many-monad.iml" filepath="$PROJECT_DIR$/one-many-monad/one-many-monad.iml" />
     </modules>
   </component>
 </project>
